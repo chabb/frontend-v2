@@ -62,7 +62,6 @@ const appendRelatedToQuery = (query, id) => {
 function NoMatches({ query }) {
   return (
     <div id="no_matches">
-      <h1>¯\_(ツ)_/¯</h1>
       <br />
       No matches for <b>{query}</b>
     </div>

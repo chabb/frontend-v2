@@ -71,7 +71,7 @@ const logo = (
 );
 
 const items = [
-  { content: <Link to="/search">Home</Link> },
+  // { content: <Link to="/search">Home</Link> },
   { content: <Link to="/about">About</Link> },
   { content: <Link to="/stats">Our Data</Link> }
   // {
