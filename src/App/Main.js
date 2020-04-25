@@ -1,13 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Box, Text } from 'rebass';
-import { Grid, List, Image } from 'semantic-ui-react';
+import { Grid, Image, List } from 'semantic-ui-react';
 import { shuffle } from 'lodash';
 import SearchForm from 'App/shared/components/SearchForm';
 import Link from 'App/shared/components/Link';
 import { onSearch } from './Search/Utils';
 import COVIDScholarIcon from 'App/shared/img/COVIDScholarIcon.png';
-import COVIDScholarLogo from 'App/shared/img/COVIDScholarLogo.png';
 import Footer from 'App/shared/components/Footer';
 
 const sampleQueries = [

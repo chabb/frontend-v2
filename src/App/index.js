@@ -1,11 +1,11 @@
 import React from 'react';
 import { Router } from '@reach/router';
-import { Flex, Box } from 'rebass';
+import { Box, Flex } from 'rebass';
 import NavMenu from 'App/shared/components/NavMenu';
 import Main from './Main';
 import Search from './Search';
 import Article from './Article';
-import Compound from './Compound';
+// import Compound from './Compound';
 import About from './About';
 import Stats from './Stats';
 import Error from 'App/shared/components/Error';
