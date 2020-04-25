@@ -124,12 +124,13 @@ const FunctionLink = ({ onClick, ...props }) => (
 );
 
 const tagToColor = {
-  Treatment: 'red',
-  Diagnosis: 'blue',
+  Diagnosis: 'red',
   Mechanism: 'yellow',
-  Transmission: 'black',
-  Prevention: 'teal',
-  Epidemic_Forecasting: 'pink'
+  Treatment: 'green',
+  Case_Report: 'blue',
+  Prevention: 'violet',
+  Epidemic_Forecasting: 'brown',
+  Transmission: 'black'
 };
 
 function Explanation({ text }) {
@@ -201,15 +202,15 @@ function authorsList(authors) {
 
 function cardCategory({ tags }) {
   tags = tags || [];
-  let spans = [];
-  for (let i = 0; i < tags.length; i++) {
-    spans.push(
-      <span className={'ui tag small label ' + tagToColor[tags[i]]}>
-        {tags[i]}
-      </span>
-    );
-  }
-  return <div style={{ margin: '0.5em' }}>{spans}</div>;
+  return (
+    <div style={{ margin: '0.5em' }}>
+      {tags.map((tag, i) => (
+        <span key={i} className={'ui tag small label ' + tagToColor[tag]}>
+          {tag}
+        </span>
+      ))}
+    </div>
+  );
 }
 
 function getSummaryFixLink({ link, doi, abstract }) {

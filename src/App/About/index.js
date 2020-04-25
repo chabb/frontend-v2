@@ -73,7 +73,7 @@ export default function About() {
   return (
     <ContentGrid>
       <Container>
-        <Header as="h1" style={{ 'margin-top': '10px' }}>
+        <Header as="h1" style={{ marginTop: '10px' }}>
           About CovidScholar{' '}
         </Header>
         <p>
@@ -87,7 +87,7 @@ export default function About() {
           Lawrence Berkeley National Lab.
         </p>
 
-        <Header as="h2" style={{ 'margin-top': '10px' }}>
+        <Header as="h2" style={{ marginTop: '10px' }}>
           Our team
         </Header>
         <Grid className={'center aligned'}>
