@@ -113,13 +113,13 @@ export default function About() {
           />
           <MemberCard
             name={'Yuxing Fei'}
-            intro={'Intro for Yuxing.'}
+            intro={'Yuxing joined Ceder Group at UC Berkeley in 2020 as an undergraduate intern. He avidly dabbles in machine learning (especially natural language processing) to accelerate the design of next-generation materials.'}
             pic={yuxing_pic}
             link={'https://yuxingfei.com/'}
           />
           <MemberCard
             name={'Zheren Wang'}
-            intro={'Intro for Zheren.'}
+            intro={'Zheren joined Ceder Group at UC Berkeley and LBNL in 2018 as a Ph.D. student. He focus on using machine learning and optimization to find material sytnehsis conditions.'}
             pic={zheren_pic}
             link={null}
           />
