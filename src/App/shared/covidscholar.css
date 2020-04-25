@@ -1,0 +1,148 @@
+.msweb-is-tall {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.msweb-is-tall-container {
+  flex: 1;
+}
+
+.msweb-fade-in {
+  animation: sweep 0.5s ease-in-out;
+}
+
+@keyframes sweep {
+  0% {
+    opacity: 0;
+    margin-left: 0;
+  }
+  100% {
+    opacity: 1;
+    margin-left: 0;
+  }
+}
+
+.msweb-is-red-txt {
+  color: red;
+}
+
+.msweb-is-red-link {
+  color: red;
+  text-decoration: underline;
+}
+
+.msweb-is-blue-txt {
+  color: darkblue;
+}
+
+.msweb-is-green-txt {
+  color: darkgreen;
+}
+
+.msweb-is-orange-txt {
+  color: darkorange;
+}
+
+.msweb-is-turq-txt {
+  color: darkturquoise;
+}
+
+.msweb-is-purple-txt {
+  color: mediumpurple;
+}
+
+.msweb-is-darkcyan-txt {
+  color: #2b8182;
+}
+
+.msweb-is-pink-txt {
+  color: deeppink;
+}
+
+.msweb-is-grey-txt {
+  color: gray;
+}
+
+.msweb-is-midnightblue-txt {
+  color: midnightblue;
+}
+
+.msweb-is-dimgray-txt {
+  color: dimgray;
+}
+
+.msweb-hovertrans {
+  -moz-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  -webkit-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+
+.msweb-hovertrans-0:hover {
+  color: green;
+}
+
+.msweb-hovertrans-1:hover {
+  color: red;
+}
+
+.msweb-hovertrans-2:hover {
+  color: blue;
+}
+
+.msweb-hovertrans-3:hover {
+  color: purple;
+}
+
+.msweb-hovertrans-4:hover {
+  color: orange;
+}
+
+.msweb-hovertrans-5:hover {
+  color: violet;
+}
+
+.msweb-hovertrans-6:hover {
+  color: darkcyan;
+}
+
+.msweb-hovertrans-7:hover {
+  color: darkblue;
+}
+
+.msweb-hovertrans-8:hover {
+  color: darkred;
+}
+
+.msweb-hovertrans-9:hover {
+  color: coral;
+}
+
+.msweb-hovertrans-10:hover {
+  color: darkgoldenrod;
+}
+
+.msweb-custom-box-shading {
+  box-shadow: 0 5px 3px rgba(10, 10, 10, 0.1), 0 0 0 3px rgba(10, 10, 10, 0.1);
+}
+
+.msweb-custom-box-shading:hover {
+  box-shadow: 0 5px 3px rgba(10, 10, 10, 0.1), 0 0 0 3px rgba(0, 00, 00, 1);
+}
+
+.sui-multi-checkbox-facet__input-text {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.is-vertical-align-middle {
+  vertical-align: middle;
+}
+
+@media (max-width: 978px) {
+  .container {
+    padding: 0;
+    margin: 0;
+  }
+}
