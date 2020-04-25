@@ -1,16 +1,16 @@
-import React from 'react';
-import styled from 'styled-components';
-import Moment from 'react-moment';
-import { navigate } from '@reach/router';
-import { uniq } from 'lodash';
-import { Container, Header, Tab, List } from 'semantic-ui-react';
-import { Error, Loading } from 'App/shared/components/Messages';
-import { Get } from 'App/shared/Fetcher';
-import ResultCard from 'App/Search/ResultCard';
-import Link from 'App/shared/components/Link';
-import { nameFormatter } from 'App/shared/utils/formatter';
-import Pagination from 'App/shared/components/Pagination';
-import Footer from 'App/shared/components/Footer';
+import React from "react";
+import styled from "styled-components";
+import Moment from "react-moment";
+import { navigate } from "@reach/router";
+import { uniq } from "lodash";
+import { Container, Header, Tab, List } from "semantic-ui-react";
+import { Error, Loading } from "App/shared/components/Messages";
+import { Get } from "App/shared/Fetcher";
+import ResultCard from "App/Search/ResultCard";
+import Link from "App/shared/components/Link";
+import { authorFormatter } from "App/shared/utils/formatter";
+import Pagination from "App/shared/components/Pagination";
+import Footer from "App/shared/components/Footer";
 
 const ContainerContent = styled(Container)`
   &&& {
@@ -22,12 +22,14 @@ const ContainerContent = styled(Container)`
 function Authors({ authors }) {
   if (!authors) return null;
   return (
-    <Header.Subheader>{authors.map(nameFormatter).join(', ')}</Header.Subheader>
+    <Header.Subheader>
+      {authors.map(authorFormatter).join(", ")}
+    </Header.Subheader>
   );
 }
 
 function Meta({ journal, timestamp, source, license, doi }) {
-  const format = journal ? ' (YYYY-MM-DD)' : 'YYYY-MM-DD';
+  const format = journal ? " (YYYY-MM-DD)" : "YYYY-MM-DD";
   const date = timestamp ? (
     <Moment format={format} unix utc>
       {timestamp * 1000}
@@ -39,7 +41,7 @@ function Meta({ journal, timestamp, source, license, doi }) {
       {doi && (
         <List.Item>
           <List.Header>Doi</List.Header>
-          <Link to={doi}>{doi.replace('https://doi.org/', '')}</Link>
+          <Link to={"https://doi.org/" + doi}>{doi}</Link>
         </List.Item>
       )}
       {journal ? (
@@ -79,10 +81,13 @@ function Content({
   timestamp,
   source,
   license,
+  link
 }) {
   return (
     <ContainerContent>
-      <Header as="h1">{title}</Header>
+      <Header as="h1">
+        <Link to={link}>{title}</Link>
+      </Header>
       <Authors authors={authors} />
       {abstract && (
         <>
@@ -103,20 +108,20 @@ function Content({
 
 function Related({ id, specter }) {
   const query = new URLSearchParams();
-  query.set('id', id);
-  query.set('summary', 'short');
-  query.set('hits', 5);
-  if (specter) query.set('use-specter', true);
+  query.set("id", id);
+  query.set("summary", "short");
+  query.set("hits", 5);
+  if (specter) query.set("use-specter", true);
   const { loading, response, error } = Get(
-    '/search/?' + query.toString()
+    "/search/?" + query.toString()
   ).state();
 
   if (loading) return <Loading message="Searching..." />;
   if (error)
-    return <Error message={error.message || 'Unknown search error...'} />;
+    return <Error message={error.message || "Unknown search error..."} />;
 
   console.log(response);
-  if (!('children' in response.root)) return null;
+  if (!("children" in response.root)) return null;
   return (
     <Tab.Pane>
       <React.Fragment>
@@ -171,36 +176,36 @@ function Article({ id }) {
     ...(response.fields.cited_by || []),
     ...(response.fields.citations_inbound || [])
       .map(c => c.source_id)
-      .filter(c => !isNaN(c)),
+      .filter(c => !isNaN(c))
   ]);
 
   const panes = [
     {
-      menuItem: 'Similar articles by Sent-SciBERT',
-      render: () => <Related id={response.fields.id} specter={false} />,
+      menuItem: "Similar articles by Sent-SciBERT",
+      render: () => <Related id={response.fields.id} specter={false} />
     },
     {
-      menuItem: 'Similar articles by SPECTER',
-      render: () => <Related id={response.fields.id} specter={true} />,
+      menuItem: "Similar articles by SPECTER",
+      render: () => <Related id={response.fields.id} specter={true} />
     },
     {
       menuItem: {
-        key: 'citations',
+        key: "citations",
         content: `${citations.length} citing articles`,
-        disabled: citations.length === 0,
+        disabled: citations.length === 0
       },
       render: () => (
         <CitedBy
           citedBy={citations}
-          offset={parseInt(url.searchParams.get('offset')) || 0}
+          offset={parseInt(url.searchParams.get("offset")) || 0}
           total={citations.length}
           onOffsetChange={offset => {
-            url.searchParams.set('offset', offset);
+            url.searchParams.set("offset", offset);
             navigate(url);
           }}
         />
-      ),
-    },
+      )
+    }
   ];
 
   return (
@@ -209,13 +214,13 @@ function Article({ id }) {
         <Content {...response.fields} />
         <Tab
           panes={panes}
-          defaultActiveIndex={url.searchParams.get('tab') || 0}
+          defaultActiveIndex={url.searchParams.get("tab") || 0}
           onTabChange={(e, tabInfo) => {
             // Reset all query params when changing tab
             [...url.searchParams.keys()].forEach(k =>
               url.searchParams.delete(k)
             );
-            url.searchParams.set('tab', tabInfo.activeIndex);
+            url.searchParams.set("tab", tabInfo.activeIndex);
             navigate(url);
           }}
         />
