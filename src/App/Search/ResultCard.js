@@ -123,6 +123,15 @@ const FunctionLink = ({ onClick, ...props }) => (
   </a>
 );
 
+const tagToColor = {
+  Treatment: 'red',
+  Diagnosis: 'blue',
+  Mechanism: 'yellow',
+  Transmission: 'black',
+  Prevention: 'teal',
+  Epidemic_Forecasting: 'pink'
+};
+
 function Explanation({ text }) {
   return (
     <Popup
@@ -190,6 +199,19 @@ function authorsList(authors) {
   return authors.map(authorFormatter).join(', ');
 }
 
+function cardCategory({ tags }) {
+  tags = tags || [];
+  let spans = [];
+  for (let i = 0; i < tags.length; i++) {
+    spans.push(
+      <span className={'ui tag small label ' + tagToColor[tags[i]]}>
+        {tags[i]}
+      </span>
+    );
+  }
+  return <div>{spans}</div>;
+}
+
 function getSummaryFixLink({ link, doi, abstract }) {
   // If url with params is too long, delete the abstract
   if (abstract && abstract.length > 2048) {
@@ -197,29 +219,14 @@ function getSummaryFixLink({ link, doi, abstract }) {
   }
   let gform_url =
     'https://docs.google.com/forms/d/e/1FAIpQLSf4z7LCBizCs6pUgO3UyfxJMCAVC-bRh3cvW7uNghDu4UeBig/viewform?usp=pp_url';
-  let true_url =
+  return (
     gform_url +
     '&entry.101149199=' +
     link +
     '&entry.1258141481=' +
     doi +
     '&entry.112702407=' +
-    abstract;
-
-  return true_url;
-  return (
-    <div>
-      <div className="my-1 ml-1 mr-3 human-summary-submission">
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href={true_url}
-          className="float-right"
-        >
-          Submit/fix metadata
-        </a>
-      </div>
-    </div>
+    abstract
   );
 }
 
@@ -234,6 +241,7 @@ function ResultCard({
     abstract_t5,
     body_text,
     authors,
+    tags,
     source,
     citations_count_total
   },
@@ -295,6 +303,8 @@ function ResultCard({
               {formatText(abstract_t5)}
             </div>
           )}
+          {cardCategory({ tags })}
+
           {onSearchSimilar && (
             <FunctionLink onClick={onSearchSimilar}>
               Search within related articles
