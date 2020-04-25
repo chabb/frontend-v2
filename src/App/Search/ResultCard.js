@@ -113,7 +113,7 @@ const formatText = text => {
 // Link which has a dummy target which is ignored, only triggers the onClick callback
 const FunctionLink = ({ onClick, ...props }) => (
   <a
-    href="#root"
+    href="#"
     onClick={e => {
       e.preventDefault();
       onClick();
