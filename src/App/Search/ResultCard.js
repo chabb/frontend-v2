@@ -209,7 +209,7 @@ function cardCategory({ tags }) {
       </span>
     );
   }
-  return <div>{spans}</div>;
+  return <div style={{ margin: '0.5em' }}>{spans}</div>;
 }
 
 function getSummaryFixLink({ link, doi, abstract }) {
