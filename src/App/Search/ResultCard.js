@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Card, Icon, Label, Popup } from 'semantic-ui-react';
 import Moment from 'react-moment';
 import Link from 'App/shared/components/Link';
-import { nameFormatter } from 'App/shared/utils/formatter';
+// import { nameFormatter } from 'App/shared/utils/formatter';
 import ReadMore from './ReadMore';
 import AuthorsJournalDate from './ResultComponents/AuthorsJournalDate';
 import { authorFormatter } from '../shared/utils/formatter';
@@ -60,7 +60,7 @@ const StyledCard = styled(Card)`
     //padding: 0.3em 0.5em;
     padding: 0.3em 0.1em;
     border: 0;
-    width: 90%;
+    width: 100%;
   }
 
   .larger {
@@ -83,6 +83,12 @@ const StyledCard = styled(Card)`
 
   .margin20 {
     margin: 20px;
+  }
+
+  a.float-right {
+    float: right;
+    margin-right: 0.25em;
+    color: #de0008;
   }
 `;
 
@@ -184,6 +190,39 @@ function authorsList(authors) {
   return authors.map(authorFormatter).join(', ');
 }
 
+function getSummaryFixLink({ link, doi, abstract }) {
+  // If url with params is too long, delete the abstract
+  if (abstract && abstract.length > 2048) {
+    abstract = '[#Abstract too long, redacted#]';
+  }
+  let gform_url =
+    'https://docs.google.com/forms/d/e/1FAIpQLSf4z7LCBizCs6pUgO3UyfxJMCAVC-bRh3cvW7uNghDu4UeBig/viewform?usp=pp_url';
+  let true_url =
+    gform_url +
+    '&entry.101149199=' +
+    link +
+    '&entry.1258141481=' +
+    doi +
+    '&entry.112702407=' +
+    abstract;
+
+  return true_url;
+  return (
+    <div>
+      <div className="my-1 ml-1 mr-3 human-summary-submission">
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href={true_url}
+          className="float-right"
+        >
+          Submit/fix metadata
+        </a>
+      </div>
+    </div>
+  );
+}
+
 function ResultCard({
   fields: {
     id,
@@ -204,7 +243,6 @@ function ResultCard({
   const content = formatText(abstract);
   const body = formatText(body_text);
   const highlightedTitle = title.replace(highlightRegex, '$1');
-  console.log(timestamp);
   return (
     <StyledCard className="red card">
       <Card.Header>
@@ -262,6 +300,14 @@ function ResultCard({
               Search within related articles
             </FunctionLink>
           )}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            className={'float-right'}
+            href={getSummaryFixLink({ link: null, doi, abstract })}
+          >
+            Submit/fix metadata
+          </a>
         </Card.Content>
       )}
     </StyledCard>

@@ -1,14 +1,9 @@
 import React from 'react';
-import { Grid, List, Image } from 'semantic-ui-react';
-import { Container, Header } from 'semantic-ui-react';
+import { Container, Grid, Header } from 'semantic-ui-react';
 import Footer from 'App/shared/components/Footer';
 import styled from 'styled-components';
-import { Box } from 'rebass';
-
-const Content = styled(Box)`
-  // background-image: linear-gradient(0deg, #98c1db 7%, #005a8e 100%);
-  min-height: calc(100vh - 66px);
-`;
+import MemberCard from './MemberBox';
+import haoyan_pic from './pics/haoyan.jpg';
 
 const ContentGrid = styled(Grid)`
   &&& {
@@ -61,13 +56,19 @@ const ContentGrid = styled(Grid)`
     a:hover {
       color: #1b4b4c !important;
     }
+
+    .ui.card,
+    .ui.card:first-child,
+    .ui.card:last-child {
+      margin: 0.5em;
+    }
   }
 `;
 
 export default function About() {
   return (
     <ContentGrid>
-      <Container text>
+      <Container>
         <Header as="h1" style={{ 'margin-top': '10px' }}>
           About CovidScholar{' '}
         </Header>
@@ -81,6 +82,36 @@ export default function About() {
           <a href="https://ceder.berkeley.edu">Ceder</a> research groups at
           Lawrence Berkeley National Lab.
         </p>
+
+        <Header as="h2" style={{ 'margin-top': '10px' }}>
+          Our team
+        </Header>
+        <Grid className={'center aligned'}>
+          <MemberCard
+            name={'Haoyan Huo'}
+            intro={
+              'Haoyan joined Ceder Group at UC Berkeley as a PhD student in 2017. He is interested in making computers read papers and learn how to cook materials using the knowledge mined from the scientific literature knowledge base.'
+            }
+            pic={haoyan_pic}
+            link={'https://github.com/hhaoyan'}
+          />
+          <MemberCard
+            name={'Haoyan Huo'}
+            intro={
+              'Haoyan joined Ceder Group at UC Berkeley as a PhD student in 2017. He is interested in making computers read papers and learn how to cook materials using the knowledge mined from the scientific literature knowledge base.'
+            }
+            pic={haoyan_pic}
+            link={'https://github.com/hhaoyan'}
+          />
+          <MemberCard
+            name={'Haoyan Huo'}
+            intro={
+              'Haoyan joined Ceder Group at UC Berkeley as a PhD student in 2017. He is interested in making computers read papers and learn how to cook materials using the knowledge mined from the scientific literature knowledge base.'
+            }
+            pic={haoyan_pic}
+            link={'https://github.com/hhaoyan'}
+          />
+        </Grid>
       </Container>
       <Footer page="main" />
     </ContentGrid>
