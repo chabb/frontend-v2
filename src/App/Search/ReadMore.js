@@ -1,6 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './ReadMore.css';
+import styled from 'styled-components';
+
+let maxLength = 300;
+let ellipses = '...';
+
+const StyledDiv = styled.div`
+  && {
+    display: inline;
+
+    .read-more,
+    .read-less {
+      color: #005a8e;
+      cursor: pointer;
+      position: relative;
+      top: -0.05rem;
+    }
+
+    .read-more:hover,
+    .read-less:hover {
+      text-decoration: underline;
+    }
+  }
+`;
 
 class ReadMore extends React.Component {
   constructor(props) {
@@ -14,35 +36,47 @@ class ReadMore extends React.Component {
     });
   };
 
+  get_short = () => {
+    console.log(this.props.long);
+    if (this.props.short) return this.props.short;
+
+    for (let i = maxLength; i > 0; i--) {
+      if (this.props.long[i - 1] === ' ') return this.props.long.substr(0, i);
+    }
+    return this.props.long.substr(0, maxLength);
+  };
+
   render() {
     if (this.props.long && this.props.long.length > 0) {
       if (!this.state.expanded) {
         return (
-          <div className="my-1 ml-1 mr-5">
+          <StyledDiv>
             <span
-              dangerouslySetInnerHTML={{ __html: this.props.short + '...' }}
+              dangerouslySetInnerHTML={{ __html: this.get_short() + ellipses }}
             />
+            &nbsp;
             <span
-              className="read-more btn btn-sm btn-link"
+              className="read-more ui"
               onClick={this.showMoreLess}
               onTouchStart={this.showMoreLess}
             >
               {'[+]'}
             </span>
-          </div>
+          </StyledDiv>
         );
       } else {
         return (
-          <div className="my-1 ml-1 mr-5">
+          <StyledDiv>
             <span dangerouslySetInnerHTML={{ __html: this.props.long }} />
+            &nbsp;
             <span
-              className="read-more btn btn-sm btn-link"
+              className="read-more ui"
               onClick={this.showMoreLess}
               onTouchStart={this.showMoreLess}
             >
               {'[-]'}
             </span>
-          </div>
+          </StyledDiv>
         );
       }
     } else {
@@ -53,7 +87,7 @@ class ReadMore extends React.Component {
 
 ReadMore.propTypes = {
   long: PropTypes.string.isRequired,
-  short: PropTypes.string.isRequired
+  short: PropTypes.string
 };
 
 export default ReadMore;

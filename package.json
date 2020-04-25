@@ -1,12 +1,9 @@
 {
-  "name": "cord-19-ui",
+  "name": "covidscholar.org",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/",
-  "dependencies": {
-    "fomantic-ui-css": "^2.8.4",
-    "nivo": "^0.31.0"
-  },
+  "homepage": "covidscholar.org",
+  "dependencies": {},
   "lint-staged": {
     "src/App/!(Guide)/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
       "prettier --single-quote --write",
@@ -37,11 +34,13 @@
     "eslint-plugin-prettier": "^3.1.1",
     "eslint-plugin-react-hooks": "^2.3.0",
     "faker": "^4.1.0",
+    "fomantic-ui-css": "^2.8.4",
     "http-proxy-middleware": "^0.20.0",
     "husky": "^3.1.0",
     "lint-staged": "^10.1.0",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
+    "nivo": "^0.31.0",
     "prettier": "^1.19.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
@@ -50,7 +49,8 @@
     "react-window": "^1.8.5",
     "rebass": "^4.0.6",
     "semantic-ui-react": "^0.88.2",
-    "styled-components": "^4.4.1"
+    "styled-components": "^4.4.1",
+    "typescript": "^3.8.3"
   },
   "husky": {
     "hooks": {

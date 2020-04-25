@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Card, Icon, Label, Popup } from 'semantic-ui-react';
 import Moment from 'react-moment';
@@ -235,7 +235,7 @@ function ResultCard({
                 content="This is a dynamic summary of the abstract of the paper, showing the matched query terms and surrounding context."
                 trigger={<Label horizontal>Abstract</Label>}
               />
-              {content}
+              <ReadMore long={content.join(' ')} />
             </div>
           )}
           {body && (
