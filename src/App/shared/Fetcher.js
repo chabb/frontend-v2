@@ -1,7 +1,6 @@
 import { useReducer } from 'react';
 
-const backend =
-  process.env.REACT_APP_BACKEND_URL || 'https://vespa.covidscholar.org';
+const backend = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
 
 function Get(url, params) {
   return Fetch('GET', url, params);
@@ -75,7 +74,7 @@ function Fetch(method, url, params) {
       },
       response: null,
       error: null,
-      version: version,
+      version: version
     };
 
     const [state, dispatch] = useReducer(reducer, initialState);
@@ -90,7 +89,7 @@ function Fetch(method, url, params) {
             dispatch({
               loading: false,
               response: response,
-              version: version,
+              version: version
             });
         })
         .catch(error => {
