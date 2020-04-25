@@ -10,8 +10,7 @@ import { authorFormatter } from '../shared/utils/formatter';
 
 const StyledCard = styled(Card)`
   && {
-    box-shadow: none;
-    margin-bottom: 2em;
+    margin-bottom: 1em !important;
 
     a {
       color: #005a8e;
@@ -133,6 +132,12 @@ const tagToColor = {
   Transmission: 'black'
 };
 
+const docTypeToColor = {
+  paper: 'red',
+  patent: 'blue',
+  clinical_trial: 'green'
+};
+
 function Explanation({ text }) {
   return (
     <Popup
@@ -243,6 +248,7 @@ function ResultCard({
     body_text,
     authors,
     tags,
+    document_type,
     source,
     citations_count_total
   },
@@ -253,7 +259,7 @@ function ResultCard({
   const body = formatText(body_text);
   const highlightedTitle = title.replace(highlightRegex, '$1');
   return (
-    <StyledCard className="red card">
+    <StyledCard className={docTypeToColor[document_type]}>
       <Card.Header>
         <Link className="title larger" to={`/article/${id}`}>
           {highlightedTitle}

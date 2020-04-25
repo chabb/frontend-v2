@@ -24,8 +24,7 @@ const filters = [
     name: 'Year Published',
     field: 'year'
   },
-  { name: 'Data Source',
-    field: 'source_display' },
+  { name: 'Data Source', field: 'source_display' },
   {
     name: 'Document Type',
     field: 'document_type'
@@ -43,19 +42,20 @@ const PaddedCheckbox = styled(Checkbox)`
   }
 `;
 
-function filterOutUndesiredCheckboxes(field, value){
+function filterOutUndesiredCheckboxes(field, value) {
   if (value.length <= 0) {
-    return false
+    return false;
   } else if (field === 'is_covid19' && value === false) {
-    return false
+    return false;
   } else if (field === 'is_preprint' && value === false) {
-    return false
+    return false;
   } else {
-    return true
+    return true;
   }
 }
 
 function Checkboxes({ name, field, values, onSearch }) {
+  console.log(values);
   if (!values || values.length === 0) return null;
   const onChange = (event, { value, checked }) => {
     // The new selected checkboxes are the ones that were previously selected
@@ -72,10 +72,7 @@ function Checkboxes({ name, field, values, onSearch }) {
     <Form.Field>
       <label>{name}</label>
       {values
-        .filter(
-          ({value}) =>
-              filterOutUndesiredCheckboxes(field, value)
-        )
+        .filter(({ value }) => filterOutUndesiredCheckboxes(field, value))
         .map(({ value, count, checked }, i) => (
           <PaddedCheckbox
             key={i}
@@ -125,12 +122,12 @@ function Sidebar({ onSearch, ...filterValues }) {
         />
       ))}
       <Dropdown
-          placeholder="Keywords"
-          fluid
-          multiple
-          search
-          selection
-          options={stateOptions}
+        placeholder="Keywords"
+        fluid
+        multiple
+        search
+        selection
+        options={stateOptions}
       />
     </div>
   );
