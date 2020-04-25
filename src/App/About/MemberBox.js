@@ -11,7 +11,11 @@ const StyledP = styled.p`
 
 function get_name_link({ name, link }) {
   if (link) {
-    return <a href={link}>{name}</a>;
+    return (
+      <a target={'_black'} href={link}>
+        {name}
+      </a>
+    );
   }
   return <p>{name}</p>;
 }

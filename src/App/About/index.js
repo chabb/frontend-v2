@@ -4,6 +4,10 @@ import Footer from 'App/shared/components/Footer';
 import styled from 'styled-components';
 import MemberCard from './MemberBox';
 import haoyan_pic from './pics/haoyan.jpg';
+import amalie_pic from './pics/amalie.jpg';
+import kevin_pic from './pics/kevin.jpg';
+import yuxing_pic from './pics/yuxing.jpg';
+import zheren_pic from './pics/zheren.jpg';
 
 const ContentGrid = styled(Grid)`
   &&& {
@@ -88,12 +92,10 @@ export default function About() {
         </Header>
         <Grid className={'center aligned'}>
           <MemberCard
-            name={'Haoyan Huo'}
-            intro={
-              'Haoyan joined Ceder Group at UC Berkeley as a PhD student in 2017. He is interested in making computers read papers and learn how to cook materials using the knowledge mined from the scientific literature knowledge base.'
-            }
-            pic={haoyan_pic}
-            link={'https://github.com/hhaoyan'}
+            name={'Amalie Trewartha'}
+            intro={'Intro for Amalie.'}
+            pic={amalie_pic}
+            link={null}
           />
           <MemberCard
             name={'Haoyan Huo'}
@@ -104,12 +106,22 @@ export default function About() {
             link={'https://github.com/hhaoyan'}
           />
           <MemberCard
-            name={'Haoyan Huo'}
-            intro={
-              'Haoyan joined Ceder Group at UC Berkeley as a PhD student in 2017. He is interested in making computers read papers and learn how to cook materials using the knowledge mined from the scientific literature knowledge base.'
-            }
-            pic={haoyan_pic}
-            link={'https://github.com/hhaoyan'}
+            name={'Kevin Cruse'}
+            intro={'Intro for Kevin.'}
+            pic={kevin_pic}
+            link={'https://www.linkedin.com/in/kevin-cruse/'}
+          />
+          <MemberCard
+            name={'Yuxing Fei'}
+            intro={'Intro for Yuxing.'}
+            pic={yuxing_pic}
+            link={'https://yuxingfei.com/'}
+          />
+          <MemberCard
+            name={'Zheren Wang'}
+            intro={'Intro for Zheren.'}
+            pic={zheren_pic}
+            link={null}
           />
         </Grid>
       </Container>
