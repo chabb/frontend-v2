@@ -37,7 +37,6 @@ class ReadMore extends React.Component {
   };
 
   get_short = () => {
-    console.log(this.props.long);
     if (this.props.short) return this.props.short;
 
     for (let i = maxLength; i > 0; i--) {

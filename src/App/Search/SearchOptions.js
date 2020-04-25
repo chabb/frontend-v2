@@ -53,7 +53,7 @@ function RelatedArticle({ id }) {
   const use_specter = params.get('use-specter') === 'true';
   const similarMethod = use_specter
     ? 'SPECTER similarity'
-    : 'Sent-SciBERT similarity';
+    : 'Document Embedding Similarity';
 
   const query = new URLSearchParams();
   query.set('yql', `select title from sources * where id = ${id};`);

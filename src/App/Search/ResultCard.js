@@ -204,7 +204,6 @@ function ResultCard({
   const content = formatText(abstract);
   const body = formatText(body_text);
   const highlightedTitle = title.replace(highlightRegex, '$1');
-  console.log(timestamp);
   return (
     <StyledCard className="red card">
       <Card.Header>

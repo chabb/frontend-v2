@@ -8,7 +8,7 @@ import {
   generateApiQueryParams,
   getSearchState,
   onSearch,
-  relatedToRegex,
+  relatedToRegex
 } from './Utils';
 import { Get } from 'App/shared/Fetcher';
 import SearchForm from 'App/shared/components/SearchForm';
@@ -84,7 +84,7 @@ function SearchResults({ articles, query, isFieldSetAll, loading, error }) {
           isFieldSetAll={isFieldSetAll}
           onSearchSimilar={() =>
             onSearch({
-              query: appendRelatedToQuery(query, article.fields.id),
+              query: appendRelatedToQuery(query, article.fields.id)
             })
           }
         />
@@ -102,9 +102,7 @@ function Search() {
   query.set('restrict', 'doc');
   query.set('hits', 10);
 
-  const { loading, response, error } = Get(
-    '/search/?' + query.toString()
-  ).state();
+  const { loading, response, error } = Get('/?' + query.toString()).state();
   const [grouping, setGrouping] = useState();
 
   // Sort results to make sure the grouping hit is first
@@ -129,7 +127,7 @@ function Search() {
         obj[label] = children.map(({ value, fields }) => ({
           value,
           count: fields['count()'],
-          checked: searchState[label].includes(value),
+          checked: searchState[label].includes(value)
         }));
         return obj;
       }, {});

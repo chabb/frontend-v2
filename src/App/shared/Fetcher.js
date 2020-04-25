@@ -1,6 +1,7 @@
 import { useReducer } from 'react';
 
-const backend = process.env.REACT_APP_BACKEND_URL || 'http://vespa.covidscholar.org';
+const backend =
+  process.env.REACT_APP_BACKEND_URL || 'http://www.covidscholar.org/vespa';
 
 function Get(url, params) {
   return Fetch('GET', url, params);
