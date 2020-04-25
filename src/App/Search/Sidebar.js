@@ -13,21 +13,22 @@ const stateOptions = _.map(addressDefinitions.state, (state, index) => ({
 
 const filters = [
   {
-    name: 'Published',
+    name: 'COVID-19 Only',
+    field: 'is_covid19'
+  },
+  {
+    name: 'Peer Reviewed',
+    field: 'is_preprint'
+  },
+  {
+    name: 'Year Published',
     field: 'year'
   },
-  { name: 'Source', field: 'source' },
+  { name: 'Data Source',
+    field: 'source_display' },
   {
-    name: 'Journal',
-    field: 'journal'
-  },
-  {
-    name: 'Author',
-    field: 'author'
-  },
-  {
-    name: 'Full text',
-    field: 'has_full_text'
+    name: 'Document Type',
+    field: 'document_type'
   }
 ];
 
@@ -41,6 +42,18 @@ const PaddedCheckbox = styled(Checkbox)`
     }
   }
 `;
+
+function filterOutUndesiredCheckboxes(field, value){
+  if (value.length <= 0) {
+    return false
+  } else if (field === 'is_covid19' && value === false) {
+    return false
+  } else if (field === 'is_preprint' && value === false) {
+    return false
+  } else {
+    return true
+  }
+}
 
 function Checkboxes({ name, field, values, onSearch }) {
   if (!values || values.length === 0) return null;
@@ -60,8 +73,8 @@ function Checkboxes({ name, field, values, onSearch }) {
       <label>{name}</label>
       {values
         .filter(
-          ({ value }) =>
-            value.length > 0 && !(field === 'year' && value === '1970')
+          ({value}) =>
+              filterOutUndesiredCheckboxes(field, value)
         )
         .map(({ value, count, checked }, i) => (
           <PaddedCheckbox
@@ -102,14 +115,6 @@ function Sidebar({ onSearch, ...filterValues }) {
       >
         Clear all
       </Button>
-      <Dropdown
-        placeholder="State"
-        fluid
-        multiple
-        search
-        selection
-        options={stateOptions}
-      />
       {filters.map(({ name, field }) => (
         <Checkboxes
           key={field}
@@ -119,6 +124,14 @@ function Sidebar({ onSearch, ...filterValues }) {
           onSearch={onSearch}
         />
       ))}
+      <Dropdown
+          placeholder="Keywords"
+          fluid
+          multiple
+          search
+          selection
+          options={stateOptions}
+      />
     </div>
   );
 }
