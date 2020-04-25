@@ -40,7 +40,7 @@ const rankings = [
   },
   {
     text: 'Relevance + COVID-19',
-    value: 'bm25'
+    value: 'bm25-covid'
   },
   {
     text: 'date (most recent first)',
