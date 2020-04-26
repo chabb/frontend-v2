@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Box, Flex, Text } from 'rebass';
+import { Box, Text } from 'rebass';
 import NavMenu from 'App/shared/components/NavMenu';
 import { Grid, Image, List } from 'semantic-ui-react';
 import { shuffle } from 'lodash';

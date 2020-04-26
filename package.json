@@ -2,7 +2,7 @@
   "name": "covidscholar.org",
   "version": "0.1.0",
   "private": true,
-  "homepage": "index.html",
+  "homepage": "/",
   "dependencies": {},
   "lint-staged": {
     "src/App/!(Guide)/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
@@ -29,6 +29,7 @@
   ],
   "devDependencies": {
     "@nivo/bar": "^0.61.1",
+    "@nivo/stream": "^0.61.1",
     "@reach/router": "^1.2.1",
     "@welldone-software/why-did-you-render": "^3.3.9",
     "eslint-plugin-prettier": "^3.1.1",

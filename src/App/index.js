@@ -1,7 +1,6 @@
 import React from 'react';
 import { Router } from '@reach/router';
-import { Box, Flex } from 'rebass';
-import NavMenu from 'App/shared/components/NavMenu';
+import { Flex } from 'rebass';
 import Main from './Main';
 import Search from './Search';
 import Article from './Article';

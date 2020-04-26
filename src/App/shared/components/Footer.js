@@ -1,9 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Box } from 'rebass';
-import Link from 'App/shared/components/Link';
-import { Segment, Image, Container } from 'semantic-ui-react';
-import logo from 'App/shared/img/VespaLogoWhite.png';
+import { Container, Segment } from 'semantic-ui-react';
 
 const FooterBox = styled(Box)`
   &&& {
