@@ -102,7 +102,9 @@ function Search() {
   query.set('restrict', 'doc');
   query.set('hits', 10);
 
-  const { loading, response, error } = Get('/?' + query.toString()).state();
+  const { loading, response, error } = Get(
+    '/search/?' + query.toString()
+  ).state();
   const [grouping, setGrouping] = useState();
 
   // Sort results to make sure the grouping hit is first

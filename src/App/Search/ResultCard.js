@@ -1,12 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Card, Icon, Label, Popup } from 'semantic-ui-react';
+import { Card, Icon, Label, Popup, Header } from 'semantic-ui-react';
 import Moment from 'react-moment';
 import Link from 'App/shared/components/Link';
-import { nameFormatter } from 'App/shared/utils/formatter';
 import ReadMore from './ReadMore';
 import AuthorsJournalDate from './ResultComponents/AuthorsJournalDate';
 import { authorFormatter } from '../shared/utils/formatter';
+import {
+  KeywordsSection,
+  NLPKeywordsSection
+} from './ResultComponents/Keywords';
+import { HumanSummarySection } from './ResultComponents/HumanSummary';
 
 const StyledCard = styled(Card)`
   && {
@@ -29,6 +33,7 @@ const StyledCard = styled(Card)`
   }
 
   .header {
+    padding-top: 5px;
     padding-bottom: 5px;
   }
 
@@ -195,12 +200,19 @@ function ResultCard({
     abstract_t5,
     body_text,
     authors,
-    source,
-    citations_count_total
+    source_display,
+    summary,
+    keywords,
+    keywords_ml,
+    citations_count_total,
+    link
   },
   onSearchSimilar,
   isFieldSetAll
 }) {
+  const keywords_dummy = ['key1', 'key2', 'key3'];
+  const keywords_ml_dummy = ['mlkey1', 'mlkey2', 'mlkey3'];
+  const summary_dummy = 'This was a really great paper and you should read it.';
   const content = formatText(abstract);
   const body = formatText(body_text);
   const highlightedTitle = title.replace(highlightRegex, '$1');
@@ -229,33 +241,16 @@ function ResultCard({
         <Card.Content>
           {content && (
             <div>
-              <Popup
-                position="top center"
-                content="This is a dynamic summary of the abstract of the paper, showing the matched query terms and surrounding context."
-                trigger={<Label horizontal>Abstract</Label>}
-              />
               <ReadMore long={content.join(' ')} />
             </div>
           )}
-          {body && (
-            <div>
-              <Popup
-                position="top center"
-                content="This is a dynamic summary of the body of the paper, showing the matched query terms and surrounding context."
-                trigger={<Label horizontal>Full Text</Label>}
-              />
-              {body}
-            </div>
-          )}
-          {abstract_t5 && (
-            <div>
-              <Label horizontal>
-                Machine Generated Summary
-                <Explanation text="This is a short summary of the abstract, generated using a Natural Language Processing Model (T5)." />
-              </Label>
-              {formatText(abstract_t5)}
-            </div>
-          )}
+          {keywords_dummy &&
+            KeywordsSection(keywords_dummy.concat(keywords_ml_dummy))}
+          {HumanSummarySection(summary_dummy, {
+            link: link,
+            abstract: abstract,
+            doi: doi
+          })}
           {onSearchSimilar && (
             <FunctionLink onClick={onSearchSimilar}>
               Search within related articles

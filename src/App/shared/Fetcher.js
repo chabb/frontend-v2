@@ -1,7 +1,8 @@
 import { useReducer } from 'react';
 
 const backend =
-  process.env.REACT_APP_BACKEND_URL || 'http://vespa.covidscholar.org/search';
+  process.env.REACT_APP_BACKEND_URL ||
+  'http://db-vespa.vespa-spin.dev-cattle.stable.spin.nersc.org:55025';
 
 function Get(url, params) {
   return Fetch('GET', url, params);

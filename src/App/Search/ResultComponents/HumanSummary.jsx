@@ -1,18 +1,28 @@
 import React from 'react';
+import { KeywordsSection, NLPKeywordsSection } from './Keywords';
+import { Header, Popup, Label } from 'semantic-ui-react';
 
-export default function HumanSummarySection(summary, fields) {
+export function HumanSummarySection(summary, fields) {
   if (summary.length) {
     return (
       <div>
-        <div className="my-1 ml-1 mr-3 font-weight-bold">
-          User-submitted summary:
-        </div>
-        <div
-          className="my-1 ml-1 mr-3 msweb-is-darkcyan-txt"
-          dangerouslySetInnerHTML={{
-            __html: summary
-          }}
+        <Popup
+          position="top center"
+          content="Thus summary was submitted to COVIDScholar by a human expert."
+          trigger={
+            <Label as="h5" horizontal>
+              User-submitted summary:
+            </Label>
+          }
         />
+        <span className="msweb-is-darkcyan-txt">{summary}</span>
+        {/*<div*/}
+        {/*  className="my-1 ml-1 mr-3 msweb-is-darkcyan-txt"*/}
+        {/*  dangerouslySetInnerHTML={{*/}
+        {/*    __html: summary*/}
+        {/*  }}*/}
+        {/*  style={{display: "inline-block"}}*/}
+        {/*/>*/}
       </div>
     );
   } else {
@@ -24,7 +34,7 @@ export default function HumanSummarySection(summary, fields) {
 
     // If url with params is too long, delete the abstract
     if (params.abstract && params.abstract.length > 2048) {
-      params.abstract = '[#Abstract too long, redacted#]';
+      params.abstract = '';
     }
     let gform_url =
       'https://docs.google.com/forms/d/e/1FAIpQLSf4z7LCBizCs6pUgO3UyfxJMCAVC-bRh3cvW7uNghDu4UeBig/viewform?usp=pp_url';
@@ -36,7 +46,6 @@ export default function HumanSummarySection(summary, fields) {
       params.doi +
       '&entry.112702407=' +
       params.abstract;
-
     return (
       <div>
         <div className="my-1 ml-1 mr-3 human-summary-submission">
@@ -53,3 +62,5 @@ export default function HumanSummarySection(summary, fields) {
     );
   }
 }
+
+export default { HumanSummarySection };
