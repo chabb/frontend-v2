@@ -2,16 +2,16 @@ import { Label, Popup } from 'semantic-ui-react';
 import React from 'react';
 
 const tagToColor = {
-  Diagnosis: 'red',
+  Diagnosis: 'orange',
   Mechanism: 'yellow',
-  Treatment: 'green',
-  Case_Report: 'blue',
+  Treatment: 'teal',
+  Case_Report: 'purple',
   Prevention: 'violet',
   Epidemic_Forecasting: 'brown',
   Transmission: 'black'
 };
 
-export default function CardCategory({ tags, onFilterCategory }) {
+function CardCategory({ tags, onFilterCategory }) {
   tags = tags || [];
   return tags.length > 0 ? (
     <div className={'category'}>
@@ -42,3 +42,5 @@ export default function CardCategory({ tags, onFilterCategory }) {
     ''
   );
 }
+
+export { tagToColor, CardCategory };

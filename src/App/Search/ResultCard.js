@@ -1,18 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Card, Icon } from 'semantic-ui-react';
+import { Card } from 'semantic-ui-react';
 import Moment from 'react-moment';
 import Link from 'App/shared/components/Link';
 import ReadMore from './ReadMore';
 import AuthorsJournalDate from './ResultComponents/AuthorsJournalDate';
 import { authorFormatter } from '../shared/utils/formatter';
-import {
-  KeywordsSection
-  // NLPKeywordsSection
-} from './ResultComponents/Keywords';
+import { KeywordsSection } from './ResultComponents/Keywords';
 import { HumanSummarySection } from './ResultComponents/HumanSummary';
 import SummaryFixLink from './ResultComponents/SummaryFixLink';
-import CardCategory from './ResultComponents/CardCategory';
+import { CardCategory } from './ResultComponents/CardCategory';
 
 const StyledCard = styled(Card)`
   && {
@@ -105,12 +102,6 @@ const StyledCard = styled(Card)`
 
   .larger {
     font-size: 1.25rem !important;
-  }
-`;
-
-const ExplanationIcon = styled(Icon)`
-  &&.icon {
-    margin: 0 0 0 0.5em;
   }
 `;
 
@@ -279,4 +270,4 @@ function ResultCard({
   );
 }
 
-export default ResultCard;
+export { ResultCard, docTypeToColor };
