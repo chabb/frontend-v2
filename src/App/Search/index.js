@@ -89,6 +89,7 @@ function SearchResults({ articles, query, isFieldSetAll, loading, error }) {
               query: appendRelatedToQuery(query, article.fields.id)
             })
           }
+          onFilterCategory={tag => onSearch({ tags: tag })}
         />
       ))}
     </>

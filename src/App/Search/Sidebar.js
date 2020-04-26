@@ -47,7 +47,6 @@ const PaddedCheckbox = styled(Checkbox)`
 `;
 
 function filterOutUndesiredCheckboxes(field, value) {
-  console.log(field, value);
   if (value.length <= 0) {
     return false;
   } else if (field === 'is_covid19' && value === 'false') {
@@ -60,7 +59,6 @@ function filterOutUndesiredCheckboxes(field, value) {
 }
 
 function formatFacetLabel(field, value) {
-  console.log(field, value);
   if (field === 'is_preprint' && value === 'false') {
     return 'true';
   } else {
@@ -69,7 +67,6 @@ function formatFacetLabel(field, value) {
 }
 
 function Checkboxes({ name, field, values, onSearch }) {
-  console.log(values);
   if (!values || values.length === 0) return null;
   const onChange = (event, { value, checked }) => {
     // The new selected checkboxes are the ones that were previously selected

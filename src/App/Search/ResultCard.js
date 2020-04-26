@@ -23,6 +23,48 @@ const StyledCard = styled(Card)`
     a:hover {
       color: #1a7db6;
     }
+
+    a.float-right {
+      float: right;
+      margin-right: 0.25em;
+      color: #de0008;
+    }
+
+    a.title:hover,
+    a.title:focus {
+      color: #205bbc !important;
+    }
+
+    .human-summary-submission a {
+      color: #de0008;
+      text-decoration: underline;
+    }
+
+    .content {
+      padding: 0.3em 0.1em;
+      border: 0;
+      width: 100%;
+    }
+
+    .content > div {
+      margin: 3px 0;
+    }
+
+    .category .label:not(:first-child) {
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+  }
+
+  &.ui.card.red {
+    box-shadow: 0 0 0 1px #d4d4d5, -3px 0 0 0 #db2828, 0 1px 3px 0 #d4d4d5;
+  }
+
+  &.ui.card.blue {
+    box-shadow: 0 0 0 1px #d4d4d5, -3px 0 0 0 #2185d0, 0 1px 3px 0 #d4d4d5;
+  }
+
+  &.ui.card.green {
+    box-shadow: 0 0 0 1px #d4d4d5, -3px 0 0 0 #21ba45, 0 1px 3px 0 #d4d4d5;
   }
 
   &.card {
@@ -59,39 +101,8 @@ const StyledCard = styled(Card)`
     clear: both;
   }
 
-  && .content {
-    //padding: 0.3em 0.5em;
-    padding: 0.3em 0.1em;
-    border: 0;
-    width: 100%;
-  }
-
   .larger {
     font-size: 1.25rem !important;
-  }
-
-  a.result-title:hover,
-  a.result-title:focus {
-    color: #205bbc !important;
-  }
-
-  .human-summary-submission a {
-    color: #de0008;
-    text-decoration: underline;
-  }
-
-  .has-underline {
-    text-decoration: underline;
-  }
-
-  .margin20 {
-    margin: 20px;
-  }
-
-  a.float-right {
-    float: right;
-    margin-right: 0.25em;
-    color: #de0008;
   }
 `;
 
@@ -134,6 +145,13 @@ const tagToColor = {
   Prevention: 'violet',
   Epidemic_Forecasting: 'brown',
   Transmission: 'black'
+  // Diagnosis: '',
+  // Mechanism: '',
+  // Treatment: '',
+  // Case_Report: '',
+  // Prevention: '',
+  // Epidemic_Forecasting: '',
+  // Transmission: ''
 };
 
 const docTypeToColor = {
@@ -209,14 +227,31 @@ function authorsList(authors) {
   return authors.map(authorFormatter).join(', ');
 }
 
-function cardCategory({ tags }) {
+function cardCategory({ tags }, onFilterCategory) {
   tags = tags || [];
   return (
-    <div style={{ margin: '0.5em' }}>
+    <div className={'category'}>
+      {tags.length > 0 ? (
+        <Popup
+          position="top center"
+          content="This is a machine-learned categorization of the paper."
+          trigger={<Label horizontal>Categories</Label>}
+        />
+      ) : (
+        ''
+      )}
       {tags.map((tag, i) => (
-        <span key={i} className={'ui tag small label ' + tagToColor[tag]}>
+        <a
+          key={i}
+          href={'#'}
+          className={'ui basic small label ' + tagToColor[tag]}
+          onClick={e => {
+            onFilterCategory(tag);
+            e.preventDefault();
+          }}
+        >
           {tag}
-        </span>
+        </a>
       ))}
     </div>
   );
@@ -261,6 +296,7 @@ function ResultCard({
     citations_count_total
   },
   onSearchSimilar,
+  onFilterCategory,
   isFieldSetAll
 }) {
   const keywords_dummy = ['key1', 'key2', 'key3'];
@@ -307,7 +343,6 @@ function ResultCard({
           {/*    {body}*/}
           {/*  </div>*/}
           {/*)}*/}
-          {/*{cardCategory({ tags })}*/}
 
           {keywords_dummy &&
             KeywordsSection(keywords_dummy.concat(keywords_ml_dummy))}
@@ -316,6 +351,9 @@ function ResultCard({
             abstract: abstract,
             doi: doi
           })}
+
+          {cardCategory({ tags }, onFilterCategory)}
+
           {onSearchSimilar && (
             <FunctionLink onClick={onSearchSimilar}>
               Search within related articles

@@ -1,12 +1,10 @@
 import React from 'react';
 import { Container, Grid } from 'semantic-ui-react';
-import Footer from 'App/shared/components/Footer';
 import styled from 'styled-components';
 import { Box } from 'rebass';
 import NavMenu from 'App/shared/components/NavMenu';
 import { ResponsiveBar } from '@nivo/bar';
 import EntriesStream from './EntriesStream';
-// import data from './data.json';
 
 const data = [
   {
