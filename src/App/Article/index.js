@@ -227,7 +227,7 @@ function Article({ id }) {
             }}
           />
         </ContainerContent>
-        <Footer />
+        <Footer page={'article'} />
       </Box>
     </React.Fragment>
   );

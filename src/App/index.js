@@ -9,6 +9,7 @@ import About from './About';
 import Stats from './Stats';
 import Error from 'App/shared/components/Error';
 import 'App/shared/covidscholar.css';
+import Privacy from './Privacy';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Search path="/search" />
         <About path="/about" />
         <Stats path="/stats" />
+        <Privacy path="/privacy" />
         <Article path="/article/:id" />
         {/*<Compound path="/compound/:id" />*/}
         <Error default />

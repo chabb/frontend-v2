@@ -164,7 +164,7 @@ function Search() {
             />
           </div>
         </ContainerSearch>
-        <Footer />
+        <Footer page={'search'} />
       </Box>
     </React.Fragment>
   );
