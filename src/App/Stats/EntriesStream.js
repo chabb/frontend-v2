@@ -138,10 +138,14 @@ class EntriesStream extends React.Component {
             }
           ]}
         />
-        <div className="Title">COVIDScholar Datastream Breakdown</div>
+        <div
+          style={{ width: '100%', textAlign: 'center', marginBottom: '10px' }}
+        >
+          <h5>COVIDScholar Datastream Breakdown</h5>
+        </div>
 
         <div>
-          <div className="ui buttons">
+          <div className="ui tiny buttons">
             <button
               className="ui button active"
               value={1}
@@ -159,7 +163,7 @@ class EntriesStream extends React.Component {
             </button>
           </div>
 
-          <div className="ui buttons">
+          <div className="ui tiny buttons">
             <button
               className="ui button active"
               value={3}

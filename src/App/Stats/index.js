@@ -96,7 +96,7 @@ export default function Stats() {
         <NavMenu logo="show" />
       </Box>
       <ContentGrid>
-        <Container style={{ height: '25em', maxWidth: '50em' }}>
+        <Container style={{ height: '20em', maxWidth: '50em' }}>
           <ResponsiveBar
             data={data}
             keys={['PubChem', 'Elsevier', 'medRxiv', 'bioRxiv', 'chemRxiv']}
