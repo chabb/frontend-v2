@@ -307,7 +307,7 @@ function ResultCard({
           {/*    {body}*/}
           {/*  </div>*/}
           {/*)}*/}
-          {cardCategory({ tags })}
+          {/*{cardCategory({ tags })}*/}
 
           {keywords_dummy &&
             KeywordsSection(keywords_dummy.concat(keywords_ml_dummy))}

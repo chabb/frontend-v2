@@ -5,12 +5,14 @@ import { navigate } from '@reach/router';
 import { uniq } from 'lodash';
 import { Container, Header, Tab, List } from 'semantic-ui-react';
 import { Error, Loading } from 'App/shared/components/Messages';
+import NavMenu from 'App/shared/components/NavMenu';
 import { Get } from 'App/shared/Fetcher';
 import ResultCard from 'App/Search/ResultCard';
 import Link from 'App/shared/components/Link';
 import { authorFormatter } from 'App/shared/utils/formatter';
 import Pagination from 'App/shared/components/Pagination';
 import Footer from 'App/shared/components/Footer';
+import { Box } from 'rebass';
 
 const ContainerContent = styled(Container)`
   &&& {
@@ -206,22 +208,27 @@ function Article({ id }) {
 
   return (
     <React.Fragment>
-      <ContainerContent>
-        <Content {...response.fields} />
-        <Tab
-          panes={panes}
-          defaultActiveIndex={url.searchParams.get('tab') || 0}
-          onTabChange={(e, tabInfo) => {
-            // Reset all query params when changing tab
-            [...url.searchParams.keys()].forEach(k =>
-              url.searchParams.delete(k)
-            );
-            url.searchParams.set('tab', tabInfo.activeIndex);
-            navigate(url);
-          }}
-        />
-      </ContainerContent>
-      <Footer />
+      <Box width={1}>
+        <Box width={1}>
+          <NavMenu logo="show" />
+        </Box>
+        <ContainerContent>
+          <Content {...response.fields} />
+          <Tab
+            panes={panes}
+            defaultActiveIndex={url.searchParams.get('tab') || 0}
+            onTabChange={(e, tabInfo) => {
+              // Reset all query params when changing tab
+              [...url.searchParams.keys()].forEach(k =>
+                url.searchParams.delete(k)
+              );
+              url.searchParams.set('tab', tabInfo.activeIndex);
+              navigate(url);
+            }}
+          />
+        </ContainerContent>
+        <Footer />
+      </Box>
     </React.Fragment>
   );
 }

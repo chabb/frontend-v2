@@ -52,11 +52,11 @@ function Footer({ page = null }) {
       <Container>
         <Segment.Group size="small">
           <Segment basic textAlign="center">
-            <div>
-              <Link to="https://vespa.ai">
-                <Image src={logo} />
-              </Link>
-            </div>
+            {/*<div>*/}
+            {/*  <Link to="https://vespa.ai">*/}
+            {/*    <Image src={logo} />*/}
+            {/*  </Link>*/}
+            {/*</div>*/}
             {/*<Link to="https://pages.semanticscholar.org/coronavirus-research">*/}
             {/*  COVID-19 Open Research Dataset (CORD-19)*/}
             {/*</Link>*/}

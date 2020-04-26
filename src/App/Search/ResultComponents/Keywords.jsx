@@ -7,7 +7,7 @@ export function KeywordsSection(keywords) {
       <div>
         <Popup
           position="top center"
-          content="Thus summary was submitted to COVIDScholar by a human expert."
+          content="Keywords submitted by users and/or extracted with our custom NLP models."
           trigger={
             <Label as="h5" horizontal>
               Keywords:

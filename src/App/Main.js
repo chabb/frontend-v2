@@ -32,7 +32,7 @@ const ContentGrid = styled(Grid)`
     font-size: 1.1rem;
 
     #logo {
-      width: 300px;
+      max-width: 500px;
     }
 
     .column {
@@ -88,7 +88,7 @@ function COVIDScholarDescription() {
   return (
     <Box my={4}>
       <Text mt={3}>
-        A knowledge portal for COVID-19 research built using
+        <span> A knowledge portal for COVID-19 research built using </span>
         <Link to="https://vespa.ai">Vespa.ai.</Link>
         <Text mt={1}>
           Licenced under{' '}
@@ -109,7 +109,9 @@ function Main() {
       </Box>
       <ContentGrid textAlign="center">
         <Grid.Row>
-          <Image src={COVIDScholarLogo} id={'logo'} />
+          <div id={'logo'}>
+            <Image src={COVIDScholarLogo} />
+          </div>
         </Grid.Row>
         <Grid.Row>
           <Grid.Column width={12}>

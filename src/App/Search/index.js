@@ -10,11 +10,13 @@ import {
   onSearch,
   relatedToRegex
 } from './Utils';
+import NavMenu from 'App/shared/components/NavMenu';
 import { Get } from 'App/shared/Fetcher';
 import SearchForm from 'App/shared/components/SearchForm';
 import { Error, Loading } from 'App/shared/components/Messages';
 import Footer from 'App/shared/components/Footer';
 import Pagination from 'App/shared/components/Pagination';
+import { Box } from 'rebass';
 
 const ContainerSearch = styled(Container)`
   &&& {
@@ -136,28 +138,33 @@ function Search() {
 
   return (
     <React.Fragment>
-      <ContainerSearch>
-        <Sidebar onSearch={onSearch} {...valuesState} />
-        <div id="search_results">
-          <SearchForm onSearch={onSearch} {...searchState} />
-          <SearchOptions
-            totalCount={totalCount}
-            onSearch={onSearch}
-            {...searchState}
-          />
-          <SearchResults
-            query={searchState.query}
-            isFieldSetAll={searchState.fieldset === 'all'}
-            {...{ articles, loading, error }}
-          />
-          <Pagination
-            total={totalCount}
-            offset={parseInt(query.get('offset')) || 0}
-            onOffsetChange={offset => onSearch({ offset })}
-          />
-        </div>
-      </ContainerSearch>
-      <Footer />
+      <Box width={1}>
+        <Box width={1}>
+          <NavMenu logo="show" />
+        </Box>
+        <ContainerSearch>
+          <Sidebar onSearch={onSearch} {...valuesState} />
+          <div id="search_results">
+            <SearchForm onSearch={onSearch} {...searchState} />
+            <SearchOptions
+              totalCount={totalCount}
+              onSearch={onSearch}
+              {...searchState}
+            />
+            <SearchResults
+              query={searchState.query}
+              isFieldSetAll={searchState.fieldset === 'all'}
+              {...{ articles, loading, error }}
+            />
+            <Pagination
+              total={totalCount}
+              offset={parseInt(query.get('offset')) || 0}
+              onOffsetChange={offset => onSearch({ offset })}
+            />
+          </div>
+        </ContainerSearch>
+        <Footer />
+      </Box>
     </React.Fragment>
   );
 }

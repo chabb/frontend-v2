@@ -35,12 +35,12 @@ const rankings = [
   //   value: 'default',
   // },
   {
-    text: 'Relevance',
-    value: 'default'
+    text: 'Relevance + boost(COVID-19)',
+    value: 'bm25-covid'
   },
   {
-    text: 'Relevance + COVID-19',
-    value: 'bm25-covid'
+    text: 'Relevance',
+    value: 'default'
   },
   {
     text: 'date (most recent first)',
@@ -49,11 +49,7 @@ const rankings = [
 ];
 
 function RelatedArticle({ id }) {
-  const params = new URLSearchParams(window.location.search);
-  const use_specter = params.get('use-specter') === 'true';
-  const similarMethod = use_specter
-    ? 'SPECTER similarity'
-    : 'Document Embedding Similarity';
+  const similarMethod = 'Document Embedding Similarity';
 
   const query = new URLSearchParams();
   query.set('yql', `select title from sources * where id = ${id};`);

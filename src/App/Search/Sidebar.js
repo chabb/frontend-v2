@@ -21,14 +21,18 @@ const filters = [
     field: 'is_preprint'
   },
   {
+    name: 'Document Type',
+    field: 'document_type'
+  },
+  {
+    name: 'Tag',
+    field: 'tags'
+  },
+  {
     name: 'Year Published',
     field: 'year'
   },
-  { name: 'Data Source', field: 'source_display' },
-  {
-    name: 'Document Type',
-    field: 'document_type'
-  }
+  { name: 'Data Source', field: 'source_display' }
 ];
 
 const PaddedCheckbox = styled(Checkbox)`
@@ -43,14 +47,24 @@ const PaddedCheckbox = styled(Checkbox)`
 `;
 
 function filterOutUndesiredCheckboxes(field, value) {
+  console.log(field, value);
   if (value.length <= 0) {
     return false;
-  } else if (field === 'is_covid19' && value === false) {
+  } else if (field === 'is_covid19' && value === 'false') {
     return false;
-  } else if (field === 'is_preprint' && value === false) {
+  } else if (field === 'is_preprint' && value === 'true') {
     return false;
   } else {
     return true;
+  }
+}
+
+function formatFacetLabel(field, value) {
+  console.log(field, value);
+  if (field === 'is_preprint' && value === 'false') {
+    return 'true';
+  } else {
+    return value;
   }
 }
 
@@ -79,7 +93,7 @@ function Checkboxes({ name, field, values, onSearch }) {
             name={name}
             value={value}
             onChange={onChange}
-            label={`${value} (${count})`}
+            label={`${formatFacetLabel(field, value)} (${count})`}
             checked={checked}
           />
         ))}
