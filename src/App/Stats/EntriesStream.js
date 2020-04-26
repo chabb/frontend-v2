@@ -178,6 +178,8 @@ class EntriesStream extends React.Component {
             </button>
           </div>
 
+          <span>&nbsp;</span>
+
           <div className="ui tiny buttons">
             <button
               className={
