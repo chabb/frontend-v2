@@ -1,16 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Card, Icon, Label, Popup, Header } from 'semantic-ui-react';
+import { Card, Icon } from 'semantic-ui-react';
 import Moment from 'react-moment';
 import Link from 'App/shared/components/Link';
 import ReadMore from './ReadMore';
 import AuthorsJournalDate from './ResultComponents/AuthorsJournalDate';
 import { authorFormatter } from '../shared/utils/formatter';
 import {
-  KeywordsSection,
-  NLPKeywordsSection
+  KeywordsSection
+  // NLPKeywordsSection
 } from './ResultComponents/Keywords';
 import { HumanSummarySection } from './ResultComponents/HumanSummary';
+import SummaryFixLink from './ResultComponents/SummaryFixLink';
+import CardCategory from './ResultComponents/CardCategory';
 
 const StyledCard = styled(Card)`
   && {
@@ -137,41 +139,11 @@ const FunctionLink = ({ onClick, ...props }) => (
   </a>
 );
 
-const tagToColor = {
-  Diagnosis: 'red',
-  Mechanism: 'yellow',
-  Treatment: 'green',
-  Case_Report: 'blue',
-  Prevention: 'violet',
-  Epidemic_Forecasting: 'brown',
-  Transmission: 'black'
-  // Diagnosis: '',
-  // Mechanism: '',
-  // Treatment: '',
-  // Case_Report: '',
-  // Prevention: '',
-  // Epidemic_Forecasting: '',
-  // Transmission: ''
-};
-
 const docTypeToColor = {
   paper: 'red',
   patent: 'blue',
   clinical_trial: 'green'
 };
-
-function Explanation({ text }) {
-  return (
-    <Popup
-      content={text}
-      trigger={
-        <span>
-          <ExplanationIcon name="question circle" />
-        </span>
-      }
-    />
-  );
-}
 
 function JournalAndDate({ journal, timestamp }) {
   const format = journal ? ' (YYYY-MM-DD)' : 'YYYY-MM-DD';
@@ -227,54 +199,6 @@ function authorsList(authors) {
   return authors.map(authorFormatter).join(', ');
 }
 
-function cardCategory({ tags }, onFilterCategory) {
-  tags = tags || [];
-  return (
-    <div className={'category'}>
-      {tags.length > 0 ? (
-        <Popup
-          position="top center"
-          content="This is a machine-learned categorization of the paper."
-          trigger={<Label horizontal>Categories</Label>}
-        />
-      ) : (
-        ''
-      )}
-      {tags.map((tag, i) => (
-        <a
-          key={i}
-          href={'#'}
-          className={'ui basic small label ' + tagToColor[tag]}
-          onClick={e => {
-            onFilterCategory(tag);
-            e.preventDefault();
-          }}
-        >
-          {tag}
-        </a>
-      ))}
-    </div>
-  );
-}
-
-function getSummaryFixLink({ link, doi, abstract }) {
-  // If url with params is too long, delete the abstract
-  if (abstract && abstract.length > 2048) {
-    abstract = '[#Abstract too long, redacted#]';
-  }
-  let gform_url =
-    'https://docs.google.com/forms/d/e/1FAIpQLSf4z7LCBizCs6pUgO3UyfxJMCAVC-bRh3cvW7uNghDu4UeBig/viewform?usp=pp_url';
-  return (
-    gform_url +
-    '&entry.101149199=' +
-    link +
-    '&entry.1258141481=' +
-    doi +
-    '&entry.112702407=' +
-    abstract
-  );
-}
-
 function ResultCard({
   fields: {
     id,
@@ -303,7 +227,7 @@ function ResultCard({
   const keywords_ml_dummy = ['mlkey1', 'mlkey2', 'mlkey3'];
   const summary_dummy = 'This was a really great paper and you should read it.';
   const content = formatText(abstract);
-  const body = formatText(body_text);
+  // const body = formatText(body_text);
   const highlightedTitle = title.replace(highlightRegex, '$1');
   return (
     <StyledCard className={docTypeToColor[document_type]}>
@@ -321,54 +245,36 @@ function ResultCard({
           100
         )}
       </Card.Header>
-      {/*<Card.Meta>*/}
-      {/*  <JournalAndDate {...{ journal, timestamp }} />*/}
-      {/*  <DoiLink doi={doi} />*/}
-      {/*  <SourceAndCitations {...{ source, citations_count_total }} />*/}
-      {/*</Card.Meta>*/}
-      {(content || onSearchSimilar) && (
-        <Card.Content>
-          {content && (
-            <div>
-              <ReadMore long={content.join(' ')} />
-            </div>
-          )}
-          {/*{body && (*/}
-          {/*  <div>*/}
-          {/*    <Popup*/}
-          {/*      position="top center"*/}
-          {/*      content="This is a dynamic summary of the body of the paper, showing the matched query terms and surrounding context."*/}
-          {/*      trigger={<Label horizontal>Full Text</Label>}*/}
-          {/*    />*/}
-          {/*    {body}*/}
-          {/*  </div>*/}
-          {/*)}*/}
 
-          {keywords_dummy &&
-            KeywordsSection(keywords_dummy.concat(keywords_ml_dummy))}
-          {HumanSummarySection(summary_dummy, {
-            link: link,
-            abstract: abstract,
-            doi: doi
-          })}
+      <Card.Content>
+        {content && (
+          <div>
+            <ReadMore long={content.join(' ')} />
+          </div>
+        )}
+        {/*{body && (*/}
+        {/*  <div>*/}
+        {/*    <Popup*/}
+        {/*      position="top center"*/}
+        {/*      content="This is a dynamic summary of the body of the paper, showing the matched query terms and surrounding context."*/}
+        {/*      trigger={<Label horizontal>Full Text</Label>}*/}
+        {/*    />*/}
+        {/*    {body}*/}
+        {/*  </div>*/}
+        {/*)}*/}
 
-          {cardCategory({ tags }, onFilterCategory)}
+        <KeywordsSection keywords={keywords_dummy.concat(keywords_ml_dummy)} />
+        <HumanSummarySection summary={summary_dummy} />
+        <CardCategory tags={tags} onFilterCategory={onFilterCategory} />
 
-          {onSearchSimilar && (
-            <FunctionLink onClick={onSearchSimilar}>
-              Search within related articles
-            </FunctionLink>
-          )}
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            className={'float-right'}
-            href={getSummaryFixLink({ link: null, doi, abstract })}
-          >
-            Submit/fix metadata
-          </a>
-        </Card.Content>
-      )}
+        {onSearchSimilar && (
+          <FunctionLink onClick={onSearchSimilar}>
+            Search within related articles
+          </FunctionLink>
+        )}
+
+        <SummaryFixLink link={null} doi={doi} abstract={abstract} />
+      </Card.Content>
     </StyledCard>
   );
 }
