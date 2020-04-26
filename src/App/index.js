@@ -14,11 +14,8 @@ import 'App/shared/covidscholar.css';
 function App() {
   return (
     <Flex flexDirection="column" minHeight="100vh">
-      <Box width={1}>
-        <NavMenu />
-      </Box>
       <Router primary={false} component={React.Fragment}>
-        <Main path="/" />
+        <Main path="/" z />
         <Search path="/search" />
         <About path="/about" />
         <Stats path="/stats" />

@@ -4,6 +4,7 @@ import { Container, Header } from 'semantic-ui-react';
 import Footer from 'App/shared/components/Footer';
 import styled from 'styled-components';
 import { Box } from 'rebass';
+import NavMenu from 'App/shared/components/NavMenu';
 import { ResponsiveBar } from '@nivo/bar';
 
 const data = [
@@ -89,46 +90,51 @@ const ContentGrid = styled(Grid)`
 
 export default function About() {
   return (
-    <ContentGrid>
-      <Container style={{ height: '25em', maxWidth: '50em' }}>
-        <ResponsiveBar
-          data={data}
-          keys={['PubChem', 'Elsevier', 'medRxiv', 'bioRxiv', 'chemRxiv']}
-          indexBy="source"
-          margin={{ top: 50, right: 130, bottom: 50, left: 130 }}
-          padding={0.2}
-          layout="horizontal"
-          colors={{ scheme: 'nivo' }}
-          borderColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
-          axisTop={null}
-          axisRight={null}
-          axisBottom={null}
-          enableGridY={false}
-          label={null}
-          // labelSkipWidth={12}
-          // labelSkipHeight={12}
-          // labelTextColor={{ from: 'color', modifiers: [ [ 'darker', 1.6 ] ] }}
-          legends={[
-            {
-              dataFrom: 'keys',
-              anchor: 'bottom-right',
-              direction: 'column',
-              justify: false,
-              translateX: 120,
-              translateY: -20,
-              itemWidth: 100,
-              itemHeight: 17,
-              itemsSpacing: 10,
-              symbolSize: 20,
-              itemDirection: 'left-to-right'
-            }
-          ]}
-          animate={true}
-          motionStiffness={90}
-          motionDamping={15}
-        />
-      </Container>
-      <Footer page="main" />
-    </ContentGrid>
+    <Content width={1}>
+      <Box width={1}>
+        <NavMenu logo="show" />
+      </Box>
+      <ContentGrid>
+        <Container style={{ height: '25em', maxWidth: '50em' }}>
+          <ResponsiveBar
+            data={data}
+            keys={['PubChem', 'Elsevier', 'medRxiv', 'bioRxiv', 'chemRxiv']}
+            indexBy="source"
+            margin={{ top: 50, right: 130, bottom: 50, left: 130 }}
+            padding={0.2}
+            layout="horizontal"
+            colors={{ scheme: 'nivo' }}
+            borderColor={{ from: 'color', modifiers: [['darker', 1.6]] }}
+            axisTop={null}
+            axisRight={null}
+            axisBottom={null}
+            enableGridY={false}
+            label={null}
+            // labelSkipWidth={12}
+            // labelSkipHeight={12}
+            // labelTextColor={{ from: 'color', modifiers: [ [ 'darker', 1.6 ] ] }}
+            legends={[
+              {
+                dataFrom: 'keys',
+                anchor: 'bottom-right',
+                direction: 'column',
+                justify: false,
+                translateX: 120,
+                translateY: -20,
+                itemWidth: 100,
+                itemHeight: 17,
+                itemsSpacing: 10,
+                symbolSize: 20,
+                itemDirection: 'left-to-right'
+              }
+            ]}
+            animate={true}
+            motionStiffness={90}
+            motionDamping={15}
+          />
+        </Container>
+        <Footer page="main" />
+      </ContentGrid>
+    </Content>
   );
 }

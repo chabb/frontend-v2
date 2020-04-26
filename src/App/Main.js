@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Box, Text } from 'rebass';
+import { Box, Flex, Text } from 'rebass';
+import NavMenu from 'App/shared/components/NavMenu';
 import { Grid, Image, List } from 'semantic-ui-react';
 import { shuffle } from 'lodash';
 import SearchForm from 'App/shared/components/SearchForm';
@@ -103,6 +104,9 @@ function COVIDScholarDescription() {
 function Main() {
   return (
     <Content width={1}>
+      <Box width={1}>
+        <NavMenu hidelogo="hide" />
+      </Box>
       <ContentGrid textAlign="center">
         <Grid.Row>
           <Image src={COVIDScholarLogo} id={'logo'} />

@@ -255,11 +255,9 @@ function ResultCard({
     summary,
     keywords,
     keywords_ml,
-    citations_count_total,
     link,
     tags,
     document_type,
-    source,
     citations_count_total
   },
   onSearchSimilar,

@@ -6,11 +6,11 @@ import {
   Container,
   Responsive,
   Icon,
-  Dropdown
-  // Image,
+  Dropdown,
+  Image
 } from 'semantic-ui-react';
 import Link from 'App/shared/components/Link';
-// import logo from "App/shared/img/COVIDScholarLogo.png";
+import COVIDScholarLogoWide from '../img/COVIDScholarLogoWide.png';
 
 const Header = styled(Box)`
   border-bottom: 2px solid rgba(255, 255, 255, 0.2);
@@ -48,6 +48,10 @@ const NavBar = styled(Menu)`
       margin-right: 0 !important;
     }
 
+    .ui.image {
+      width: 250px;
+    }
+
     span {
       color: #ffc43c;
     }
@@ -68,41 +72,36 @@ const NavBar = styled(Menu)`
   }
 `;
 
+const logo = (
+  <Link to="/">
+    <Image src={COVIDScholarLogoWide} />
+  </Link>
+);
+
 const items = [
-  { content: <Link to="/search">Search</Link> },
   { content: <Link to="/about">About</Link> },
   { content: <Link to="/stats">Our Data</Link> }
-  // {
-  //   content: (
-  //     <Link to="https://github.com/vespa-engine/cord-19/blob/master/README.md">
-  //       Open source
-  //     </Link>
-  //   )
-  // },
-  // {
-  //   content: (
-  //     <Link to="https://github.com/vespa-engine/cord-19/blob/master/README.md#Contact">
-  //       Contact us
-  //     </Link>
-  //   )
-  // }
 ];
 
-function Nav({ children }) {
+function Nav({ children, hidelogo }) {
   return (
     <NavBar secondary inverted fluid>
-      <Menu.Item header fitted>
-        {/*<Image src={logo}/>*/}
-      </Menu.Item>
+      {hidelogo.hidelogo.hidelogo === 'hide' ? (
+        <Menu.Item header fitted />
+      ) : (
+        <Menu.Item header fitted>
+          {logo}
+        </Menu.Item>
+      )}
       {children}
     </NavBar>
   );
 }
 
-function Mobile() {
+function Mobile(hidelogo) {
   return (
     <Responsive {...Responsive.onlyMobile}>
-      <Nav>
+      <Nav hidelogo={hidelogo}>
         <Menu.Menu position="right">
           <Dropdown item icon={null} trigger={<Icon name="bars" />}>
             <Dropdown.Menu items={items}>
@@ -117,10 +116,10 @@ function Mobile() {
   );
 }
 
-function Desktop() {
+function Desktop(hidelogo) {
   return (
     <Responsive minWidth={Responsive.onlyTablet.minWidth}>
-      <Nav>
+      <Nav hidelogo={hidelogo}>
         <Menu.Menu position="right">
           {items.map((item, idx) => (
             <Menu.Item key={idx} {...item} />
@@ -131,12 +130,12 @@ function Desktop() {
   );
 }
 
-function NavMenu() {
+function NavMenu(hidelogo) {
   return (
     <Header sx={{ paddingLeft: '0px', paddingRight: '0px' }} width={1}>
       <Container>
-        <Desktop />
-        <Mobile />
+        <Desktop hidelogo={hidelogo} />
+        <Mobile hidelogo={hidelogo} />
       </Container>
     </Header>
   );
