@@ -6,14 +6,13 @@ import {
   Container,
   Responsive,
   Icon,
-  Dropdown,
-  Image
+  Dropdown
+  // Image,
 } from 'semantic-ui-react';
 import Link from 'App/shared/components/Link';
-import COVIDScholarLogo from 'App/shared/img/COVIDScholarLogo.png';
+// import logo from "App/shared/img/COVIDScholarLogo.png";
 
 const Header = styled(Box)`
-  background-color: #fcfcfc;
   border-bottom: 2px solid rgba(255, 255, 255, 0.2);
   a {
     cursor: pointer;
@@ -23,7 +22,7 @@ const Header = styled(Box)`
 
 const NavBar = styled(Menu)`
   &&& {
-    height: 100px;
+    height: 55px;
     margin: 0;
 
     border-bottom: 1px solid rgba(63, 157, 216, 0.25);
@@ -49,29 +48,28 @@ const NavBar = styled(Menu)`
       margin-right: 0 !important;
     }
 
-    .ui.image {
-      width: 200px;
-    }
-
     span {
       color: #ffc43c;
     }
 
     .dropdown.item .menu {
-      background: #005a8e;
       box-shadow: none;
+    }
+
+    .header {
+      height: 100%;
+    }
+
+    .header > img {
+      margin-top: 5px;
+      margin-left: 30px;
+      height: 100%;
     }
   }
 `;
 
-const logo = (
-  <Link to="/">
-    <Image src={COVIDScholarLogo} />
-  </Link>
-);
-
 const items = [
-  // { content: <Link to="/search">Home</Link> },
+  { content: <Link to="/search">Search</Link> },
   { content: <Link to="/about">About</Link> },
   { content: <Link to="/stats">Our Data</Link> }
   // {
@@ -94,7 +92,7 @@ function Nav({ children }) {
   return (
     <NavBar secondary inverted fluid>
       <Menu.Item header fitted>
-        {logo}
+        {/*<Image src={logo}/>*/}
       </Menu.Item>
       {children}
     </NavBar>

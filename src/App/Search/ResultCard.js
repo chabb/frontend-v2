@@ -14,8 +14,7 @@ import { HumanSummarySection } from './ResultComponents/HumanSummary';
 
 const StyledCard = styled(Card)`
   && {
-    box-shadow: none;
-    margin-bottom: 2em;
+    margin-bottom: 1em !important;
 
     a {
       color: #005a8e;
@@ -33,7 +32,6 @@ const StyledCard = styled(Card)`
   }
 
   .header {
-    padding-top: 5px;
     padding-bottom: 5px;
   }
 
@@ -65,7 +63,7 @@ const StyledCard = styled(Card)`
     //padding: 0.3em 0.5em;
     padding: 0.3em 0.1em;
     border: 0;
-    width: 90%;
+    width: 100%;
   }
 
   .larger {
@@ -88,6 +86,12 @@ const StyledCard = styled(Card)`
 
   .margin20 {
     margin: 20px;
+  }
+
+  a.float-right {
+    float: right;
+    margin-right: 0.25em;
+    color: #de0008;
   }
 `;
 
@@ -112,7 +116,7 @@ const formatText = text => {
 // Link which has a dummy target which is ignored, only triggers the onClick callback
 const FunctionLink = ({ onClick, ...props }) => (
   <a
-    href="#root"
+    href="#"
     onClick={e => {
       e.preventDefault();
       onClick();
@@ -121,6 +125,22 @@ const FunctionLink = ({ onClick, ...props }) => (
     {props.children}
   </a>
 );
+
+const tagToColor = {
+  Diagnosis: 'red',
+  Mechanism: 'yellow',
+  Treatment: 'green',
+  Case_Report: 'blue',
+  Prevention: 'violet',
+  Epidemic_Forecasting: 'brown',
+  Transmission: 'black'
+};
+
+const docTypeToColor = {
+  paper: 'red',
+  patent: 'blue',
+  clinical_trial: 'green'
+};
 
 function Explanation({ text }) {
   return (
@@ -189,6 +209,37 @@ function authorsList(authors) {
   return authors.map(authorFormatter).join(', ');
 }
 
+function cardCategory({ tags }) {
+  tags = tags || [];
+  return (
+    <div style={{ margin: '0.5em' }}>
+      {tags.map((tag, i) => (
+        <span key={i} className={'ui tag small label ' + tagToColor[tag]}>
+          {tag}
+        </span>
+      ))}
+    </div>
+  );
+}
+
+function getSummaryFixLink({ link, doi, abstract }) {
+  // If url with params is too long, delete the abstract
+  if (abstract && abstract.length > 2048) {
+    abstract = '[#Abstract too long, redacted#]';
+  }
+  let gform_url =
+    'https://docs.google.com/forms/d/e/1FAIpQLSf4z7LCBizCs6pUgO3UyfxJMCAVC-bRh3cvW7uNghDu4UeBig/viewform?usp=pp_url';
+  return (
+    gform_url +
+    '&entry.101149199=' +
+    link +
+    '&entry.1258141481=' +
+    doi +
+    '&entry.112702407=' +
+    abstract
+  );
+}
+
 function ResultCard({
   fields: {
     id,
@@ -205,7 +256,11 @@ function ResultCard({
     keywords,
     keywords_ml,
     citations_count_total,
-    link
+    link,
+    tags,
+    document_type,
+    source,
+    citations_count_total
   },
   onSearchSimilar,
   isFieldSetAll
@@ -217,7 +272,7 @@ function ResultCard({
   const body = formatText(body_text);
   const highlightedTitle = title.replace(highlightRegex, '$1');
   return (
-    <StyledCard className="red card">
+    <StyledCard className={docTypeToColor[document_type]}>
       <Card.Header>
         <Link className="title larger" to={`/article/${id}`}>
           {highlightedTitle}
@@ -244,6 +299,18 @@ function ResultCard({
               <ReadMore long={content.join(' ')} />
             </div>
           )}
+          {/*{body && (*/}
+          {/*  <div>*/}
+          {/*    <Popup*/}
+          {/*      position="top center"*/}
+          {/*      content="This is a dynamic summary of the body of the paper, showing the matched query terms and surrounding context."*/}
+          {/*      trigger={<Label horizontal>Full Text</Label>}*/}
+          {/*    />*/}
+          {/*    {body}*/}
+          {/*  </div>*/}
+          {/*)}*/}
+          {cardCategory({ tags })}
+
           {keywords_dummy &&
             KeywordsSection(keywords_dummy.concat(keywords_ml_dummy))}
           {HumanSummarySection(summary_dummy, {
@@ -256,6 +323,14 @@ function ResultCard({
               Search within related articles
             </FunctionLink>
           )}
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            className={'float-right'}
+            href={getSummaryFixLink({ link: null, doi, abstract })}
+          >
+            Submit/fix metadata
+          </a>
         </Card.Content>
       )}
     </StyledCard>

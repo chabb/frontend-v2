@@ -2,6 +2,7 @@
   "name": "covidscholar.org",
   "version": "0.1.0",
   "private": true,
+  "homepage": "index.html",
   "dependencies": {},
   "lint-staged": {
     "src/App/!(Guide)/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
