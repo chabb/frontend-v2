@@ -148,7 +148,7 @@ export default function About() {
             />
           </Grid>
         </Container>
-        <Footer page="main" />
+        <Footer page={'about'} />
       </ContentGrid>
     </Box>
   );

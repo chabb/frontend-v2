@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Container } from 'semantic-ui-react';
-import ResultCard from './ResultCard';
+import { ResultCard } from './ResultCard';
 import Sidebar from './Sidebar';
 import SearchOptions from './SearchOptions';
 import {
@@ -89,6 +89,7 @@ function SearchResults({ articles, query, isFieldSetAll, loading, error }) {
               query: appendRelatedToQuery(query, article.fields.id)
             })
           }
+          onFilterCategory={tag => onSearch({ tags: tag })}
         />
       ))}
     </>
@@ -163,7 +164,7 @@ function Search() {
             />
           </div>
         </ContainerSearch>
-        <Footer />
+        <Footer page={'search'} />
       </Box>
     </React.Fragment>
   );

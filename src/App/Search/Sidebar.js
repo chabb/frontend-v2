@@ -3,6 +3,8 @@ import _ from 'lodash';
 import styled from 'styled-components';
 import faker from 'faker';
 import { Button, Checkbox, Form, Dropdown } from 'semantic-ui-react';
+import { tagToColor } from 'App/Search/ResultComponents/CardCategory';
+import { docTypeToColor } from 'App/Search/ResultCard';
 
 const addressDefinitions = faker.definitions.address;
 const stateOptions = _.map(addressDefinitions.state, (state, index) => ({
@@ -14,25 +16,34 @@ const stateOptions = _.map(addressDefinitions.state, (state, index) => ({
 const filters = [
   {
     name: 'COVID-19 Only',
-    field: 'is_covid19'
+    field: 'is_covid19',
+    colormap: null
   },
   {
     name: 'Peer Reviewed',
-    field: 'is_preprint'
+    field: 'is_preprint',
+    colormap: null
   },
   {
     name: 'Document Type',
-    field: 'document_type'
+    field: 'document_type',
+    colormap: docTypeToColor
   },
   {
     name: 'Tag',
-    field: 'tags'
+    field: 'tags',
+    colormap: tagToColor
   },
   {
     name: 'Year Published',
-    field: 'year'
+    field: 'year',
+    colormap: null
   },
-  { name: 'Data Source', field: 'source_display' }
+  {
+    name: 'Data Source',
+    field: 'source_display',
+    colormap: null
+  }
 ];
 
 const PaddedCheckbox = styled(Checkbox)`
@@ -44,10 +55,49 @@ const PaddedCheckbox = styled(Checkbox)`
       color: #303030;
     }
   }
+
+  &&.red > label {
+    color: #db2828 !important;
+  }
+  &&.orange > label {
+    color: #f2711c !important;
+  }
+  &&.yellow > label {
+    color: #fbbd08 !important;
+  }
+  &&.olive > label {
+    color: #b5cc18 !important;
+  }
+  &&.green > label {
+    color: #21ba45 !important;
+  }
+  &&.teal > label {
+    color: #00b5ad !important;
+  }
+  &&.blue > label {
+    color: #2185d0 !important;
+  }
+  &&.violet > label {
+    color: #6435c9 !important;
+  }
+  &&.purple > label {
+    color: #a333c8 !important;
+  }
+  &&.pink > label {
+    color: #e03997 !important;
+  }
+  &&.brown > label {
+    color: #a5673f !important;
+  }
+  &&.gray > label {
+    color: #767676 !important;
+  }
+  &&.black > label {
+    color: #1b1c1d !important;
+  }
 `;
 
 function filterOutUndesiredCheckboxes(field, value) {
-  console.log(field, value);
   if (value.length <= 0) {
     return false;
   } else if (field === 'is_covid19' && value === 'false') {
@@ -60,7 +110,6 @@ function filterOutUndesiredCheckboxes(field, value) {
 }
 
 function formatFacetLabel(field, value) {
-  console.log(field, value);
   if (field === 'is_preprint' && value === 'false') {
     return 'true';
   } else {
@@ -68,8 +117,7 @@ function formatFacetLabel(field, value) {
   }
 }
 
-function Checkboxes({ name, field, values, onSearch }) {
-  console.log(values);
+function Checkboxes({ name, field, values, colormap, onSearch }) {
   if (!values || values.length === 0) return null;
   const onChange = (event, { value, checked }) => {
     // The new selected checkboxes are the ones that were previously selected
@@ -89,6 +137,7 @@ function Checkboxes({ name, field, values, onSearch }) {
         .filter(({ value }) => filterOutUndesiredCheckboxes(field, value))
         .map(({ value, count, checked }, i) => (
           <PaddedCheckbox
+            className={(colormap && colormap[value]) || ''}
             key={i}
             name={name}
             value={value}
@@ -124,12 +173,13 @@ function Sidebar({ onSearch, ...filterValues }) {
         >
           Clear all
         </Button>
-        {filters.map(({ name, field }) => (
+        {filters.map(({ name, field, colormap }) => (
           <Checkboxes
             key={field}
             name={name}
             field={field}
             values={filterValues[field]}
+            colormap={colormap}
             onSearch={onSearch}
           />
         ))}

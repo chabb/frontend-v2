@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Box } from 'rebass';
-import Link from 'App/shared/components/Link';
-import { Segment, Image, Container } from 'semantic-ui-react';
-import logo from 'App/shared/img/VespaLogoWhite.png';
+import { Container, Segment } from 'semantic-ui-react';
+import Link from './Link';
 
 const FooterBox = styled(Box)`
   &&& {
@@ -27,15 +26,6 @@ const FooterBox = styled(Box)`
   .ui.segment.sides {
     width: 200px;
     padding: 0;
-  }
-
-  a {
-    font-weight: bold;
-    color: white;
-  }
-
-  a:hover {
-    color: #ffc43c;
   }
 
   .ui.image {
@@ -66,6 +56,8 @@ function Footer({ page = null }) {
             {/*</Link>*/}
             {/*<br />*/}
             <span>Copyright 2020 COVIDScholar</span>
+            <span>&nbsp;|&nbsp;</span>
+            <Link to="/privacy">Privacy Policy</Link>
             <br />
             <span>Icon made by Freepik from www.flaticon.com</span>
           </Segment>
