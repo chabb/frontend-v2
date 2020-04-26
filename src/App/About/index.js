@@ -107,7 +107,9 @@ export default function About() {
           />
           <MemberCard
             name={'Kevin Cruse'}
-            intro={'Intro for Kevin.'}
+            intro={
+              'Kevin joined the Ceder Group at UC Berkeley as a Ph.D. student in 2019. He uses text mining and machine learning techniques to extract synthesis recipes from materials science literature.'
+            }
             pic={kevin_pic}
             link={'https://www.linkedin.com/in/kevin-cruse/'}
           />
