@@ -93,9 +93,9 @@ export default function About() {
         <Grid className={'center aligned'}>
           <MemberCard
             name={'Amalie Trewartha'}
-            intro={'Intro for Amalie.'}
+            intro={'Amalie is a postdoc in Gerbrand Ceder\s group at LBNL. She began her career as a nuclear physicist, before moving into materials science in 2019, with a focus on machine learning. Her research interests include the application of NLP techniques to scientific literature, and building thermodynamically-motivated ML models for materials property prediction.'}
             pic={amalie_pic}
-            link={null}
+            link={'https://github.com/amaliet'}
           />
           <MemberCard
             name={'Haoyan Huo'}
