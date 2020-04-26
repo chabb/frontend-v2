@@ -9,6 +9,7 @@ import amalie_pic from './pics/amalie.jpg';
 import kevin_pic from './pics/kevin.jpg';
 import yuxing_pic from './pics/yuxing.jpg';
 import zheren_pic from './pics/zheren.jpg';
+import john_pic from './pics/john.jpg';
 import { Box } from 'rebass';
 
 const ContentGrid = styled(Grid)`
@@ -98,9 +99,17 @@ export default function About() {
           </Header>
           <Grid className={'center aligned'}>
             <MemberCard
+              name={'John Dagdelen'}
+              intro={
+                'John is a PhD Student in the Persson Group at UC Berkeley and Lawrence Berkeley National Lab. His research sits at the intersection of materials science, artificial intelligence, and high performance computing. John is part of the team behind Matscholar, a materials science knowledge portal that uses state of the art NLP to aid in materials discovery and design.'
+              }
+              pic={john_pic}
+              link={'https://jdagdelen.github.io'}
+            />
+            <MemberCard
               name={'Amalie Trewartha'}
               intro={
-                'Amalie is a postdoc in Gerbrand Ceders group at LBNL. She began her career as a nuclear physicist, before moving into materials science in 2019, with a focus on machine learning. Her research interests include the application of NLP techniques to scientific literature, and building thermodynamically-motivated ML models for materials property prediction.'
+                'Amalie is a postdoc in Gerbrand Ceders group at Lawrence Berkeley National Lab. She began her career as a nuclear physicist, before moving into materials science in 2019, with a focus on machine learning. Her research interests include the application of NLP techniques to scientific literature, and building thermodynamically-motivated ML models for materials property prediction.'
               }
               pic={amalie_pic}
               link={'https://github.com/amaliet'}
