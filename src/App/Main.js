@@ -62,6 +62,16 @@ const ContentGrid = styled(Grid)`
     a:hover {
       color: #1b4b4c !important;
     }
+
+    .margin-bottom-0 {
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    .margin-top-0 {
+      margin-top: 0;
+      padding-top: 0;
+    }
   }
 `;
 
@@ -108,10 +118,15 @@ function Main() {
         <NavMenu hidelogo="hide" />
       </Box>
       <ContentGrid textAlign="center">
-        <Grid.Row>
+        <Grid.Row className="margin-bottom-0">
           <div id={'logo'}>
             <Image src={COVIDScholarLogo} />
           </div>
+        </Grid.Row>
+        <Grid.Row className="margin-top-0 margin-bottom-0">
+          <h3 size="huge" className="subtitle">
+            COVID-19 literature search powered by advanced NLP algorithms.
+          </h3>
         </Grid.Row>
         <Grid.Row>
           <Grid.Column width={12}>

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Moment from 'react-moment';
 import { navigate } from '@reach/router';
 import { uniq } from 'lodash';
-import { Container, Header, Tab, List } from 'semantic-ui-react';
+import { Container, Header, Tab, List, Button } from 'semantic-ui-react';
 import { Error, Loading } from 'App/shared/components/Messages';
 import NavMenu from 'App/shared/components/NavMenu';
 import { Get } from 'App/shared/Fetcher';
@@ -76,12 +76,11 @@ function Meta({ journal, timestamp, source, license, doi }) {
 function Content({
   title,
   abstract,
-  abstract_t5,
   authors,
   doi,
   journal,
   timestamp,
-  source,
+  source_display,
   license,
   link
 }) {
@@ -91,19 +90,13 @@ function Content({
         <Link to={link}>{title}</Link>
       </Header>
       <Authors authors={authors} />
+      <Meta {...{ journal, timestamp, source_display, license, doi }} />
       {abstract && (
         <>
           <Header as="h3">Abstract</Header>
           <p>{abstract}</p>
-          {abstract_t5 && (
-            <>
-              <Header as="h3">Machine Generated Summary</Header>
-              <p>{abstract_t5}</p>
-            </>
-          )}
         </>
       )}
-      <Meta {...{ journal, timestamp, source, license, doi }} />
     </ContainerContent>
   );
 }
@@ -150,7 +143,7 @@ function CitedBy({ citedBy, total, offset, onOffsetChange }) {
 
 function Citation({ id }) {
   const { loading, response, error } = Get(
-    `/document/v1/covid-19/doc/docid/${id}?fieldSet=doc:title,abstract,doi,abstract_t5,journal,source,timestamp,license`
+    `/document/v1/covid-19/doc/docid/${id}?fieldSet=doc:title,abstract,doi,journal,source_display,timestamp,license`
   ).state();
 
   if (loading) return <Loading message="Loading..." />;
@@ -212,7 +205,12 @@ function Article({ id }) {
         <Box width={1}>
           <NavMenu logo="show" />
         </Box>
+
         <ContainerContent>
+          <Button size="small" onClick={() => navigate(-1)}>
+            {' '}
+            Go Back{' '}
+          </Button>
           <Content {...response.fields} />
           <Tab
             panes={panes}
