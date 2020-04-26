@@ -12,12 +12,12 @@ const StyledP = styled.p`
 function get_name_link({ name, link }) {
   if (link) {
     return (
-      <a target={'_black'} href={link}>
+      <a key={0} target={'_black'} href={link}>
         {name}
       </a>
     );
   }
-  return <p>{name}</p>;
+  return <p key={0}>{name}</p>;
 }
 
 export default function MemberCard({ name, intro, pic, link }) {
@@ -30,7 +30,10 @@ export default function MemberCard({ name, intro, pic, link }) {
               <Image src={pic} width={'100px'} height={'100px'} />
             </Grid.Column>
             <Grid.Column width={12}>
-              {[get_name_link({ name, link }), <StyledP>{intro}</StyledP>]}
+              {[
+                get_name_link({ name, link }),
+                <StyledP key={1}>{intro}</StyledP>
+              ]}
             </Grid.Column>
           </Grid.Row>
         </Grid>

@@ -6,8 +6,8 @@ import { shuffle } from 'lodash';
 import SearchForm from 'App/shared/components/SearchForm';
 import Link from 'App/shared/components/Link';
 import { onSearch } from './Search/Utils';
-import COVIDScholarIcon from 'App/shared/img/COVIDScholarIcon.png';
 import Footer from 'App/shared/components/Footer';
+import COVIDScholarLogo from 'App/shared/img/COVIDScholarLogo.png';
 
 const sampleQueries = [
   '+covid-19 +temperature impact on viral transmission',
@@ -26,10 +26,13 @@ const Content = styled(Box)`
 
 const ContentGrid = styled(Grid)`
   &&& {
-    min-height: calc(100vh - 180px);
+    margin-top: calc((max(600px, 100vh) - 600px) / 2);
     color: #4e4e4e;
     font-size: 1.1rem;
-    margin-top: 0;
+
+    #logo {
+      width: 300px;
+    }
 
     .column {
       padding: 0;
@@ -38,23 +41,6 @@ const ContentGrid = styled(Grid)`
     h1 {
       font-size: 3.5rem;
       font-weight: 300;
-    }
-
-    .title {
-      margin-bottom: 0;
-      margin-left: 10px;
-      margin-right: 10px;
-    }
-
-    .subtitle {
-      margin-top: 0;
-      margin-left: 10px;
-      margin-right: 10px;
-    }
-
-    h4 {
-      font-size: 1.1rem;
-      margin: 3rem 0 0;
     }
 
     & .ui.list {
@@ -100,13 +86,9 @@ function SearchSuggestions() {
 function COVIDScholarDescription() {
   return (
     <Box my={4}>
-      <Image src={COVIDScholarIcon} size="tiny" centered />
       <Text mt={3}>
-        This is an{' '}
-        <Link to="https://github.com/vespa-engine/cord-19/blob/master/README.md">
-          open source application{' '}
-        </Link>
-        that utilizes <Link to="https://vespa.ai">Vespa.ai.</Link>
+        A knowledge portal for COVID-19 research built using
+        <Link to="https://vespa.ai">Vespa.ai.</Link>
         <Text mt={1}>
           Licenced under{' '}
           <Link to="https://github.com/vespa-engine/cord-19/blob/master/LICENSE">
@@ -121,18 +103,17 @@ function COVIDScholarDescription() {
 function Main() {
   return (
     <Content width={1}>
-      <ContentGrid verticalAlign="middle" textAlign="center">
-        <Grid.Column>
-          <h1 size="huge" className="title">
-            COVID-19 Literature Search
-          </h1>
-          <h2 size="huge" className="subtitle">
-            powered by advanced NLP algorithms
-          </h2>
-          <SearchForm onSearch={onSearch} />
-          <SearchSuggestions />
-          <COVIDScholarDescription />
-        </Grid.Column>
+      <ContentGrid textAlign="center">
+        <Grid.Row>
+          <Image src={COVIDScholarLogo} id={'logo'} />
+        </Grid.Row>
+        <Grid.Row>
+          <Grid.Column width={12}>
+            <SearchForm onSearch={onSearch} />
+            <SearchSuggestions />
+            <COVIDScholarDescription />
+          </Grid.Column>
+        </Grid.Row>
       </ContentGrid>
       <Footer page="main" />
     </Content>

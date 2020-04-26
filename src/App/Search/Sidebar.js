@@ -93,42 +93,41 @@ function Sidebar({ onSearch, ...filterValues }) {
       .flatMap(values => values.map(({ checked }) => checked))
       .find(c => c) !== true;
   return (
-    <div
-      id="sidebar"
-      className="ui form"
-      style={{
-        backgroundColor: '#e6eff5',
-        paddingLeft: '10px',
-        paddingRight: '10px'
-      }}
-    >
-      <Button
-        disabled={noneChecked}
-        onClick={() =>
-          onSearch(
-            filters.reduce((obj, { field }) => ({ ...obj, [field]: [] }), {})
-          )
-        }
+    <div id="sidebar" className="ui form">
+      <div
+        style={{
+          backgroundColor: '#e6eff5',
+          padding: '10px'
+        }}
       >
-        Clear all
-      </Button>
-      {filters.map(({ name, field }) => (
-        <Checkboxes
-          key={field}
-          name={name}
-          field={field}
-          values={filterValues[field]}
-          onSearch={onSearch}
+        <Button
+          disabled={noneChecked}
+          onClick={() =>
+            onSearch(
+              filters.reduce((obj, { field }) => ({ ...obj, [field]: [] }), {})
+            )
+          }
+        >
+          Clear all
+        </Button>
+        {filters.map(({ name, field }) => (
+          <Checkboxes
+            key={field}
+            name={name}
+            field={field}
+            values={filterValues[field]}
+            onSearch={onSearch}
+          />
+        ))}
+        <Dropdown
+          placeholder="Keywords"
+          fluid
+          multiple
+          search
+          selection
+          options={stateOptions}
         />
-      ))}
-      <Dropdown
-        placeholder="Keywords"
-        fluid
-        multiple
-        search
-        selection
-        options={stateOptions}
-      />
+      </div>
     </div>
   );
 }
