@@ -1,8 +1,6 @@
 import { useReducer } from 'react';
 
-const backend =
-  process.env.REACT_APP_BACKEND_URL ||
-  'http://db-vespa.vespa-spin.dev-cattle.stable.spin.nersc.org:55025';
+const backend = process.env.REACT_APP_BACKEND_URL || '/api';
 
 function Get(url, params) {
   return Fetch('GET', url, params);

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid } from 'semantic-ui-react';
 import styled from 'styled-components';
+import Link from './Link';
 
 const Title = styled.h2`
   font-weight: 400;
@@ -32,6 +33,7 @@ function Error({ code = 404 }) {
       <Grid.Row>
         <Grid.Column width={8}>
           <Title>{message}</Title>
+          <Link to={'/'}>Go back</Link>
         </Grid.Column>
       </Grid.Row>
     </ErrorGrid>
