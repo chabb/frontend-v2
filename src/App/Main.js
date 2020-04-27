@@ -13,7 +13,7 @@ import COVIDScholarLogo from 'App/shared/img/COVIDScholarLogo.png';
 const sampleQueries = [
   '+covid-19 +temperature impact on viral transmission',
   'basic reproduction numbers for covid-19 in +"California"',
-  'Impact of school closure to handle COVID-19 pandemic',
+  'grocery store worker infection rates',
   '+title:"reproduction number" +abstract:MERS',
   '+authors.name:"Neil M Ferguson"',
   '+("SARS-COV-2" "coronavirus 2" "novel coronavirus")',
