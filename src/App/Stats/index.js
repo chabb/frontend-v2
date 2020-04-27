@@ -23,14 +23,14 @@ export default function Stats() {
         style={{ marginTop: '50px', marginBottom: '50px' }}
       >
         <Grid.Row>
-          <Grid.Column width={12} style={{ maxWidth: '50em', height: '18em' }}>
+          <Grid.Column width={16} style={{ maxWidth: '65em', height: '18em' }}>
             <h5>Comparison with other COVID-19 search sites</h5>
             <Comparison />
           </Grid.Column>
         </Grid.Row>
 
         <Grid.Row>
-          <Grid.Column width={12} style={{ maxWidth: '50em', height: '25em' }}>
+          <Grid.Column width={16} style={{ maxWidth: '65em', height: '25em' }}>
             <h5>Daily paper statistics of our site</h5>
             <EntriesStream />
           </Grid.Column>

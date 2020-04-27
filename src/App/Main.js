@@ -27,12 +27,12 @@ const Content = styled(Box)`
 
 const ContentGrid = styled(Grid)`
   &&& {
-    margin-top: calc((max(600px, 100vh) - 600px) / 2);
+    margin-top: calc((max(600px, 100vh) - 700px) / 2);
     color: #4e4e4e;
     font-size: 1.1rem;
 
     #logo {
-      max-width: 500px;
+      max-width: min(500px, 90vw);
     }
 
     .column {
@@ -50,7 +50,7 @@ const ContentGrid = styled(Grid)`
 
     .ui.form {
       max-width: 800px;
-      padding: 0 2rem;
+      padding: 0 0;
     }
 
     a {

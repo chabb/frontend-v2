@@ -69,6 +69,10 @@ const NavBar = styled(Menu)`
       margin-left: 30px;
       height: 100%;
     }
+
+    .dropdown.item:hover {
+      color: #4e4e4e !important;
+    }
   }
 `;
 

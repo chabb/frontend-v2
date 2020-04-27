@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Container } from 'semantic-ui-react';
+import { Container, Grid, Responsive } from 'semantic-ui-react';
 import ResultCard from './ResultCard';
+import {
+  Button as FloatingButton,
+  Container as FloatingContainer
+} from 'react-floating-action-button';
 import Sidebar from './Sidebar';
 import SearchOptions from './SearchOptions';
+import { CSSTransition } from 'react-transition-group';
 import {
   generateApiQueryParams,
   getSearchState,
@@ -96,6 +101,114 @@ function SearchResults({ articles, query, isFieldSetAll, loading, error }) {
   );
 }
 
+const FloatingSideBar = styled(Grid)`
+  && {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow-y: scroll;
+
+    #sidebar {
+      width: 90% !important;
+      max-width: 90vw !important;
+    }
+  }
+`;
+
+const AnimatedSidebar = styled.div`
+  && {
+    .sidebar-enter-active > div {
+      animation-name: slide-right;
+      animation-duration: 0.55s;
+    }
+
+    .sidebar-exit-active > div {
+      animation-name: slide-left;
+      animation-duration: 0.7s;
+    }
+
+    @keyframes slide-right {
+      from {
+        left: -100%;
+      }
+      to {
+        left: 0;
+      }
+    }
+
+    @keyframes slide-left {
+      from {
+        left: 0;
+      }
+      to {
+        left: -100%;
+      }
+    }
+  }
+`;
+
+function MobileFloatingButton({ onSearch, valuesState }) {
+  const [showProp, setShowProp] = useState(false);
+
+  return (
+    <Responsive {...Responsive.onlyMobile} style={{ zIndex: '100' }}>
+      <AnimatedSidebar>
+        <CSSTransition
+          in={showProp}
+          timeout={600}
+          classNames="sidebar"
+          unmountOnExit
+        >
+          <FloatingSideBar>
+            <Sidebar onSearch={onSearch} {...valuesState} />
+          </FloatingSideBar>
+        </CSSTransition>
+      </AnimatedSidebar>
+
+      <FloatingContainer>
+        <FloatingButton
+          icon="bars icon lightBlue"
+          styles={{ backgroundColor: '#0E6EB8' }}
+          onClick={() => {
+            setShowProp(!showProp);
+          }}
+        />
+      </FloatingContainer>
+    </Responsive>
+  );
+}
+
+function DesktopSidebar({ onSearch, valuesState }) {
+  const R = styled(Responsive)`
+    && {
+      width: 30%;
+
+      #sidebar {
+        width: 100% !important;
+        max-width: 300px !important;
+      }
+    }
+  `;
+  return (
+    <R minWidth={Responsive.onlyTablet.minWidth}>
+      <Sidebar onSearch={onSearch} {...valuesState} />
+    </R>
+  );
+}
+
+function CleverSidebar({ onSearch, valuesState }) {
+  return (
+    <>
+      <MobileFloatingButton onSearch={onSearch} valuesState={valuesState} />
+      <DesktopSidebar onSearch={onSearch} valuesState={valuesState} />
+    </>
+  );
+}
+
 function Search() {
   const searchState = getSearchState();
   const groupingId = 'group:root:0';
@@ -144,7 +257,7 @@ function Search() {
           <NavMenu logo="show" />
         </Box>
         <ContainerSearch>
-          <Sidebar onSearch={onSearch} {...valuesState} />
+          <CleverSidebar onSearch={onSearch} valuesState={valuesState} />
           <div id="search_results">
             <SearchForm onSearch={onSearch} {...searchState} />
             <SearchOptions

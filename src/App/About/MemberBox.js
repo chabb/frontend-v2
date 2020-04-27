@@ -9,6 +9,25 @@ const StyledP = styled.p`
   }
 `;
 
+const StyledCard = styled(Card)`
+  && {
+    width: min(83vw, 490px);
+
+    .ui.grid {
+      margin: 0;
+    }
+
+    .content {
+      padding: 0;
+    }
+
+    .member {
+      width: 100%;
+      height: auto;
+    }
+  }
+`;
+
 function get_name_link({ name, link }) {
   if (link) {
     return (
@@ -22,14 +41,14 @@ function get_name_link({ name, link }) {
 
 export default function MemberCard({ name, intro, pic, link }) {
   return (
-    <Card style={{ width: 490 }}>
+    <StyledCard>
       <CardContent>
         <Grid>
           <Grid.Row style={{ padding: '1rem' }}>
             <Grid.Column width={4}>
-              <Image src={pic} width={'100px'} height={'100px'} />
+              <Image className={'member'} src={pic} />
             </Grid.Column>
-            <Grid.Column width={12}>
+            <Grid.Column width={12} style={{ paddingLeft: '1rem' }}>
               {[
                 get_name_link({ name, link }),
                 <StyledP key={1}>{intro}</StyledP>
@@ -38,6 +57,6 @@ export default function MemberCard({ name, intro, pic, link }) {
           </Grid.Row>
         </Grid>
       </CardContent>
-    </Card>
+    </StyledCard>
   );
 }
