@@ -41,7 +41,7 @@ const StyledCard = styled(Card)`
     }
 
     .content {
-      padding: 0.3em 0.1em;
+      padding: 0.1em 0.1em;
       border: 0;
       width: 100%;
     }
@@ -217,10 +217,8 @@ function ResultCard({
   onFilterCategory,
   isFieldSetAll
 }) {
-  const content = formatText(abstract);
-  // const body = formatText(body_text);
   title = title || doi || link || id;
-  const highlightedTitle = title.replace(highlightRegex, '$1');
+  const highlightedTitle = formatText(title);
   keywords = keywords ? keywords : [];
   keywords_ml = keywords_ml ? keywords_ml : [];
   const combined_keywords = keywords.concat(keywords_ml);
@@ -251,9 +249,9 @@ function ResultCard({
       </Card.Header>
 
       <Card.Content>
-        {content && (
+        {abstract && (
           <div>
-            <ReadMore long={content.join(' ')} />
+            <ReadMore long={abstract} />
           </div>
         )}
         <KeywordsSection keywords={combined_keywords.slice(0, 10)} />
@@ -270,6 +268,7 @@ function ResultCard({
           doi={doi}
           abstract={abstract}
           title={title}
+          message="Submit/fix metadata"
         />
       </Card.Content>
     </StyledCard>

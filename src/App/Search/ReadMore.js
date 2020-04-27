@@ -46,13 +46,12 @@ class ReadMore extends React.Component {
   };
 
   render() {
+    console.log(this.props);
     if (this.props.long && this.props.long.length > 0) {
       if (!this.state.expanded) {
         return (
-          <StyledDiv>
-            <span
-              dangerouslySetInnerHTML={{ __html: this.get_short() + ellipses }}
-            />
+          <div>
+            {this.get_short() + ellipses}
             &nbsp;
             <span
               className="read-more ui"
@@ -61,12 +60,12 @@ class ReadMore extends React.Component {
             >
               {'[+]'}
             </span>
-          </StyledDiv>
+          </div>
         );
       } else {
         return (
-          <StyledDiv>
-            <span dangerouslySetInnerHTML={{ __html: this.props.long }} />
+          <div>
+            {this.props.long}
             &nbsp;
             <span
               className="read-more ui"
@@ -75,7 +74,7 @@ class ReadMore extends React.Component {
             >
               {'[-]'}
             </span>
-          </StyledDiv>
+          </div>
         );
       }
     } else {
