@@ -9,6 +9,7 @@ import { KeywordsSection } from './ResultComponents/Keywords';
 import { HumanSummarySection } from './ResultComponents/HumanSummary';
 import SummaryFixLink from './ResultComponents/SummaryFixLink';
 import { CardCategory } from './ResultComponents/CardCategory';
+import { docTypeToColor } from '../Theme';
 
 const StyledCard = styled(Card)`
   && {
@@ -136,12 +137,6 @@ const FunctionLink = ({ onClick, ...props }) => (
   </a>
 );
 
-const docTypeToColor = {
-  paper: 'red',
-  patent: 'blue',
-  clinical_trial: 'green'
-};
-
 // function SourceAndCitations({ source, citations_count_total }) {
 //   const showCitations = citations_count_total > 0;
 //   if (!source && !showCitations) return null;
@@ -169,7 +164,7 @@ function authorsList(authors) {
   return authors.map(authorFormatter).join(', ');
 }
 
-function ResultCard({
+export default function ResultCard({
   fields: {
     id,
     title,
@@ -256,5 +251,3 @@ function ResultCard({
     </StyledCard>
   );
 }
-
-export { ResultCard, docTypeToColor };
