@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import Moment from 'react-moment';
 import { navigate } from '@reach/router';
-import { uniq } from 'lodash';
+import { uniqBy } from 'lodash';
 import { Container, Header, Tab, List, Button } from 'semantic-ui-react';
 import { Error, Loading } from 'App/shared/components/Messages';
 import NavMenu from 'App/shared/components/NavMenu';
-import { Get } from 'App/shared/Fetcher';
+import { Get, Post } from 'App/shared/Fetcher';
 import { ResultCard } from 'App/Search/ResultCard';
 import Link from 'App/shared/components/Link';
 import { authorFormatter } from 'App/shared/utils/formatter';
@@ -131,17 +131,38 @@ function Related({ id, specter }) {
 }
 
 function CitedBy({ citedBy, total, offset, onOffsetChange }) {
+  const { loading, response, error } = Post('http://localhost:5000/dois/', {
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(citedBy.map(c => c.doi))
+  }).state();
+
+  if (loading) return <Loading message="Loading..." />;
+  if (error)
+    return (
+      <Error message={error.message || `Failed to load article citations`} />
+    );
+
+  let citations_id = citedBy
+    .map(c => {
+      return { doi: c, id: response[c.doi], direction: c.direction };
+    })
+    .filter(c => c.id);
+
   return (
     <Container>
-      {citedBy.slice(offset, offset + 10).map(id => (
-        <Citation key={id} id={id} />
+      <Header>Found {citations_id.length}</Header>
+      {citations_id.slice(offset, offset + 10).map(c => (
+        <Citation key={c.id} id={c.id} direction={c.direction} />
       ))}
       <Pagination {...{ total, offset, onOffsetChange }} />
     </Container>
   );
 }
 
-function Citation({ id }) {
+function Citation({ id, direction }) {
   const { loading, response, error } = Get(
     `/document/v1/covid-19/doc/docid/${id}?fieldSet=doc:title,abstract,doi,journal,source_display,timestamp,license`
   ).state();
@@ -163,12 +184,21 @@ function Article({ id }) {
   if (error)
     return <Error message={error.message || `Failed to load article #${id}`} />;
 
-  const citations = uniq([
-    ...(response.fields.cited_by || []),
-    ...(response.fields.citations_inbound || [])
-      .map(c => c.source_id)
-      .filter(c => !isNaN(c))
-  ]);
+  const citations_inbound = (response.fields.references || [])
+    .filter(c => c.doi)
+    .map(c => {
+      return {
+        doi: c.doi.replace(/^[\s"'[]+|[\s\]'"]+$/g, ''),
+        direction: 'in'
+      };
+    });
+  const citations_outbound = (response.fields.cited_by || []).map(c => {
+    return { doi: c.replace(/^[\s"'[]+|[\s\]'"]+$/, ''), direction: 'out' };
+  });
+  const citations_doi = uniqBy(
+    [...citations_inbound, ...citations_outbound],
+    c => c.doi
+  );
 
   let panes = [];
   if (response.fields.abstract) {
@@ -180,14 +210,14 @@ function Article({ id }) {
   panes.push({
     menuItem: {
       key: 'citations',
-      content: `${citations.length} citing articles`,
-      disabled: citations.length === 0
+      content: `${citations_doi.length} citing/referencing articles`,
+      disabled: citations_doi.length === 0
     },
     render: () => (
       <CitedBy
-        citedBy={citations}
+        citedBy={citations_doi}
         offset={parseInt(url.searchParams.get('offset')) || 0}
-        total={citations.length}
+        total={citations_doi.length}
         onOffsetChange={offset => {
           url.searchParams.set('offset', offset);
           navigate(url);
