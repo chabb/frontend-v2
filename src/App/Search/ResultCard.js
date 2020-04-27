@@ -172,11 +172,13 @@ function LoadingFakeCard() {
   return (
     <StyledCard>
       <div className={'ui fluid placeholder'}>
-        <Card.Header style={{ padding: 0 }}>
-          <div className={'line '}>&nbsp;</div>
-        </Card.Header>
-
         <Card.Content className={'paragraph'} style={{ padding: 0 }}>
+          <div className={'line'} style={{ marginBottom: '0.5em' }}>
+            &nbsp;
+          </div>
+          <div className={'line'} style={{ marginBottom: '0.5em' }}>
+            &nbsp;
+          </div>
           <div className={'line'} style={{ marginBottom: '0.5em' }}>
             &nbsp;
           </div>
