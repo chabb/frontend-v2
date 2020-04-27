@@ -83,7 +83,7 @@ export default function About() {
       <ContentGrid>
         <Container>
           <Header as="h1" style={{ marginTop: '10px' }}>
-            About CovidScholar{' '}
+            About COVIDScholar
           </Header>
           <p>
             This website uses natural language processing (NLP) to power search
@@ -103,7 +103,11 @@ export default function About() {
             <MemberCard
               name={'Gerbrand Ceder'}
               intro={
-                'Gerbrand Ceder is The Daniel M. Tellep Distinguished Professor in Engineering in the Department of Materials Science and Engineering at UC Berkeley. His research interests lie in computational and experimental materials design for clean energy technology, Materials Genome approaches to materials design and synthesis, and machine learning and Natural Language Processing approaches to knowledge extraction.'
+                'Gerbrand Ceder is The Daniel M. Tellep Distinguished Professor in Engineering ' +
+                'in the Department of Materials Science and Engineering at UC Berkeley. His research ' +
+                'interests lie in computational and experimental materials design for clean energy ' +
+                'technology, Materials Genome approaches to materials design and synthesis, and machine ' +
+                'learning and NLP approaches to knowledge extraction.'
               }
               pic={gerd_pic}
               link={'https://ceder.berkeley.edu/'}
@@ -111,7 +115,9 @@ export default function About() {
             <MemberCard
               name={'Kristin Persson'}
               intro={
-                'Kristin Persson is a Professor at the University of California, Berkeley and a Senior Faculty Scientist at Lawrence Berkeley National Laboratory.  She is the Director and co-founder of the Materials Project (www.materialsproject.org).'
+                'Kristin Persson is a Professor at the University of California, Berkeley and a Senior ' +
+                'Faculty Scientist at Lawrence Berkeley National Laboratory.  She is the Director and ' +
+                'co-founder of the Materials Project (www.materialsproject.org).'
               }
               pic={kristin_pic}
               link={'https://perssongroup.lbl.gov/'}
@@ -119,7 +125,10 @@ export default function About() {
             <MemberCard
               name={'John Dagdelen'}
               intro={
-                'John is a PhD Student in the Persson Group at UC Berkeley and Lawrence Berkeley National Lab. His research sits at the intersection of materials science, artificial intelligence, and high performance computing. John is part of the team behind Matscholar, a materials science knowledge portal that uses state of the art NLP to aid in materials discovery and design.'
+                'John is a PhD Student in the Persson Group at UC Berkeley and Lawrence Berkeley National ' +
+                'Lab. His research sits at the intersection of materials science, artificial intelligence, ' +
+                'and high performance computing. John is part of the team behind Matscholar, a materials ' +
+                'science knowledge portal that uses state of the art NLP to aid in materials discovery and design.'
               }
               pic={john_pic}
               link={'https://jdagdelen.github.io'}
@@ -127,7 +136,11 @@ export default function About() {
             <MemberCard
               name={'Amalie Trewartha'}
               intro={
-                'Amalie is a postdoc in Gerbrand Ceders group at Lawrence Berkeley National Lab. She began her career as a nuclear physicist, before moving into materials science in 2019, with a focus on machine learning. Her research interests include the application of NLP techniques to scientific literature, and building thermodynamically-motivated ML models for materials property prediction.'
+                'Amalie is a postdoc in Gerbrand Ceders group at Lawrence Berkeley National Lab. She began ' +
+                'her career as a nuclear physicist, before moving into materials science in 2019, with a focus ' +
+                'on machine learning. Her research interests include the application of NLP techniques to ' +
+                'scientific literature, and building thermodynamically-motivated ML models for materials ' +
+                'property prediction.'
               }
               pic={amalie_pic}
               link={'https://github.com/amaliet'}
@@ -135,7 +148,9 @@ export default function About() {
             <MemberCard
               name={'Haoyan Huo'}
               intro={
-                'Haoyan joined Ceder Group at UC Berkeley as a PhD student in 2017. He is interested in making computers read papers and learn how to cook materials using the knowledge mined from the scientific literature knowledge base.'
+                'Haoyan joined Ceder Group at UC Berkeley as a PhD student in 2017. He is interested in ' +
+                'making computers read papers and learn how to cook materials using the knowledge mined from ' +
+                'the scientific literature knowledge base.'
               }
               pic={haoyan_pic}
               link={'https://github.com/hhaoyan'}
@@ -143,7 +158,8 @@ export default function About() {
             <MemberCard
               name={'Kevin Cruse'}
               intro={
-                'Kevin joined the Ceder Group at UC Berkeley as a Ph.D. student in 2019. He uses text mining and machine learning techniques to extract synthesis recipes from materials science literature.'
+                'Kevin joined the Ceder Group at UC Berkeley as a Ph.D. student in 2019. He uses text mining ' +
+                'and machine learning techniques to extract synthesis recipes from materials science literature.'
               }
               pic={kevin_pic}
               link={'https://www.linkedin.com/in/kevin-cruse/'}
@@ -151,7 +167,9 @@ export default function About() {
             <MemberCard
               name={'Yuxing Fei'}
               intro={
-                'Yuxing joined Ceder Group at UC Berkeley in 2020 as an undergraduate intern. He avidly dabbles in machine learning (especially natural language processing) to accelerate the design of next-generation materials.'
+                'Yuxing joined Ceder Group at UC Berkeley in 2020 as an undergraduate intern. He avidly dabbles ' +
+                'in machine learning (especially natural language processing) to accelerate the design of ' +
+                'next-generation materials.'
               }
               pic={yuxing_pic}
               link={'https://yuxingfei.com/'}
@@ -159,7 +177,8 @@ export default function About() {
             <MemberCard
               name={'Zheren Wang'}
               intro={
-                'Zheren joined Ceder Group at UC Berkeley and LBNL in 2018 as a Ph.D. student. He focuses on using machine learning and optimization algorithm to find material synthesis conditions.'
+                'Zheren joined Ceder Group at UC Berkeley and LBNL in 2018 as a Ph.D. student. He focuses on ' +
+                'using machine learning and optimization algorithm to find material synthesis conditions.'
               }
               pic={zheren_pic}
               link={null}

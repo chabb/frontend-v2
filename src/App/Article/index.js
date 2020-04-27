@@ -212,6 +212,10 @@ function Article({ id }) {
           <Tab
             panes={panes}
             defaultActiveIndex={url.searchParams.get('tab') || 0}
+            style={{
+              width: '100%',
+              overflowX: 'scroll'
+            }}
             // onTabChange={(e, tabInfo) => {
             //   // Reset all query params when changing tab
             //   [...url.searchParams.keys()].forEach(k =>
