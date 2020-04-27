@@ -12,6 +12,8 @@ import zheren_pic from './pics/zheren.jpg';
 import john_pic from './pics/john.jpg';
 import gerd_pic from './pics/GerbrandCeder.jpg';
 import kristin_pic from './pics/persson2.jpg';
+import tanjin_pic from './pics/tanjin.jpg';
+import francois_pic from './pics/francois.jpg';
 import { Box } from 'rebass';
 
 const ContentGrid = styled(Grid)`
@@ -127,7 +129,7 @@ export default function About() {
               intro={
                 'John is a PhD Student in the Persson Group at UC Berkeley and Lawrence Berkeley National ' +
                 'Lab. His research sits at the intersection of materials science, artificial intelligence, ' +
-                'and high performance computing. John is part of the team behind Matscholar, a materials ' +
+                'and high performance computing. John is also part of the team behind Matscholar, a materials ' +
                 'science knowledge portal that uses state of the art NLP to aid in materials discovery and design.'
               }
               pic={john_pic}
@@ -182,6 +184,25 @@ export default function About() {
               }
               pic={zheren_pic}
               link={null}
+            />
+            <MemberCard
+              name={'Tanjin He'}
+              intro={
+                'Tanjin joined the Ceder Group as a Ph.D. student in 2017. His research interest includes materials ' +
+                'synthesis and machine learning. He utilizes NLP methods to extract materials information from ' +
+                'scientific literature and learns how to predict synthesis from the big data.'
+              }
+              pic={tanjin_pic}
+            />
+            <MemberCard
+              name={'Francois Chabbey'}
+              intro={
+                'Having worked on embedded and mobile applications in Switzerland, Francois moved to the Bay ' +
+                'Area and reoriented himself toward frond-end and web applications. After building various ' +
+                'BI tools and data pipeline applications with two start-ups, he decided to join the Person ' +
+                'Group at Lawrence Berkeley National Lab to build visualizations.'
+              }
+              pic={francois_pic}
             />
           </Grid>
         </Container>
