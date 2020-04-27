@@ -153,7 +153,6 @@ function CitedBy({ citedBy, total, offset, onOffsetChange }) {
 
   return (
     <Container>
-      <Header>Found {citations_id.length}</Header>
       {citations_id.slice(offset, offset + 10).map(c => (
         <Citation key={c.id} id={c.id} direction={c.direction} />
       ))}
