@@ -131,7 +131,7 @@ function Related({ id, specter }) {
 }
 
 function CitedBy({ citedBy, total, offset, onOffsetChange }) {
-  const { loading, response, error } = Post('http://localhost:5000/dois/', {
+  const { loading, response, error } = Post('/dois/', {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json'
