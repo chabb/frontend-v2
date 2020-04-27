@@ -83,7 +83,7 @@ export default function About() {
       <ContentGrid>
         <Container>
           <Header as="h1" style={{ marginTop: '10px' }}>
-            About CovidScholar{' '}
+            About COVIDScholar
           </Header>
           <p>
             This website uses natural language processing (NLP) to power search
