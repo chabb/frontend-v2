@@ -1,7 +1,7 @@
 import { useReducer } from 'react';
 
 const backend =
-  'http://localhost:8080' || process.env.REACT_APP_BACKEND_URL || '/api';
+  process.env.REACT_APP_BACKEND_URL || 'http://localhost:8080' || '/api';
 
 function Get(url, params) {
   return Fetch('GET', url, params);

@@ -80,7 +80,6 @@ const ContentGrid = styled(Grid)`
 `;
 
 function pinkCodeLink(code) {
-  console.log('/search?query=' + code);
   return (
     <Link to={`/search?query=${code.replace('+', '%2B')}`}>
       <code style={{ color: 'lightcoral' }}>{code}</code>
