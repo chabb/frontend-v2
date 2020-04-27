@@ -183,10 +183,20 @@ function MobileFloatingButton({ onSearch, valuesState }) {
 }
 
 function DesktopSidebar({ onSearch, valuesState }) {
+  const R = styled(Responsive)`
+    && {
+      width: 30%;
+
+      #sidebar {
+        width: 100% !important;
+        max-width: 300px !important;
+      }
+    }
+  `;
   return (
-    <Responsive minWidth={Responsive.onlyTablet.minWidth}>
+    <R minWidth={Responsive.onlyTablet.minWidth}>
       <Sidebar onSearch={onSearch} {...valuesState} />
-    </Responsive>
+    </R>
   );
 }
 

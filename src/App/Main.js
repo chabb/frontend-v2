@@ -27,7 +27,7 @@ const Content = styled(Box)`
 
 const ContentGrid = styled(Grid)`
   &&& {
-    margin-top: calc((max(600px, 100vh) - 600px) / 2);
+    margin-top: calc((max(600px, 100vh) - 700px) / 2);
     color: #4e4e4e;
     font-size: 1.1rem;
 
