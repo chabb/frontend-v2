@@ -10,6 +10,8 @@ import kevin_pic from './pics/kevin.jpg';
 import yuxing_pic from './pics/yuxing.jpg';
 import zheren_pic from './pics/zheren.jpg';
 import john_pic from './pics/john.jpg';
+import gerd_pic from './pics/GerbrandCeder.jpg';
+import kristin_pic from './pics/persson2.jpg';
 import { Box } from 'rebass';
 
 const ContentGrid = styled(Grid)`
@@ -98,6 +100,22 @@ export default function About() {
             Our team
           </Header>
           <Grid className={'center aligned'}>
+            <MemberCard
+              name={'Gerbrand Ceder'}
+              intro={
+                'Gerbrand Ceder is The Daniel M. Tellep Distinguished Professor in Engineering in the Department of Materials Science and Engineering at UC Berkeley. His research interests lie in computational and experimental materials design for clean energy technology, Materials Genome approaches to materials design and synthesis, and machine learning and Natural Language Processing approaches to knowledge extraction.'
+              }
+              pic={gerd_pic}
+              link={'https://ceder.berkeley.edu/'}
+            />
+            <MemberCard
+              name={'Kristin Persson'}
+              intro={
+                'Kristin Persson is a Professor at the University of California, Berkeley and a Senior Faculty Scientist at Lawrence Berkeley National Laboratory.  She is the Director and co-founder of the Materials Project (www.materialsproject.org).'
+              }
+              pic={kristin_pic}
+              link={'https://perssongroup.lbl.gov/'}
+            />
             <MemberCard
               name={'John Dagdelen'}
               intro={
