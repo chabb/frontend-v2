@@ -22,6 +22,7 @@ import { Error, Loading } from 'App/shared/components/Messages';
 import Footer from 'App/shared/components/Footer';
 import Pagination from 'App/shared/components/Pagination';
 import { Box } from 'rebass';
+import SummaryFixLink from './ResultComponents/SummaryFixLink';
 
 const ContainerSearch = styled(Container)`
   &&& {
@@ -70,7 +71,15 @@ function NoMatches({ query }) {
   return (
     <div id="no_matches">
       <br />
-      No matches for <b>{query}</b>
+      No matches for <b>{query}</b>. Not finding what you're looking for?
+      <br />
+      {SummaryFixLink({
+        link: null,
+        doi: null,
+        abstract: null,
+        title: null,
+        message: 'Help improve COVIDScholar by submitting articles.'
+      })}
     </div>
   );
 }

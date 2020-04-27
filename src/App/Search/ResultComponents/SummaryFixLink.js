@@ -1,7 +1,14 @@
 import React from 'react';
 
-export default function SummaryFixLink({ link, doi, abstract, title }) {
+export default function SummaryFixLink({
+  link,
+  doi,
+  abstract,
+  title,
+  message
+}) {
   // If url with params is too long, delete the abstract
+  // message = message? message: 'Submit/fix metadata'
   let query = new URLSearchParams();
   const title_length = title ? title.length : 0;
   const abstract_length = abstract ? abstract.length : 0;
@@ -9,16 +16,13 @@ export default function SummaryFixLink({ link, doi, abstract, title }) {
   if (title_length + abstract_length < 2048) {
     if (title) {
       query.set('entry.1395202514', title.replace(/<[^>]+>/g, ''));
-      console.log(query.toString());
     }
     if (abstract) {
       query.set('entry.112702407', abstract.replace(/<[^>]+>/g, ''));
-      console.log('WITH ABSTRACT', query.toString());
     }
   } else {
     if (title && title_length < 2048) {
       query.set('entry.1395202514', title.replace(/<[^>]+>/g, ''));
-      console.log('ONLY TITLE', query.toString());
     }
   }
   if (link) {
@@ -38,7 +42,7 @@ export default function SummaryFixLink({ link, doi, abstract, title }) {
       className={'float-right'}
       href={url}
     >
-      Submit/fix metadata
+      {message}
     </a>
   );
 }

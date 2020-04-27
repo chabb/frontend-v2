@@ -178,7 +178,7 @@ export default function ResultCard({
     abstract,
     authors,
     source_display,
-    summary,
+    summary_human,
     keywords,
     keywords_ml,
     link,
@@ -230,7 +230,7 @@ export default function ResultCard({
           </div>
         )}
         <KeywordsSection keywords={combined_keywords.slice(0, 10)} />
-        <HumanSummarySection summary={summary} />
+        <HumanSummarySection summary_human={summary_human} />
         <CardCategory tags={tags} onFilterCategory={onFilterCategory} />
 
         {onSearchSimilar && (

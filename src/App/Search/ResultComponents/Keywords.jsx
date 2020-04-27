@@ -2,7 +2,6 @@ import React from 'react';
 import { Label, Popup } from 'semantic-ui-react';
 
 export function KeywordsSection({ keywords }) {
-  console.log(keywords);
   return keywords && keywords.length ? (
     <div>
       <Popup

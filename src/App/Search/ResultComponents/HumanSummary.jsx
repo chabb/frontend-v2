@@ -1,8 +1,8 @@
 import React from 'react';
 import { Label, Popup } from 'semantic-ui-react';
 
-export function HumanSummarySection({ summary }) {
-  return summary && summary.length ? (
+export function HumanSummarySection({ summary_human }) {
+  return summary_human && summary_human.length ? (
     <div>
       <Popup
         position="top center"
@@ -13,7 +13,7 @@ export function HumanSummarySection({ summary }) {
           </Label>
         }
       />
-      <span className="msweb-is-darkcyan-txt">{summary}</span>
+      <span className="msweb-is-darkcyan-txt">{summary_human}</span>
     </div>
   ) : (
     ''

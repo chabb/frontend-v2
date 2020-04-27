@@ -1,16 +1,14 @@
 import React from 'react';
-import _ from 'lodash';
 import styled from 'styled-components';
-import faker from 'faker';
-import { Button, Checkbox, Form, Dropdown } from 'semantic-ui-react';
+import { Button, Checkbox, Form } from 'semantic-ui-react';
 import { tagToColor, docTypeToColor } from 'App/Theme';
 
-const addressDefinitions = faker.definitions.address;
-const stateOptions = _.map(addressDefinitions.state, (state, index) => ({
-  key: addressDefinitions.state_abbr[index],
-  text: state,
-  value: addressDefinitions.state_abbr[index]
-}));
+// const addressDefinitions = faker.definitions.address;
+// const stateOptions = _.map(addressDefinitions.state, (state, index) => ({
+//   key: addressDefinitions.state_abbr[index],
+//   text: state,
+//   value: addressDefinitions.state_abbr[index]
+// }));
 
 const filters = [
   {
