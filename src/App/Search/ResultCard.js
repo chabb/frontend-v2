@@ -206,7 +206,7 @@ export default function ResultCard({
         )}
 
         <Link className="title larger" to={`/article/${id}`}>
-          {highlightedTitle}
+          {highlightedTitle || doi || link || id}
         </Link>
         {AuthorsJournalDate(
           authorsList(authors),
@@ -225,17 +225,6 @@ export default function ResultCard({
             <ReadMore long={content.join(' ')} />
           </div>
         )}
-        {/*{body && (*/}
-        {/*  <div>*/}
-        {/*    <Popup*/}
-        {/*      position="top center"*/}
-        {/*      content="This is a dynamic summary of the body of the paper, showing the matched query terms and surrounding context."*/}
-        {/*      trigger={<Label horizontal>Full Text</Label>}*/}
-        {/*    />*/}
-        {/*    {body}*/}
-        {/*  </div>*/}
-        {/*)}*/}
-
         <KeywordsSection keywords={keywords_dummy.concat(keywords_ml_dummy)} />
         <HumanSummarySection summary={summary_dummy} />
         <CardCategory tags={tags} onFilterCategory={onFilterCategory} />
@@ -245,8 +234,12 @@ export default function ResultCard({
             Search within related articles
           </FunctionLink>
         )}
-
-        <SummaryFixLink link={null} doi={doi} abstract={abstract} />
+        <SummaryFixLink
+          link={link}
+          doi={doi}
+          abstract={abstract}
+          title={title}
+        />
       </Card.Content>
     </StyledCard>
   );
