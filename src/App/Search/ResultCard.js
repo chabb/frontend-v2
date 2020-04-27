@@ -41,7 +41,7 @@ const StyledCard = styled(Card)`
     }
 
     .content {
-      padding: 0.1em 0.1em;
+      padding: 0.3em 0.1em;
       border: 0;
       width: 100%;
     }
@@ -172,21 +172,23 @@ function LoadingFakeCard() {
   return (
     <StyledCard>
       <div className={'ui fluid placeholder'}>
-        <Card.Header style={{ padding: 0 }}>
-          <div className={'line '}>&nbsp;</div>
-        </Card.Header>
-
         <Card.Content className={'paragraph'} style={{ padding: 0 }}>
-          <div className={'line'} style={{ marginBottom: '0.5em' }}>
+          <div key={1} className={'line'} style={{ marginBottom: '0.5em' }}>
             &nbsp;
           </div>
-          <div className={'line'} style={{ marginBottom: '0.5em' }}>
+          <div key={2} className={'line'} style={{ marginBottom: '0.5em' }}>
             &nbsp;
           </div>
-          <div className={'line'} style={{ marginBottom: '0.5em' }}>
+          <div key={3} className={'line'} style={{ marginBottom: '0.5em' }}>
             &nbsp;
           </div>
-          <div className={'line'} style={{ marginBottom: '0.5em' }}>
+          <div key={4} className={'line'} style={{ marginBottom: '0.5em' }}>
+            &nbsp;
+          </div>
+          <div key={5} className={'line'} style={{ marginBottom: '0.5em' }}>
+            &nbsp;
+          </div>
+          <div key={6} className={'line'} style={{ marginBottom: '0.5em' }}>
             &nbsp;
           </div>
         </Card.Content>
@@ -217,6 +219,8 @@ function ResultCard({
   onFilterCategory,
   isFieldSetAll
 }) {
+  const content = formatText(abstract);
+  // const body = formatText(body_text);
   title = title || doi || link || id;
   const highlightedTitle = formatText(title);
   keywords = keywords ? keywords : [];
@@ -249,9 +253,9 @@ function ResultCard({
       </Card.Header>
 
       <Card.Content>
-        {abstract && (
+        {content && (
           <div>
-            <ReadMore long={abstract} />
+            <ReadMore long={content} />
           </div>
         )}
         <KeywordsSection keywords={combined_keywords.slice(0, 10)} />
@@ -268,7 +272,7 @@ function ResultCard({
           doi={doi}
           abstract={abstract}
           title={title}
-          message="Submit/fix metadata"
+          message={'Submit/fix metadata'}
         />
       </Card.Content>
     </StyledCard>

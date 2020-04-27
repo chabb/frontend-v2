@@ -104,7 +104,7 @@ function SearchResults({ articles, query, isFieldSetAll, loading, error }) {
     <>
       {articles.map((article, i) =>
         article.loading ? (
-          <LoadingFakeCard />
+          <LoadingFakeCard key={i} />
         ) : (
           <ResultCard
             key={i}
