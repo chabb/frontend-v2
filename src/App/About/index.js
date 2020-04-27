@@ -11,7 +11,7 @@ import yuxing_pic from './pics/yuxing.jpg';
 import zheren_pic from './pics/zheren.jpg';
 import john_pic from './pics/john.jpg';
 import gerd_pic from './pics/GerbrandCeder.jpg';
-import kristin_pic from './pics/persson.jpg';
+import kristin_pic from './pics/persson2.jpg';
 import { Box } from 'rebass';
 
 const ContentGrid = styled(Grid)`
