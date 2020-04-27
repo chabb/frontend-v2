@@ -20,7 +20,7 @@ function CardCategory({ tags, onFilterCategory }) {
           key={i}
           className={'ui basic small label ' + tagToColor[tag]}
           onClick={e => {
-            onFilterCategory(tag);
+            onFilterCategory && onFilterCategory(tag);
             e.preventDefault();
           }}
           style={{ cursor: 'pointer' }}

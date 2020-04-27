@@ -151,14 +151,21 @@ function CitedBy({ citedBy, total, offset, onOffsetChange }) {
     })
     .filter(c => c.id);
   let total_found = citations_id.length;
+  offset = offset || 0;
 
   return (
-    <Container>
-      {citations_id.slice(offset, offset + 10).map(c => (
-        <Citation key={c.id} id={c.id} direction={c.direction} />
-      ))}
-      <Pagination {...{ total_found, offset, onOffsetChange }} />
-    </Container>
+    <Tab.Pane>
+      <Container style={{ width: '100%' }}>
+        {citations_id.slice(offset, offset + 10).map(c => (
+          <Citation key={c.id} id={c.id} direction={c.direction} />
+        ))}
+        {total_found > 10 ? (
+          <Pagination {...{ total_found, offset, onOffsetChange }} />
+        ) : (
+          ''
+        )}
+      </Container>
+    </Tab.Pane>
   );
 }
 
@@ -168,8 +175,12 @@ function Citation({ id, direction }) {
   ).state();
 
   if (loading) return <Loading message="Loading..." />;
-  if (error)
-    return <Error message={error.message || `Failed to load article #${id}`} />;
+  if (error || !response.fields)
+    return (
+      <Error
+        message={(error && error.message) || `Failed to load article #${id}`}
+      />
+    );
 
   return <ResultCard {...response} />;
 }
@@ -216,12 +227,12 @@ function Article({ id }) {
     render: () => (
       <CitedBy
         citedBy={citations_doi}
-        offset={parseInt(url.searchParams.get('offset')) || 0}
+        // offset={parseInt(url.searchParams.get('offset')) || 0}
         total={citations_doi.length}
-        onOffsetChange={offset => {
-          url.searchParams.set('offset', offset);
-          navigate(url);
-        }}
+        // onOffsetChange={offset => {
+        //   url.searchParams.set('offset', offset);
+        //   navigate(url);
+        // }}
       />
     )
   });
