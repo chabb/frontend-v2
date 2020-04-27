@@ -150,13 +150,14 @@ function CitedBy({ citedBy, total, offset, onOffsetChange }) {
       return { doi: c, id: response[c.doi], direction: c.direction };
     })
     .filter(c => c.id);
+  let total_found = citations_id.length;
 
   return (
     <Container>
       {citations_id.slice(offset, offset + 10).map(c => (
         <Citation key={c.id} id={c.id} direction={c.direction} />
       ))}
-      <Pagination {...{ total, offset, onOffsetChange }} />
+      <Pagination {...{ total_found, offset, onOffsetChange }} />
     </Container>
   );
 }
