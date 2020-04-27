@@ -13,7 +13,10 @@ export function KeywordsSection({ keywords }) {
           </Label>
         }
       />
-      <div className="msweb-is-dimgray-txt font-weight-bold">
+      <div
+        className="msweb-is-dimgray-txt font-weight-bold"
+        style={{ display: 'inline' }}
+      >
         {keywords.slice(0, 10).join(', ')}
       </div>
     </div>

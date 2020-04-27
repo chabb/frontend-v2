@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-let maxLength = 300;
+let maxWords = 75;
 let ellipses = '...';
 
 const StyledDiv = styled.div`
@@ -26,8 +26,32 @@ const StyledDiv = styled.div`
 
 class ReadMore extends React.Component {
   constructor(props) {
+    let short = props.short;
+    if (!short) {
+      short = [];
+      let words = 0,
+        i = 0;
+      while (words < maxWords && i < props.long.length) {
+        let next = props.long[i++];
+        let content = next instanceof Object ? next.toString() : next;
+        let n_words = content.trim().split(/\s+/).length;
+        short.push(
+          words + n_words > maxWords && !(next instanceof Object)
+            ? next
+                .split(/\s/)
+                .slice(0, maxWords - words)
+                .join(' ')
+            : next
+        );
+        words += n_words;
+      }
+    }
+
     super(props);
-    this.state = { expanded: false };
+    this.state = {
+      expanded: false,
+      short: short
+    };
   }
 
   showMoreLess = () => {
@@ -37,12 +61,7 @@ class ReadMore extends React.Component {
   };
 
   get_short = () => {
-    if (this.props.short) return this.props.short;
-
-    for (let i = maxLength; i > 0; i--) {
-      if (this.props.long[i - 1] === ' ') return this.props.long.substr(0, i);
-    }
-    return this.props.long.substr(0, maxLength);
+    return this.state.short;
   };
 
   render() {
@@ -50,9 +69,8 @@ class ReadMore extends React.Component {
       if (!this.state.expanded) {
         return (
           <StyledDiv>
-            <span
-              dangerouslySetInnerHTML={{ __html: this.get_short() + ellipses }}
-            />
+            {this.get_short()}
+            {ellipses}
             &nbsp;
             <span
               className="read-more ui"
@@ -66,7 +84,7 @@ class ReadMore extends React.Component {
       } else {
         return (
           <StyledDiv>
-            <span dangerouslySetInnerHTML={{ __html: this.props.long }} />
+            {this.props.long}
             &nbsp;
             <span
               className="read-more ui"
@@ -85,8 +103,8 @@ class ReadMore extends React.Component {
 }
 
 ReadMore.propTypes = {
-  long: PropTypes.string.isRequired,
-  short: PropTypes.string
+  long: PropTypes.arrayOf(PropTypes.any),
+  short: PropTypes.arrayOf(PropTypes.any)
 };
 
 export default ReadMore;

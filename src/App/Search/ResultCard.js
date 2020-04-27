@@ -173,22 +173,22 @@ function LoadingFakeCard() {
     <StyledCard>
       <div className={'ui fluid placeholder'}>
         <Card.Content className={'paragraph'} style={{ padding: 0 }}>
-          <div className={'line'} style={{ marginBottom: '0.5em' }}>
+          <div key={1} className={'line'} style={{ marginBottom: '0.5em' }}>
             &nbsp;
           </div>
-          <div className={'line'} style={{ marginBottom: '0.5em' }}>
+          <div key={2} className={'line'} style={{ marginBottom: '0.5em' }}>
             &nbsp;
           </div>
-          <div className={'line'} style={{ marginBottom: '0.5em' }}>
+          <div key={3} className={'line'} style={{ marginBottom: '0.5em' }}>
             &nbsp;
           </div>
-          <div className={'line'} style={{ marginBottom: '0.5em' }}>
+          <div key={4} className={'line'} style={{ marginBottom: '0.5em' }}>
             &nbsp;
           </div>
-          <div className={'line'} style={{ marginBottom: '0.5em' }}>
+          <div key={5} className={'line'} style={{ marginBottom: '0.5em' }}>
             &nbsp;
           </div>
-          <div className={'line'} style={{ marginBottom: '0.5em' }}>
+          <div key={6} className={'line'} style={{ marginBottom: '0.5em' }}>
             &nbsp;
           </div>
         </Card.Content>
@@ -222,7 +222,7 @@ function ResultCard({
   const content = formatText(abstract);
   // const body = formatText(body_text);
   title = title || doi || link || id;
-  const highlightedTitle = title.replace(highlightRegex, '$1');
+  const highlightedTitle = formatText(title);
   keywords = keywords ? keywords : [];
   keywords_ml = keywords_ml ? keywords_ml : [];
   const combined_keywords = keywords.concat(keywords_ml);
@@ -255,7 +255,7 @@ function ResultCard({
       <Card.Content>
         {content && (
           <div>
-            <ReadMore long={content.join(' ')} />
+            <ReadMore long={content} />
           </div>
         )}
         <KeywordsSection keywords={combined_keywords.slice(0, 10)} />
@@ -272,6 +272,7 @@ function ResultCard({
           doi={doi}
           abstract={abstract}
           title={title}
+          message={'Submit/fix metadata'}
         />
       </Card.Content>
     </StyledCard>
