@@ -7,7 +7,7 @@ import { Container, Header, Tab, List, Button } from 'semantic-ui-react';
 import { Error, Loading } from 'App/shared/components/Messages';
 import NavMenu from 'App/shared/components/NavMenu';
 import { Get } from 'App/shared/Fetcher';
-import ResultCard from 'App/Search/ResultCard';
+import { ResultCard } from 'App/Search/ResultCard';
 import Link from 'App/shared/components/Link';
 import { authorFormatter } from 'App/shared/utils/formatter';
 import Pagination from 'App/shared/components/Pagination';

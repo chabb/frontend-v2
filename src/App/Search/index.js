@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Container, Grid, Responsive } from 'semantic-ui-react';
-import ResultCard from './ResultCard';
+import { LoadingFakeCard, ResultCard } from './ResultCard';
 import {
   Button as FloatingButton,
   Container as FloatingContainer
@@ -18,7 +18,7 @@ import {
 import NavMenu from 'App/shared/components/NavMenu';
 import { Get } from 'App/shared/Fetcher';
 import SearchForm from 'App/shared/components/SearchForm';
-import { Error, Loading } from 'App/shared/components/Messages';
+import { Error } from 'App/shared/components/Messages';
 import Footer from 'App/shared/components/Footer';
 import Pagination from 'App/shared/components/Pagination';
 import { Box } from 'rebass';
@@ -85,7 +85,16 @@ function NoMatches({ query }) {
 }
 
 function SearchResults({ articles, query, isFieldSetAll, loading, error }) {
-  if (loading) return <Loading message="Searching..." />;
+  // if (loading) return <Loading message="Searching..." />;
+  if (loading) {
+    articles = [];
+    let loading = { loading: true };
+    for (let i = 0; i < 10; i++) articles.push(loading);
+  } else {
+    articles.forEach(article => {
+      article.loading = false;
+    });
+  }
   if (error)
     return <Error message={error.message || 'Unknown search error...'} />;
 
@@ -93,19 +102,23 @@ function SearchResults({ articles, query, isFieldSetAll, loading, error }) {
 
   return (
     <>
-      {articles.map((article, i) => (
-        <ResultCard
-          key={i}
-          {...article}
-          isFieldSetAll={isFieldSetAll}
-          onSearchSimilar={() =>
-            onSearch({
-              query: appendRelatedToQuery(query, article.fields.id)
-            })
-          }
-          onFilterCategory={tag => onSearch({ tags: tag })}
-        />
-      ))}
+      {articles.map((article, i) =>
+        article.loading ? (
+          <LoadingFakeCard />
+        ) : (
+          <ResultCard
+            key={i}
+            {...article}
+            isFieldSetAll={isFieldSetAll}
+            onSearchSimilar={() =>
+              onSearch({
+                query: appendRelatedToQuery(query, article.fields.id)
+              })
+            }
+            onFilterCategory={tag => onSearch({ tags: tag })}
+          />
+        )
+      )}
     </>
   );
 }
