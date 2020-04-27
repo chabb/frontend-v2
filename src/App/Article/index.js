@@ -170,34 +170,31 @@ function Article({ id }) {
       .filter(c => !isNaN(c))
   ]);
 
-  const panes = [
-    {
-      menuItem: 'Similar articles by Sent-SciBERT',
+  let panes = [];
+  if (response.fields.abstract) {
+    panes.push({
+      menuItem: 'Similar articles by Document Embedding',
       render: () => <Related id={response.fields.id} specter={false} />
+    });
+  }
+  panes.push({
+    menuItem: {
+      key: 'citations',
+      content: `${citations.length} citing articles`,
+      disabled: citations.length === 0
     },
-    {
-      menuItem: 'Similar articles by SPECTER',
-      render: () => <Related id={response.fields.id} specter={true} />
-    },
-    {
-      menuItem: {
-        key: 'citations',
-        content: `${citations.length} citing articles`,
-        disabled: citations.length === 0
-      },
-      render: () => (
-        <CitedBy
-          citedBy={citations}
-          offset={parseInt(url.searchParams.get('offset')) || 0}
-          total={citations.length}
-          onOffsetChange={offset => {
-            url.searchParams.set('offset', offset);
-            navigate(url);
-          }}
-        />
-      )
-    }
-  ];
+    render: () => (
+      <CitedBy
+        citedBy={citations}
+        offset={parseInt(url.searchParams.get('offset')) || 0}
+        total={citations.length}
+        onOffsetChange={offset => {
+          url.searchParams.set('offset', offset);
+          navigate(url);
+        }}
+      />
+    )
+  });
 
   return (
     <React.Fragment>

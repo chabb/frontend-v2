@@ -73,6 +73,10 @@ const StyledCard = styled(Card)`
     box-shadow: 0 0 0 1px #d4d4d5, -3px 0 0 0 #21ba45, 0 1px 3px 0 #d4d4d5;
   }
 
+  &.ui.card.purple {
+    box-shadow: 0 0 0 1px #d4d4d5, -3px 0 0 0 #6c00ba, 0 1px 3px 0 #d4d4d5;
+  }
+
   &.card {
     width: 100%;
     margin: 0.5em;
@@ -172,8 +176,6 @@ export default function ResultCard({
     journal,
     doi,
     abstract,
-    abstract_t5,
-    body_text,
     authors,
     source_display,
     summary,
@@ -188,25 +190,27 @@ export default function ResultCard({
   onFilterCategory,
   isFieldSetAll
 }) {
-  const keywords_dummy = ['key1', 'key2', 'key3'];
-  const keywords_ml_dummy = ['mlkey1', 'mlkey2', 'mlkey3'];
-  const summary_dummy = 'This was a really great paper and you should read it.';
   const content = formatText(abstract);
   // const body = formatText(body_text);
+  title = title || doi || link || id;
   const highlightedTitle = title.replace(highlightRegex, '$1');
+  keywords = keywords ? keywords : [];
+  keywords_ml = keywords_ml ? keywords_ml : [];
+  const combined_keywords = keywords.concat(keywords_ml);
+
   return (
     <StyledCard className={docTypeToColor[document_type]}>
       <Card.Header>
         {source_display === 'COVIDScholar Submission' ? (
-          <span className="ui blue ribbon label">
+          <span className="ui grey ribbon label">
             COVIDScholar User Submission
           </span>
         ) : (
           ''
         )}
 
-        <Link className="title larger" to={`/article/${id}`}>
-          {highlightedTitle || doi || link || id}
+        <Link className="title larger-txt" to={`/article/${id}`}>
+          {highlightedTitle}
         </Link>
         {AuthorsJournalDate(
           authorsList(authors),
@@ -225,8 +229,8 @@ export default function ResultCard({
             <ReadMore long={content.join(' ')} />
           </div>
         )}
-        <KeywordsSection keywords={keywords_dummy.concat(keywords_ml_dummy)} />
-        <HumanSummarySection summary={summary_dummy} />
+        <KeywordsSection keywords={combined_keywords.slice(0, 10)} />
+        <HumanSummarySection summary={summary} />
         <CardCategory tags={tags} onFilterCategory={onFilterCategory} />
 
         {onSearchSimilar && (

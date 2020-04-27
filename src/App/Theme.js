@@ -2,7 +2,7 @@ const docTypeToColor = {
   paper: 'red',
   clinical_trial: 'green',
   patent: 'blue',
-  dataset: 'violet'
+  dataset: 'purple'
 };
 
 const tagToColor = {

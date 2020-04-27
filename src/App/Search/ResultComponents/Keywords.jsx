@@ -14,7 +14,9 @@ export function KeywordsSection({ keywords }) {
           </Label>
         }
       />
-      <span className="font-weight-bold">{keywords.join(', ')}</span>
+      <div className="msweb-is-dimgray-txt font-weight-bold">
+        {keywords.slice(0, 10).join(', ')}
+      </div>
     </div>
   ) : (
     ''

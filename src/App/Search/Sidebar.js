@@ -14,7 +14,7 @@ const stateOptions = _.map(addressDefinitions.state, (state, index) => ({
 
 const filters = [
   {
-    name: 'COVID-19 Only',
+    name: 'Specific to COVID-19',
     field: 'is_covid19',
     colormap: null
   },
@@ -110,7 +110,9 @@ function filterOutUndesiredCheckboxes(field, value) {
 
 function formatFacetLabel(field, value) {
   if (field === 'is_preprint' && value === 'false') {
-    return 'true';
+    return 'yes';
+  } else if (field === 'is_covid19' && value === 'true') {
+    return 'yes';
   } else {
     return value;
   }
@@ -182,14 +184,14 @@ function Sidebar({ onSearch, ...filterValues }) {
             onSearch={onSearch}
           />
         ))}
-        <Dropdown
-          placeholder="Keywords"
-          fluid
-          multiple
-          search
-          selection
-          options={stateOptions}
-        />
+        {/*<Dropdown*/}
+        {/*  placeholder="Keywords"*/}
+        {/*  fluid*/}
+        {/*  multiple*/}
+        {/*  search*/}
+        {/*  selection*/}
+        {/*  options={stateOptions}*/}
+        {/*/>*/}
       </div>
     </div>
   );

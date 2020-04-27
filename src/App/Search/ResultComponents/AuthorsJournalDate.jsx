@@ -53,8 +53,10 @@ export default function AuthorsJournalDate(
   } else {
     authorString = authors;
   }
-  const conditionalDash = journalString.length > 0 ? ' - ' : '';
-  const conditionalComma = dateString.length > 0 ? ' - ' : '';
+  const conditionalDash =
+    journalString.length > 0 && authors.length > 0 ? ' - ' : '';
+  const conditionalComma =
+    (journalString || authorString) && dateString.length > 0 ? ', ' : '';
   return (
     <div className="mr-5">
       <span
