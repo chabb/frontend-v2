@@ -99,6 +99,22 @@ export default function About() {
           </Header>
           <Grid className={'center aligned'}>
             <MemberCard
+              name={'Gerbrand Ceder'}
+              intro={
+                'Gerbrand Ceder is The Daniel M. Tellep Distinguished Professor in Engineering in the Department of Materials Science and Engineering at UC Berkeley. His research interests lie in computational and experimental materials design for clean energy technology, Materials Genome approaches to materials design and synthesis, and machine learning and Natural Language Processing approaches to knowledge extraction.'
+              }
+              pic={john_pic}
+              link={'https://ceder.berkeley.edu/'}
+            />
+            <MemberCard
+              name={'Kristin Persson'}
+              intro={
+                'Kristin Persson is a Professor at the University of California, Berkeley and a Senior Faculty Scientist at Lawrence Berkeley National Laboratory.  She is the Director and co-founder of the Materials Project (www.materialsproject.org).'
+              }
+              pic={john_pic}
+              link={'https://perssongroup.lbl.gov/'}
+            />
+            <MemberCard
               name={'John Dagdelen'}
               intro={
                 'John is a PhD Student in the Persson Group at UC Berkeley and Lawrence Berkeley National Lab. His research sits at the intersection of materials science, artificial intelligence, and high performance computing. John is part of the team behind Matscholar, a materials science knowledge portal that uses state of the art NLP to aid in materials discovery and design.'
