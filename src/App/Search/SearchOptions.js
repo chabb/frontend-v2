@@ -14,16 +14,16 @@ const Container = styled.div`
   }
 `;
 
-const fieldsets = [
-  {
-    text: 'title and abstract',
-    value: 'default'
-  },
-  {
-    text: 'title, abstract and full text',
-    value: 'all'
-  }
-];
+// const fieldsets = [
+//   {
+//     text: 'title, abstract and full text',
+//     value: 'all'
+//   },
+//   {
+//     text: 'title and abstract',
+//     value: 'default'
+//   },
+// ];
 
 const rankings = [
   // {
@@ -83,18 +83,19 @@ function SearchOptions({ totalCount, fieldset, ranking, onSearch, relatedId }) {
           </>
         )}
         <span>
-          Searching in{' '}
-          <Dropdown
-            inline
-            defaultValue={
-              fieldsets.find(
-                ({ value }, i) => fieldset === value || (!fieldset && i === 0)
-              ).value
-            }
-            options={fieldsets.map((flds, id) => ({ id, ...flds }))}
-            onChange={(event, { value }) => onSearch({ fieldset: value })}
-          />
-          {' and sorting by '}
+          {/*Searching in{' '}*/}
+          {/*<Dropdown*/}
+          {/*  inline*/}
+          {/*  defaultValue={*/}
+          {/*    fieldsets.find(*/}
+          {/*      ({ value }, i) => fieldset === value || (!fieldset && i === 0)*/}
+          {/*    ).value*/}
+          {/*  }*/}
+          {/*  options={fieldsets.map((flds, id) => ({ id, ...flds }))}*/}
+          {/*  onChange={(event, { value }) => onSearch({ fieldset: value })}*/}
+          {/*/>*/}
+          {/*{' and sorting by '}*/}
+          {'Sorting by '}
           <Dropdown
             inline
             defaultValue={

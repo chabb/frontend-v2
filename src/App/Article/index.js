@@ -217,14 +217,14 @@ function Article({ id }) {
           <Tab
             panes={panes}
             defaultActiveIndex={url.searchParams.get('tab') || 0}
-            onTabChange={(e, tabInfo) => {
-              // Reset all query params when changing tab
-              [...url.searchParams.keys()].forEach(k =>
-                url.searchParams.delete(k)
-              );
-              url.searchParams.set('tab', tabInfo.activeIndex);
-              navigate(url);
-            }}
+            // onTabChange={(e, tabInfo) => {
+            //   // Reset all query params when changing tab
+            //   [...url.searchParams.keys()].forEach(k =>
+            //     url.searchParams.delete(k)
+            //   );
+            //   url.searchParams.set('tab', tabInfo.activeIndex);
+            //   navigate(url);
+            // }}
           />
         </ContainerContent>
         <Footer page={'article'} />

@@ -56,7 +56,7 @@ const generateApiQueryParams = () => {
 
   const query = new URLSearchParams(window.location.search);
   const ranking = query.get('ranking');
-  const fieldset = query.get('fieldset');
+  const fieldset = query.get('fieldset') || 'all';
   // Remove query parameters used in the UI, these are either sent to backend under a different name
   // or as part of an expression (filters)
   [
@@ -118,7 +118,7 @@ const getSearchState = () => {
     has_full_text: urlParams.getAll('has_full_text'),
     use_specter: urlParams.getAll('use_specter'),
     ranking: urlParams.get('ranking'),
-    fieldset: urlParams.get('fieldset'),
+    fieldset: urlParams.get('fieldset') || 'all',
     relatedId: getRelatedId(urlParams)
   };
 };
