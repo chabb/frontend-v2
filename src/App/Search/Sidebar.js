@@ -3,8 +3,7 @@ import _ from 'lodash';
 import styled from 'styled-components';
 import faker from 'faker';
 import { Button, Checkbox, Form, Dropdown } from 'semantic-ui-react';
-import { tagToColor } from 'App/Search/ResultComponents/CardCategory';
-import { docTypeToColor } from 'App/Search/ResultCard';
+import { tagToColor, docTypeToColor } from 'App/Theme';
 
 const addressDefinitions = faker.definitions.address;
 const stateOptions = _.map(addressDefinitions.state, (state, index) => ({

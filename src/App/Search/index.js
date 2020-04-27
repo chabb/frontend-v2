@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Container } from 'semantic-ui-react';
-import { ResultCard } from './ResultCard';
+import ResultCard from './ResultCard';
 import Sidebar from './Sidebar';
 import SearchOptions from './SearchOptions';
 import {

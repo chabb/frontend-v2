@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Card } from 'semantic-ui-react';
-import Moment from 'react-moment';
 import Link from 'App/shared/components/Link';
 import ReadMore from './ReadMore';
 import AuthorsJournalDate from './ResultComponents/AuthorsJournalDate';
@@ -10,9 +9,11 @@ import { KeywordsSection } from './ResultComponents/Keywords';
 import { HumanSummarySection } from './ResultComponents/HumanSummary';
 import SummaryFixLink from './ResultComponents/SummaryFixLink';
 import { CardCategory } from './ResultComponents/CardCategory';
+import { docTypeToColor } from '../Theme';
 
 const StyledCard = styled(Card)`
   && {
+    margin-top: 1.5em !important;
     margin-bottom: 1em !important;
 
     a {
@@ -51,6 +52,12 @@ const StyledCard = styled(Card)`
 
     .category .label:not(:first-child) {
       padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+
+    .ribbon {
+      position: absolute;
+      left: -16px;
+      top: -15px;
     }
   }
 
@@ -120,7 +127,7 @@ const formatText = text => {
 // Link which has a dummy target which is ignored, only triggers the onClick callback
 const FunctionLink = ({ onClick, ...props }) => (
   <a
-    href="#"
+    href="."
     onClick={e => {
       e.preventDefault();
       onClick();
@@ -130,67 +137,34 @@ const FunctionLink = ({ onClick, ...props }) => (
   </a>
 );
 
-const docTypeToColor = {
-  paper: 'red',
-  patent: 'blue',
-  clinical_trial: 'green'
-};
-
-function JournalAndDate({ journal, timestamp }) {
-  const format = journal ? ' (YYYY-MM-DD)' : 'YYYY-MM-DD';
-  return (
-    <>
-      {journal && (
-        <>
-          <b>Journal:</b> {journal}
-        </>
-      )}
-      {timestamp > 0 ? (
-        <Moment format={format} unix utc>
-          {timestamp * 1000}
-        </Moment>
-      ) : null}
-    </>
-  );
-}
-
-function DoiLink({ doi }) {
-  if (!doi) return null;
-  return (
-    <Link className="ui doi" to={doi}>
-      {doi.replace('https://doi.org/', 'doi:')}
-    </Link>
-  );
-}
-
-function SourceAndCitations({ source, citations_count_total }) {
-  const showCitations = citations_count_total > 0;
-  if (!source && !showCitations) return null;
-  return (
-    <div>
-      {source && (
-        <>
-          <b>Source: </b>
-          {source}
-        </>
-      )}
-      {source && showCitations && <>, </>}
-      {showCitations && (
-        <>
-          <b>Citations: </b>
-          {citations_count_total}
-        </>
-      )}
-    </div>
-  );
-}
+// function SourceAndCitations({ source, citations_count_total }) {
+//   const showCitations = citations_count_total > 0;
+//   if (!source && !showCitations) return null;
+//   return (
+//     <div>
+//       {source && (
+//         <>
+//           <b>Source: </b>
+//           {source}
+//         </>
+//       )}
+//       {source && showCitations && <>, </>}
+//       {showCitations && (
+//         <>
+//           <b>Citations: </b>
+//           {citations_count_total}
+//         </>
+//       )}
+//     </div>
+//   );
+// }
 
 function authorsList(authors) {
   if (!authors) return '';
   return authors.map(authorFormatter).join(', ');
 }
 
-function ResultCard({
+export default function ResultCard({
   fields: {
     id,
     title,
@@ -223,6 +197,14 @@ function ResultCard({
   return (
     <StyledCard className={docTypeToColor[document_type]}>
       <Card.Header>
+        {source_display === 'COVIDScholar Submission' ? (
+          <span className="ui blue ribbon label">
+            COVIDScholar User Submission
+          </span>
+        ) : (
+          ''
+        )}
+
         <Link className="title larger" to={`/article/${id}`}>
           {highlightedTitle}
         </Link>
@@ -269,5 +251,3 @@ function ResultCard({
     </StyledCard>
   );
 }
-
-export { ResultCard, docTypeToColor };

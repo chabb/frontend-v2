@@ -7,7 +7,7 @@ import { Container, Header, Tab, List, Button } from 'semantic-ui-react';
 import { Error, Loading } from 'App/shared/components/Messages';
 import NavMenu from 'App/shared/components/NavMenu';
 import { Get } from 'App/shared/Fetcher';
-import { ResultCard } from 'App/Search/ResultCard';
+import ResultCard from 'App/Search/ResultCard';
 import Link from 'App/shared/components/Link';
 import { authorFormatter } from 'App/shared/utils/formatter';
 import Pagination from 'App/shared/components/Pagination';
@@ -215,14 +215,14 @@ function Article({ id }) {
           <Tab
             panes={panes}
             defaultActiveIndex={url.searchParams.get('tab') || 0}
-            onTabChange={(e, tabInfo) => {
-              // Reset all query params when changing tab
-              [...url.searchParams.keys()].forEach(k =>
-                url.searchParams.delete(k)
-              );
-              url.searchParams.set('tab', tabInfo.activeIndex);
-              navigate(url);
-            }}
+            // onTabChange={(e, tabInfo) => {
+            //   // Reset all query params when changing tab
+            //   [...url.searchParams.keys()].forEach(k =>
+            //     url.searchParams.delete(k)
+            //   );
+            //   url.searchParams.set('tab', tabInfo.activeIndex);
+            //   navigate(url);
+            // }}
           />
         </ContainerContent>
         <Footer page={'article'} />
