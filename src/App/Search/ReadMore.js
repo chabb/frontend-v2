@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-let maxWords = 75;
+let maxWords = 50;
 let ellipses = '...';
 
 const StyledDiv = styled.div`
