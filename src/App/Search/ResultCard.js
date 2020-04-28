@@ -225,6 +225,7 @@ function ResultCard({
   const highlightedTitle = formatText(title);
   keywords = keywords ? keywords : [];
   keywords_ml = keywords_ml ? keywords_ml : [];
+  summary_human = formatText(summary_human);
   const combined_keywords = keywords.concat(keywords_ml);
 
   return (

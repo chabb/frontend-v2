@@ -2,23 +2,22 @@ import React from 'react';
 import styled from 'styled-components';
 import { Box, Text } from 'rebass';
 import NavMenu from 'App/shared/components/NavMenu';
-import { Grid, Image, List, Button, Modal } from 'semantic-ui-react';
-import { shuffle } from 'lodash';
+import { Button, Grid, Image, Modal } from 'semantic-ui-react';
 import SearchForm from 'App/shared/components/SearchForm';
 import Link from 'App/shared/components/Link';
 import { onSearch } from './Search/Utils';
 import Footer from 'App/shared/components/Footer';
 import COVIDScholarLogo from 'App/shared/img/COVIDScholarLogo.png';
 
-const sampleQueries = [
-  '+covid-19 +temperature impact on viral transmission',
-  'basic reproduction numbers for covid-19 in +"California"',
-  'grocery store worker infection rates',
-  '+title:"reproduction number" +abstract:MERS',
-  'Clinical trial data of COVID-19 in +("China" "Europe")',
-  '+("SARS-COV-2" "coronavirus 2" "novel coronavirus")',
-  '+("spike protein" "(S) protein" "S protein") +ACE2 +(covid-19 coronavirus)'
-];
+// const sampleQueries = [
+//   '+covid-19 +temperature impact on viral transmission',
+//   'basic reproduction numbers for covid-19 in +"California"',
+//   'grocery store worker infection rates',
+//   '+title:"reproduction number" +abstract:MERS',
+//   'Clinical trial data of COVID-19 in +("China" "Europe")',
+//   '+("SARS-COV-2" "coronavirus 2" "novel coronavirus")',
+//   '+("spike protein" "(S) protein" "S protein") +ACE2 +(covid-19 coronavirus)'
+// ];
 
 const Content = styled(Box)`
   // background-image: linear-gradient(0deg, #98c1db 7%, #005a8e 100%);
@@ -138,24 +137,24 @@ function SearchSyntaxModal() {
   );
 }
 
-function SearchSuggestions() {
-  return (
-    <>
-      <h4>Try searching for...</h4>
-      <List>
-        {shuffle(sampleQueries)
-          .slice(0, 3)
-          .map((query, i) => (
-            <List.Item key={i}>
-              <Link to={'/search?query=' + encodeURIComponent(query)}>
-                {query}
-              </Link>
-            </List.Item>
-          ))}
-      </List>
-    </>
-  );
-}
+// function SearchSuggestions() {
+//   return (
+//     <>
+//       <h4>Try searching for...</h4>
+//       <List>
+//         {shuffle(sampleQueries)
+//           .slice(0, 3)
+//           .map((query, i) => (
+//             <List.Item key={i}>
+//               <Link to={'/search?query=' + encodeURIComponent(query)}>
+//                 {query}
+//               </Link>
+//             </List.Item>
+//           ))}
+//       </List>
+//     </>
+//   );
+// }
 
 function COVIDScholarDescription() {
   return (
