@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Form, Icon } from 'semantic-ui-react';
+import { Button, Form, Icon, Modal } from 'semantic-ui-react';
+import Link from './Link';
+import { shuffle } from 'lodash';
 
 const StyledSearchForm = styled(Form)`
   &&& {
@@ -13,9 +15,76 @@ const StyledSearchForm = styled(Form)`
   }
 `;
 
-let set_once = true;
+function pinkCodeLink(code) {
+  return (
+    <Link to={`/search?query=${code.replace('+', '%2B')}`}>
+      <code style={{ color: 'lightcoral' }}>{code}</code>
+    </Link>
+  );
+}
 
-function SearchForm({ onSearch, query = '', placeholder_query }) {
+function SearchSyntaxModal() {
+  return (
+    <Modal trigger={<a href={'#'}>Search Syntax</a>} closeIcon>
+      <Modal.Header>COVIDScholar Search Syntax</Modal.Header>
+      <Modal.Content>
+        <ul>
+          <li>
+            <div> Use quotes to search for a specivid multi-word phrase.</div>
+            <div className="center-block">
+              {' '}
+              e.g. {pinkCodeLink('"spike protein"')}
+            </div>
+          </li>
+          <li>
+            <div>
+              {' '}
+              Use <code>+query_term</code> to specify that the result must
+              include the term and -query_term for must not.
+            </div>
+            <div className="center-block">
+              {' '}
+              e.g. {pinkCodeLink('+coronavirus -COVID-19')}
+            </div>
+          </li>
+          <li>
+            <div>
+              {' '}
+              Use {pinkCodeLink('()')} to specify OR, matches any of the terms
+              inside.
+            </div>
+            <div>
+              {' '}
+              e.g.{' '}
+              {pinkCodeLink(
+                'symptoms +(COVID-19 SARS-COV-2 "novel coronavirus")'
+              )}
+            </div>
+          </li>
+          <li>
+            <div> To search specific fields use fieldname:query_term.</div>
+            <div className="center-block">
+              {' '}
+              e.g. {pinkCodeLink('title:"ACE2 inhibitor" tag:Treatment')}
+            </div>
+          </li>
+        </ul>
+      </Modal.Content>
+    </Modal>
+  );
+}
+
+const sampleQueries = [
+  '+covid-19 +temperature impact on viral transmission',
+  'basic reproduction numbers for covid-19 in +"California"',
+  'grocery store worker infection rates',
+  '+title:"reproduction number" +abstract:MERS',
+  'Clinical trial data of COVID-19 in +("China" "Europe")',
+  '+("SARS-COV-2" "coronavirus 2" "novel coronavirus")',
+  '+("spike protein" "(S) protein" "S protein") +ACE2 +(covid-19 coronavirus)'
+];
+
+function SearchForm({ onSearch, query = '', show_button = false }) {
   const [currentQuery, setCurrentQuery] = useState(query);
   useEffect(() => {
     if (query !== currentQuery) setCurrentQuery(query);
@@ -24,20 +93,33 @@ function SearchForm({ onSearch, query = '', placeholder_query }) {
   const handleSearch = () => onSearch({ query: currentQuery });
 
   return (
-    <StyledSearchForm onSubmit={handleSearch}>
-      <Form.Input
-        fluid
-        icon={<Icon name="search" link onClick={handleSearch} />}
-        placeholder={'Try: ' + placeholder_query}
-        className="input"
-        onClick={() => {
-          set_once &&
-            (setCurrentQuery(placeholder_query) || (set_once = false));
-        }}
-        onChange={(e, { value }) => setCurrentQuery(value)}
-        value={currentQuery}
-      />
-    </StyledSearchForm>
+    <>
+      <StyledSearchForm onSubmit={handleSearch}>
+        <Form.Input
+          fluid
+          icon={<Icon name="search" link onClick={handleSearch} />}
+          placeholder={'Search...'}
+          className="input"
+          onChange={(e, { value }) => setCurrentQuery(value)}
+          value={currentQuery}
+        />
+      </StyledSearchForm>
+      {show_button ? (
+        <>
+          <Button
+            onClick={() => {
+              setCurrentQuery(shuffle(sampleQueries)[0]);
+            }}
+          >
+            Example
+          </Button>
+          &nbsp;
+          {SearchSyntaxModal()}
+        </>
+      ) : (
+        ''
+      )}
+    </>
   );
 }
 

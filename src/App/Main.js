@@ -2,23 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { Box, Text } from 'rebass';
 import NavMenu from 'App/shared/components/NavMenu';
-import { Button, Grid, Image, Modal } from 'semantic-ui-react';
+import { Grid, Image } from 'semantic-ui-react';
 import SearchForm from 'App/shared/components/SearchForm';
 import Link from 'App/shared/components/Link';
 import { onSearch } from './Search/Utils';
 import Footer from 'App/shared/components/Footer';
 import COVIDScholarLogo from 'App/shared/img/COVIDScholarLogo.png';
-import { shuffle } from 'lodash';
-
-const sampleQueries = [
-  '+covid-19 +temperature impact on viral transmission',
-  'basic reproduction numbers for covid-19 in +"California"',
-  'grocery store worker infection rates',
-  '+title:"reproduction number" +abstract:MERS',
-  'Clinical trial data of COVID-19 in +("China" "Europe")',
-  '+("SARS-COV-2" "coronavirus 2" "novel coronavirus")',
-  '+("spike protein" "(S) protein" "S protein") +ACE2 +(covid-19 coronavirus)'
-];
 
 const Content = styled(Box)`
   // background-image: linear-gradient(0deg, #98c1db 7%, #005a8e 100%);
@@ -79,65 +68,6 @@ const ContentGrid = styled(Grid)`
   }
 `;
 
-function pinkCodeLink(code) {
-  return (
-    <Link to={`/search?query=${code.replace('+', '%2B')}`}>
-      <code style={{ color: 'lightcoral' }}>{code}</code>
-    </Link>
-  );
-}
-
-function SearchSyntaxModal() {
-  return (
-    <Modal trigger={<Button size={'tiny'}>Search Syntax</Button>} closeIcon>
-      <Modal.Header>COVIDScholar Search Syntax</Modal.Header>
-      <Modal.Content>
-        <ul>
-          <li>
-            <div> Use quotes to search for a specivid multi-word phrase.</div>
-            <div className="center-block">
-              {' '}
-              e.g. {pinkCodeLink('"spike protein"')}
-            </div>
-          </li>
-          <li>
-            <div>
-              {' '}
-              Use <code>+query_term</code> to specify that the result must
-              include the term and -query_term for must not.
-            </div>
-            <div className="center-block">
-              {' '}
-              e.g. {pinkCodeLink('+coronavirus -COVID-19')}
-            </div>
-          </li>
-          <li>
-            <div>
-              {' '}
-              Use {pinkCodeLink('()')} to specify OR, matches any of the terms
-              inside.
-            </div>
-            <div>
-              {' '}
-              e.g.{' '}
-              {pinkCodeLink(
-                'symptoms +(COVID-19 SARS-COV-2 "novel coronavirus")'
-              )}
-            </div>
-          </li>
-          <li>
-            <div> To search specific fields use fieldname:query_term.</div>
-            <div className="center-block">
-              {' '}
-              e.g. {pinkCodeLink('title:"ACE2 inhibitor" tag:Treatment')}
-            </div>
-          </li>
-        </ul>
-      </Modal.Content>
-    </Modal>
-  );
-}
-
 // function SearchSuggestions() {
 //   return (
 //     <>
@@ -194,12 +124,7 @@ function Main() {
         </Grid.Row>
         <Grid.Row>
           <Grid.Column width={12}>
-            <SearchForm
-              onSearch={onSearch}
-              placeholder_query={shuffle(sampleQueries)[0]}
-            />
-            <div style={{ marginBottom: '80px' }}></div>
-            {SearchSyntaxModal()}
+            <SearchForm onSearch={onSearch} show_button={true} />
             <COVIDScholarDescription />
           </Grid.Column>
         </Grid.Row>
