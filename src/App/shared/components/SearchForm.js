@@ -13,7 +13,9 @@ const StyledSearchForm = styled(Form)`
   }
 `;
 
-function SearchForm({ onSearch, query = '' }) {
+let set_once = true;
+
+function SearchForm({ onSearch, query = '', placeholder_query }) {
   const [currentQuery, setCurrentQuery] = useState(query);
   useEffect(() => {
     if (query !== currentQuery) setCurrentQuery(query);
@@ -26,8 +28,12 @@ function SearchForm({ onSearch, query = '' }) {
       <Form.Input
         fluid
         icon={<Icon name="search" link onClick={handleSearch} />}
-        placeholder="Search..."
+        placeholder={'Try: ' + placeholder_query}
         className="input"
+        onClick={() => {
+          set_once &&
+            (setCurrentQuery(placeholder_query) || (set_once = false));
+        }}
         onChange={(e, { value }) => setCurrentQuery(value)}
         value={currentQuery}
       />

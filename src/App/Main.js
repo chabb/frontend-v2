@@ -8,16 +8,17 @@ import Link from 'App/shared/components/Link';
 import { onSearch } from './Search/Utils';
 import Footer from 'App/shared/components/Footer';
 import COVIDScholarLogo from 'App/shared/img/COVIDScholarLogo.png';
+import { shuffle } from 'lodash';
 
-// const sampleQueries = [
-//   '+covid-19 +temperature impact on viral transmission',
-//   'basic reproduction numbers for covid-19 in +"California"',
-//   'grocery store worker infection rates',
-//   '+title:"reproduction number" +abstract:MERS',
-//   'Clinical trial data of COVID-19 in +("China" "Europe")',
-//   '+("SARS-COV-2" "coronavirus 2" "novel coronavirus")',
-//   '+("spike protein" "(S) protein" "S protein") +ACE2 +(covid-19 coronavirus)'
-// ];
+const sampleQueries = [
+  '+covid-19 +temperature impact on viral transmission',
+  'basic reproduction numbers for covid-19 in +"California"',
+  'grocery store worker infection rates',
+  '+title:"reproduction number" +abstract:MERS',
+  'Clinical trial data of COVID-19 in +("China" "Europe")',
+  '+("SARS-COV-2" "coronavirus 2" "novel coronavirus")',
+  '+("spike protein" "(S) protein" "S protein") +ACE2 +(covid-19 coronavirus)'
+];
 
 const Content = styled(Box)`
   // background-image: linear-gradient(0deg, #98c1db 7%, #005a8e 100%);
@@ -193,7 +194,10 @@ function Main() {
         </Grid.Row>
         <Grid.Row>
           <Grid.Column width={12}>
-            <SearchForm onSearch={onSearch} />
+            <SearchForm
+              onSearch={onSearch}
+              placeholder_query={shuffle(sampleQueries)[0]}
+            />
             {SearchSyntaxModal()}
             <COVIDScholarDescription />
           </Grid.Column>
