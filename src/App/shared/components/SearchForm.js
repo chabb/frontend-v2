@@ -23,9 +23,24 @@ function pinkCodeLink(code) {
   );
 }
 
+const StyledFakeButton = styled.a`
+  && {
+    cursor: pointer;
+    text-decoration: underline;
+    color: #2b8182 !important;
+  }
+
+  &&:hover {
+    color: #1b4b4c !important;
+  }
+`;
+
 function SearchSyntaxModal() {
   return (
-    <Modal trigger={<a href={'#'}>Search Syntax</a>} closeIcon>
+    <Modal
+      trigger={<StyledFakeButton>Search Syntax</StyledFakeButton>}
+      closeIcon
+    >
       <Modal.Header>COVIDScholar Search Syntax</Modal.Header>
       <Modal.Content>
         <ul>

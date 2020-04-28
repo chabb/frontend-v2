@@ -155,7 +155,7 @@ function CitedBy({ citedBy, total, offset, onOffsetChange }) {
 
   return (
     <Tab.Pane>
-      <Container style={{ width: '100%' }}>
+      <Container style={{ width: '100%', marginLeft: 0 }}>
         {citations_id.slice(offset, offset + 10).map(c => (
           <Citation key={c.id} id={c.id} direction={c.direction} />
         ))}
