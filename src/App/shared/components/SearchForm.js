@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Button, Form, Icon, Modal } from 'semantic-ui-react';
+import { Button, Form, Icon, Input, Modal } from 'semantic-ui-react';
 import Link from './Link';
 import { shuffle } from 'lodash';
 
@@ -107,15 +107,19 @@ function SearchForm({ onSearch, query = '', show_button = false }) {
   }, [query]);
   const handleSearch = () => onSearch({ query: currentQuery });
 
+  let input_obj = {};
+
   return (
     <>
       <StyledSearchForm onSubmit={handleSearch}>
-        <Form.Input
+        <Input
           fluid
           icon={<Icon name="search" link onClick={handleSearch} />}
           placeholder={'Search...'}
+          autoFocus={true}
           className="input"
           onChange={(e, { value }) => setCurrentQuery(value)}
+          ref={ref => (input_obj.input = ref)}
           value={currentQuery}
         />
       </StyledSearchForm>
@@ -124,6 +128,7 @@ function SearchForm({ onSearch, query = '', show_button = false }) {
           <Button
             onClick={() => {
               setCurrentQuery(shuffle(sampleQueries)[0]);
+              input_obj.input.focus();
             }}
           >
             Example

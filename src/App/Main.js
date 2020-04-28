@@ -97,8 +97,10 @@ function COVIDScholarDescription() {
         <Text mt={1}>
           Licenced under{' '}
           <Link to="https://github.com/vespa-engine/cord-19/blob/master/LICENSE">
-            Apache 2.0 License.{' '}
+            Apache 2.0 License
           </Link>
+          <span>&nbsp;|&nbsp;</span>
+          <Link to="/privacy">Privacy Policy</Link>
         </Text>
       </Text>
     </Box>
