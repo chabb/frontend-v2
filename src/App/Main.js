@@ -161,8 +161,9 @@ function COVIDScholarDescription() {
   return (
     <Box my={4}>
       <Text mt={3}>
-        <span> A knowledge portal for COVID-19 research built using </span>
-        <Link to="https://vespa.ai">Vespa.ai.</Link>
+        <span> Using technology based on the </span>
+        <Link to="https://vespa.ai">Vespa.ai</Link>
+        <span> open source project.</span>
         <Text mt={1}>
           Licenced under{' '}
           <Link to="https://github.com/vespa-engine/cord-19/blob/master/LICENSE">
@@ -195,7 +196,6 @@ function Main() {
           <Grid.Column width={12}>
             <SearchForm onSearch={onSearch} />
             {SearchSyntaxModal()}
-            <SearchSuggestions />
             <COVIDScholarDescription />
           </Grid.Column>
         </Grid.Row>
