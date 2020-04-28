@@ -21,9 +21,9 @@ class EntriesStream extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      display: 'cumulative',
-      ds: 'full',
-      dataset: dataset.full
+      display: 'daily',
+      ds: 'covid19',
+      dataset: dataset.covid19
     };
   }
 

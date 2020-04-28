@@ -129,7 +129,7 @@ export default function About() {
               intro={
                 'John is a PhD Student in the Persson Group at UC Berkeley and Lawrence Berkeley National ' +
                 'Lab. His research sits at the intersection of materials science, artificial intelligence, ' +
-                'and high performance computing. John is also part of the team behind Matscholar, a materials ' +
+                'and high-performance computing. John is also part of the team behind Matscholar, a materials ' +
                 'science knowledge portal that uses state of the art NLP to aid in materials discovery and design.'
               }
               pic={john_pic}
@@ -138,7 +138,7 @@ export default function About() {
             <MemberCard
               name={'Amalie Trewartha'}
               intro={
-                'Amalie is a postdoc in Gerbrand Ceders group at Lawrence Berkeley National Lab. She began ' +
+                "Amalie is a postdoc in Gerbrand Ceder's group at Lawrence Berkeley National Lab. She began " +
                 'her career as a nuclear physicist, before moving into materials science in 2019, with a focus ' +
                 'on machine learning. Her research interests include the application of NLP techniques to ' +
                 'scientific literature, and building thermodynamically-motivated ML models for materials ' +

@@ -15,7 +15,7 @@ const sampleQueries = [
   'basic reproduction numbers for covid-19 in +"California"',
   'grocery store worker infection rates',
   '+title:"reproduction number" +abstract:MERS',
-  '+authors.name:"Neil M Ferguson"',
+  'Clinical trial data of COVID-19 in +("China" "Europe")',
   '+("SARS-COV-2" "coronavirus 2" "novel coronavirus")',
   '+("spike protein" "(S) protein" "S protein") +ACE2 +(covid-19 coronavirus)'
 ];
@@ -187,7 +187,7 @@ function Main() {
           </div>
         </Grid.Row>
         <Grid.Row className="margin-top-0 margin-bottom-0">
-          <h3 size="huge" className="subtitle">
+          <h3 size="huge" className="subtitle twelve wide column">
             COVID-19 literature search powered by advanced NLP algorithms.
           </h3>
         </Grid.Row>

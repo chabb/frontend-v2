@@ -185,6 +185,16 @@ function Citation({ id, direction }) {
   return <ResultCard {...response} />;
 }
 
+const StyledTab = styled(Tab)`
+  && {
+    .menu {
+      width: 100% !important;
+      overflow-x: auto !important;
+      overflow-y: hidden !important;
+    }
+  }
+`;
+
 function Article({ id }) {
   const url = new URL(window.location);
   const { loading, response, error } = Get(
@@ -250,13 +260,9 @@ function Article({ id }) {
             Go Back{' '}
           </Button>
           <Content {...response.fields} />
-          <Tab
+          <StyledTab
             panes={panes}
             defaultActiveIndex={url.searchParams.get('tab') || 0}
-            style={{
-              width: '100%',
-              overflowX: 'scroll'
-            }}
             // onTabChange={(e, tabInfo) => {
             //   // Reset all query params when changing tab
             //   [...url.searchParams.keys()].forEach(k =>
