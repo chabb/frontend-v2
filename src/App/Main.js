@@ -198,6 +198,7 @@ function Main() {
               onSearch={onSearch}
               placeholder_query={shuffle(sampleQueries)[0]}
             />
+            <div style={{ marginBottom: '80px' }}></div>
             {SearchSyntaxModal()}
             <COVIDScholarDescription />
           </Grid.Column>
