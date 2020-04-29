@@ -1,12 +1,14 @@
 import React from 'react';
 import { ResponsiveStream } from '@nivo/stream';
+import {Get} from './App/shared/Fetcher';
+import { Error, Loading } from './App/shared/components/Messages';
 import non_summed_data from './EntriesStreamData/non_summed_data.json';
 import covid19_data from './EntriesStreamData/covid19_data.json';
 import non_summed_covid19_data from './EntriesStreamData/non_summed_covid19_data.json';
 import data from './EntriesStreamData/data.json';
 import { Responsive } from 'semantic-ui-react';
 
-const dataset = {
+/*const dataset = {
   full: {
     cumulative: data,
     daily: non_summed_data
@@ -15,11 +17,12 @@ const dataset = {
     cumulative: covid19_data,
     daily: non_summed_covid19_data
   }
-};
+};*/
 
 class EntriesStream extends React.Component {
   constructor(props) {
     super(props);
+    console.log('hi')
     this.state = {
       display: 'daily',
       ds: 'covid19',
@@ -45,7 +48,7 @@ class EntriesStream extends React.Component {
   }
 
   Mobile({ that }) {
-    return (
+    return(
       <Responsive
         {...Responsive.onlyMobile}
         style={{ height: '100%', width: '100%' }}
@@ -59,7 +62,9 @@ class EntriesStream extends React.Component {
             'LitCovid',
             'CORD-19',
             'medrxiv',
-            'Dimensions',
+            'Dimensions Publications',
+            'Dimensions Clinical Trials',
+            'Dimensions Data Sets',
             'Lens Patents',
             'Public Health Ontario COVID-19 Synopsis'
           ]}
@@ -252,8 +257,100 @@ class EntriesStream extends React.Component {
   }
 
   render() {
+    /* Grab sources breakdown from stats api */
+    function Sources({}) {
+      const url = new URL(window.location);
+      const { loading, response, error } = Get(
+        `http://api-stats.covidscholar-spin.dev-cattle.stable.spin.nersc.org:55041/sources/`
+      ).state();
+
+      if (loading) return <Loading message="Loading..." />;
+      if (error)
+        return <Error message={error.message || `Failed to load sources data`} />;
+
+      const full_daily_data = (response)
+        .map(entry => {
+          return {
+            ['Elsevier']: entry['Elsevier'],
+            ['biorxiv']: entry['biorxiv'],
+            ['COVIDScholar Submission']: entry['COVIDScholar Submission'],
+            ['LitCovid']: entry['LitCovid'],
+            ['CORD-19']: entry['CORD-19'],
+            ['medrxiv']: entry['medrxiv'],
+            ['Dimensions Publications']: entry['Dimensions Publications'],
+            ['Dimensions Clinical Trials']: entry['Dimensions Clinical Trials'],
+            ['Dimensions Data Sets']: entry['Dimensions Data Sets'],
+            ['Lens Patents']: entry['Lens Patents'],
+            ['Public Health Ontario COVID-19 Synopsis']: entry['Public Health Ontario COVID-19 Synopsis']
+          };
+        });
+
+      const full_cumulative_data = (response)
+        .map(entry => {
+          return {
+            ['Elsevier']: entry['Elsevier_sum'],
+            ['biorxiv']: entry['biorxiv_sum'],
+            ['COVIDScholar Submission']: entry['COVIDScholar Submission_sum'],
+            ['LitCovid']: entry['LitCovid_sum'],
+            ['CORD-19']: entry['CORD-19_sum'],
+            ['medrxiv']: entry['medrxiv_sum'],
+            ['Dimensions Publications']: entry['Dimensions Publications_sum'],
+            ['Dimensions Clinical Trials']: entry['Dimensions Clinical Trials_sum'],
+            ['Dimensions Data Sets']: entry['Dimensions Data Sets_sum'],
+            ['Lens Patents']: entry['Lens Patents_sum'],
+            ['Public Health Ontario COVID-19 Synopsis']: entry['Public Health Ontario COVID-19 Synopsis_sum']
+          };
+        });
+
+      const covid19_daily_data = (response)
+        .map(entry => {
+          return {
+            ['Elsevier']: entry['Elsevier_covid19'],
+            ['biorxiv']: entry['biorxiv_covid19'],
+            ['COVIDScholar Submission']: entry['COVIDScholar Submission_covid19'],
+            ['LitCovid']: entry['LitCovid_covid19'],
+            ['CORD-19']: entry['CORD-19_covid19'],
+            ['medrxiv']: entry['medrxiv_covid19'],
+            ['Dimensions Publications']: entry['Dimensions Publications_covid19'],
+            ['Dimensions Clinical Trials']: entry['Dimensions Clinical Trials_covid19'],
+            ['Dimensions Data Sets']: entry['Dimensions Data Sets_covid19'],
+            ['Lens Patents']: entry['Lens Patents_covid19'],
+            ['Public Health Ontario COVID-19 Synopsis']: entry['Public Health Ontario COVID-19 Synopsis_covid19']
+          };
+        });
+
+      const covid19_cumulative_data = (response)
+      .map(entry => {
+        return {
+          ['Elsevier']: entry['Elsevier_covid19_sum'],
+          ['biorxiv']: entry['biorxiv_covid19_sum'],
+          ['COVIDScholar Submission']: entry['COVIDScholar Submission_covid19_sum'],
+          ['LitCovid']: entry['LitCovid_covid19_sum'],
+          ['CORD-19']: entry['CORD-19_covid19_sum'],
+          ['medrxiv']: entry['medrxiv_covid19_sum'],
+          ['Dimensions Publications']: entry['Dimensions Publications_covid19_sum'],
+          ['Dimensions Clinical Trials']: entry['Dimensions Clinical Trials_covid19_sum'],
+          ['Dimensions Data Sets']: entry['Dimensions Data Sets_covid19_sum'],
+          ['Lens Patents']: entry['Lens Patents_covid19_sum'],
+          ['Public Health Ontario COVID-19 Synopsis']: entry['Public Health Ontario COVID-19 Synopsis_covid19_sum']
+        };
+      });
+
+      const dataset = {
+        full: {
+          cumulative: full_cumulative_data,
+          daily: full_daily_data
+        },
+        covid19: {
+          cumulative: covid19_cumulative_data,
+          daily: covid19_daily_data
+        }
+      };
+    };
+
     return (
       <div style={{ height: '300px' }} className={'ui center aligned grid'}>
+        <Sources/>
         <this.Mobile that={this} />
         <this.Desktop that={this} />
         <div
