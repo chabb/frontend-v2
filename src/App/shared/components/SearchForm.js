@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
-import { Button, Form, Icon, Input, Modal } from 'semantic-ui-react';
+import { Form, Icon, Modal } from 'semantic-ui-react';
+import Autosuggest from 'react-autosuggest';
+import { Subject } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
 import Link from './Link';
-import { shuffle } from 'lodash';
 
 const StyledSearchForm = styled(Form)`
   &&& {
@@ -14,7 +16,6 @@ const StyledSearchForm = styled(Form)`
     }
   }
 `;
-
 function pinkCodeLink(code) {
   return (
     <Link to={`/search?query=${code.replace('+', '%2B')}`}>
@@ -29,7 +30,6 @@ const StyledFakeButton = styled.a`
     text-decoration: underline;
     color: #2b8182 !important;
   }
-
   &&:hover {
     color: #1b4b4c !important;
   }
@@ -99,49 +99,91 @@ const sampleQueries = [
   '+("spike protein" "(S) protein" "S protein") +ACE2 +(covid-19 coronavirus)'
 ];
 
-function SearchForm({ onSearch, query = '', show_button = false }) {
+function SearchForm({ onSearch, query = '' }) {
   const [currentQuery, setCurrentQuery] = useState(query);
+  const [suggestions, setSuggestions] = useState([]);
+  const trigger = useRef(new Subject());
+  const isMounted = useRef(false);
+
+  useEffect(() => {
+    isMounted.current = true;
+    return () => {
+      isMounted.current = false;
+    };
+  });
+
+  useEffect(() => {
+    const subscription = trigger.current
+      .pipe(
+        switchMap(v =>
+          fetch(`https://scholar.google.com/scholar_complete?q=${v}`).then(r =>
+            r.json()
+          )
+        )
+      )
+      .subscribe(({ l }) => {
+        if (!l) {
+          console.warn('response is null');
+        } else {
+          isMounted.current && setSuggestions(l); // component can be unmounted when the request is done
+        }
+      });
+    return () => subscription.unsubscribe();
+  }, []);
+
   useEffect(() => {
     if (query !== currentQuery) setCurrentQuery(query);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [query]);
   const handleSearch = () => onSearch({ query: currentQuery });
+  const onChange = (e, { newValue }) => setCurrentQuery(newValue);
 
-  let input_obj = {};
+  const inputProps = {
+    value: currentQuery,
+    onChange
+  };
+  const onSuggestionsFetchRequested = ({ value }) => {
+    trigger.current.next(value);
+  };
+
+  const onSuggestionsClearRequested = () => setSuggestions([]);
+
+  // I've intended to use this, but it looses the focus
+  // https://github.com/artsy/reaction/blob/c58f6407a00393dbd3940a401c82d1e470a692b1/src/Components/Search/SearchBar.tsx#L319
+  const CustomInput = React.forwardRef((props, ref) => {
+    return (
+      <Form.Field
+        icon={<Icon name="search" link onClick={handleSearch} />}
+        className="input"
+      >
+        <input {...props} className="input" ref={ref} placeholder="Search..." />
+      </Form.Field>
+    );
+  });
 
   return (
-    <>
-      <StyledSearchForm onSubmit={handleSearch}>
-        <Input
-          fluid
-          icon={<Icon name="search" link onClick={handleSearch} />}
-          placeholder={'Search...'}
-          autoFocus={true}
-          className="input"
-          onChange={(e, { value }) => setCurrentQuery(value)}
-          ref={ref => (input_obj.input = ref)}
-          value={currentQuery}
-        />
-      </StyledSearchForm>
-      {show_button ? (
-        <>
-          <Button
-            onClick={() => {
-              setCurrentQuery(shuffle(sampleQueries)[0]);
-              input_obj.input.focus();
-            }}
-          >
-            Example
-          </Button>
-          &nbsp;
-          {SearchSyntaxModal()}
-        </>
-      ) : (
-        ''
-      )}
-    </>
+    // handleSearch has been moved down to handle keyboard and mouse interaction
+    <StyledSearchForm>
+      <Autosuggest
+        suggestions={suggestions}
+        multiSection={false}
+        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+        onSuggestionsClearRequested={onSuggestionsClearRequested}
+        onSuggestionSelected={handleSearch}
+        renderSectionTitle={() => {}}
+        getSectionItems={() => {}}
+        getSuggestionValue={s => s}
+        inputProps={inputProps}
+        renderSuggestion={renderSuggestion}
+        renderInputComponent={props => (
+          <input {...props} className="input" placeholder="Search..." />
+        )}
+      />
+    </StyledSearchForm>
   );
 }
+
+const renderSuggestion = suggestion => <span>{suggestion}</span>;
 
 export default SearchForm;
 
