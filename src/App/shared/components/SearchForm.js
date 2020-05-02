@@ -106,6 +106,7 @@ function SearchForm({ onSearch, query = '', show_button = false }) {
   const [suggestions, setSuggestions] = useState([]);
   const trigger = useRef(new Subject());
   const isMounted = useRef(false);
+  const inputRef = useRef(null);
 
   useEffect(() => {
     isMounted.current = true;
@@ -181,6 +182,7 @@ function SearchForm({ onSearch, query = '', show_button = false }) {
           getSectionItems={() => {}}
           getSuggestionValue={s => s}
           inputProps={inputProps}
+          ref={inputRef}
           renderSuggestion={renderSuggestion}
           renderInputComponent={props => (
             <input {...props} className="input" placeholder="Search..." />
@@ -192,7 +194,7 @@ function SearchForm({ onSearch, query = '', show_button = false }) {
           <Button
             onClick={() => {
               setCurrentQuery(shuffle(sampleQueries)[0]);
-              input_obj.input.focus();
+              inputRef.current.input.focus();
             }}
           >
             Example
